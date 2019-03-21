@@ -1,10 +1,11 @@
 import 'dart:async';
-
+import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/blocs/categories_bloc.dart';
 import 'package:memorizer/models/category_card.dart';
 import 'package:memorizer/widgets/category_card_widget.dart';
+import 'package:rxdart/rxdart.dart';
 
 class CategoriesPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -13,7 +14,8 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final CategoriesBloc categoryBloc =
     BlocProvider.of<CategoriesBloc>(context);
-    print("Widget build");
+    categoryBloc.fetchCategories();
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -25,23 +27,28 @@ class CategoriesPage extends StatelessWidget {
           Expanded(
             // Display an infinite GridView with the list of all categories in the catalog,
             // that meet the filters
-            child: StreamBuilder<List<CategoryCard>>(
-                stream: categoryBloc.outCategoriesList,
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<CategoryCard>> snapshot) {
-                  return GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 1.0,
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return _buildCategoryCard(context, categoryBloc, index,
-                          snapshot.data);
-                    },
-                    itemCount:
-                    (snapshot.data == null ? 0 : snapshot.data.length) + 30,
-                  );
-                }),
+            child: StreamBuilder<int>(
+          stream: categoryBloc.outTotalCategories,
+          builder: (BuildContext context, AsyncSnapshot<int> snapshot1){
+            return StreamBuilder<List<CategoryCard>>(
+              stream: categoryBloc.outCategoriesList,
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<CategoryCard>> snapshot2) {
+                return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.0,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    return _buildCategoryCard(context, categoryBloc, index,
+                        snapshot2.data, snapshot1.data ?? 20);
+                  },
+                  itemCount:
+                  (snapshot1.data == null ? 30 : snapshot1.data),
+                );
+              });
+        }
+      )
           ),
         ],
       )
@@ -52,10 +59,13 @@ class CategoriesPage extends StatelessWidget {
       BuildContext context,
       CategoriesBloc categoryBloc,
       int index,
-      List<CategoryCard> categoryCards) {
+      List<CategoryCard> categoryCards,
+      int totalItems) {
 
-      // Notify the catalog that we are rendering CategoryCard[index]
-      categoryBloc.inCategoryIndex.add(index);
+    if(index >= totalItems) {
+      return null;
+    }
+
     // Get the CategoryCard data
     final CategoryCard categoryCard =
     (categoryCards != null && categoryCards.length > index)
