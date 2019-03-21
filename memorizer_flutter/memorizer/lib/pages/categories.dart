@@ -5,6 +5,7 @@ import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/blocs/categories_bloc.dart';
 import 'package:memorizer/models/category_card.dart';
 import 'package:memorizer/widgets/category_card_widget.dart';
+import 'package:memorizer/pages/practice.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -85,7 +86,7 @@ class CategoriesPage extends StatelessWidget {
           Navigator
               .of(context)
               .push(MaterialPageRoute(builder: (BuildContext context) {
-            return null; // todo return detail page
+            return Practice(title: "Dojo", items: categoryCard.items); // todo return detail page
           }));
         });
   }
