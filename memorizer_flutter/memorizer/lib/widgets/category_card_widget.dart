@@ -57,7 +57,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
     List<Widget> children = <Widget>[
       ClipRect(
         clipper: _SquareClipper(),
-        child: Image.network("https://media1.tenor.com/images/5c406b927ec59a31eb67e3366f3121ef/tenor.gif?itemid=11909469",
+        child: Image.network("https://farm8.staticflickr.com/7833/33560139708_4a83f9a7b5_b_d.jpg",
             fit: BoxFit.cover),
       ),
       Container(
