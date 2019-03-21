@@ -1,17 +1,13 @@
 
-class CategoryCard extends Object {
-  final int id;
-  final String title;
+import 'package:memorizer/models/LocString.dart';
+import 'package:memorizer/models/category_item.dart';
 
-  CategoryCard(this.id, this.title);
+class CategoryCard extends Object {
+  final LocString name;
+  final List<CategoryItem> items;
 
   CategoryCard.fromJSON(Map<String, dynamic> json)
-      : id = json['id'],
-        title = json['title'];
+      : name = LocString.fromJSON(json['name']),
+        items= (json['items'] as List).map((json) => CategoryItem.fromJSON(json)).toList();
 
-  @override
-  bool operator==(dynamic other) => identical(this, other) || this.id == other.id;
-
-  @override
-  int get hashCode => id;
 }

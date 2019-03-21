@@ -79,7 +79,7 @@ class CategoriesPage extends StatelessWidget {
     }
 
     return CategoryCardWidget(
-        key: Key('cat_${categoryCard.id}'),
+        key: Key('cat_${categoryCard.name.getString("cs")}'),
         categoryCard: categoryCard,
         onPressed: () {
           Navigator

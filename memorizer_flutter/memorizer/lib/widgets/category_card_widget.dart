@@ -57,7 +57,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
     List<Widget> children = <Widget>[
       ClipRect(
         clipper: _SquareClipper(),
-        child: Image.network("https://farm8.staticflickr.com/7833/33560139708_4a83f9a7b5_b_d.jpg",
+        child: Image.network(widget.categoryCard.items.first.imageUrls.first,
             fit: BoxFit.cover),
       ),
       Container(
@@ -103,7 +103,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text(
-          categoryCard.title,
+          categoryCard.name.getString("cs"),
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
