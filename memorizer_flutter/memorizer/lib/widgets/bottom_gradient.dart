@@ -9,8 +9,11 @@ class BottomGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
+    return new Container(
+        height: 50,
+        width:50,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
           gradient: LinearGradient(
             end: FractionalOffset(0.0, 0.0),
             begin: FractionalOffset(0.0, offset),
@@ -20,6 +23,6 @@ class BottomGradient extends StatelessWidget {
               Color(0x002C2B33)
             ],
           )),
-    );
+    ));
   }
 }

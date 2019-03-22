@@ -2,11 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
-import 'package:memorizer/models/species_item.dart';
-import 'package:memorizer/pages/species_detail.dart';
+import 'package:memorizer/pages/practice.dart';
 import 'package:memorizer/widgets/StaggerAnimation.dart';
-import 'package:memorizer/widgets/bottom_gradient.dart';
-import 'package:memorizer/widgets/species_item.dart';
 import 'package:memorizer/widgets/FancyButton.dart';
 
 class PracticeConfirmPage extends StatefulWidget {
@@ -39,7 +36,13 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage> with TickerPr
   Future<Null> _playAnimation() async {
     try {
       await _loginButtonController.forward();
-      await _loginButtonController.reverse();
+
+      // navigate to the practice page
+      Navigator
+          .of(context)
+          .push(MaterialPageRoute(builder: (BuildContext context) {
+        return new Practice(title: "Dojo", items: widget.category.items); // todo return detail page
+      }));
     } on TickerCanceled {}
   }
 

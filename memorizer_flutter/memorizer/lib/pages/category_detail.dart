@@ -92,71 +92,23 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
             child: new Text(widget.category.name.getString("la")),
           ),
-          rating
+          new FlatButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero),
+            textColor: Colors.white,
+            color: Colors.red,
+            child: new Text("PRACTICE"),
+            onPressed: () => {
+              Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+              return PracticeConfirmPage(widget.category);
+            }))},
+          ),
         ],
       ),
     );
   }
 
-  Widget get rating {
-    return new Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        new Icon(
-          Icons.star,
-          size: 40.0,
-        ),
-      ],
-    );
-  }
-
-  Widget get addYourRating {
-    return new Column(
-      children: <Widget>[
-        new Container(
-          padding: new EdgeInsets.symmetric(
-            vertical: 16.0,
-            horizontal: 16.0,
-          ),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              new Flexible(
-                flex: 1,
-                child: new Slider(
-                  activeColor: Colors.indigoAccent,
-                  min: 0.0,
-                  max: 15.0,
-                  onChanged: (newRating) => updateSlider(newRating),
-                  value: _sliderValue,
-                ),
-              ),
-              new Container(
-                width: 50.0,
-                alignment: Alignment.center,
-                child: new Text('${_sliderValue.toInt()}',
-                    style: Theme.of(context).textTheme.display1),
-              ),
-            ],
-          ),
-        ),
-        submitRatingButton,
-      ],
-    );
-  }
-
-  Widget get submitRatingButton {
-    return new RaisedButton(
-      child: new Text('Submit'),
-      onPressed: () => {
-        Navigator.of(context)
-        .push(MaterialPageRoute(builder: (BuildContext context) {
-          return PracticeConfirmPage(widget.category);
-        }))
-      },
-      color: Colors.indigoAccent,
-    );
-  }
 
   void updateSlider(double newRating) {
     setState(() => _sliderValue = newRating);
@@ -178,14 +130,13 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
 
   Widget _buildAppBar() {
     return SliverAppBar(
-      expandedHeight: 240.0,
+      expandedHeight: 390.0,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             dogProfile,
-            new BottomGradient(),
             _buildMetaSection()
           ],
         ),
@@ -203,7 +154,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   Widget _buildContentSection() {
     return SliverList(
       delegate: SliverChildListDelegate(<Widget>[
-        addYourRating,
         ListView.builder(
           physics: ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,
