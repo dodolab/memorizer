@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:memorizer/models/category_item.dart';
+import 'package:memorizer/models/species_item.dart';
 
 class Practice extends StatefulWidget {
   Practice({Key key, this.title, this.items}) : super(key: key);
 
   final String title;
-  List<CategoryItem> items;
+  List<SpeciesItem> items;
   int currentIndex = 0;
 
   @override

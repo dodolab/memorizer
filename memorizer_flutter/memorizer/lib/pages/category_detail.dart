@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
-import 'package:memorizer/models/category_item.dart';
+import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/widgets/bottom_gradient.dart';
+import 'package:memorizer/widgets/species_item.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final CategoryContent category;
@@ -14,6 +18,13 @@ class CategoryDetailPage extends StatefulWidget {
 class _CategoryDetailPageState extends State<CategoryDetailPage> {
   double dogAvatarSize = 150.0;
   double _sliderValue = 10.0;
+  bool _visible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 100), () => setState(() => _visible = true));
+  }
 
   Widget get dogImage {
     return new Hero(
@@ -149,13 +160,53 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       backgroundColor: Colors.black87,
-      appBar: new AppBar(
-        backgroundColor: Colors.black87,
-        title: new Text('Meet ${widget.category.name.getString("cs")}'),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            _buildAppBar(),
+            _buildContentSection(),
+          ],
+        ));
+  }
+
+
+  Widget _buildAppBar() {
+    return SliverAppBar(
+      expandedHeight: 240.0,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            dogProfile,
+            new BottomGradient(),
+            _buildMetaSection()
+          ],
+        ),
       ),
-      body: new ListView(
-        children: <Widget>[dogProfile, addYourRating],
-      ),
+    );
+  }
+
+  Widget _buildMetaSection() {
+    return AnimatedOpacity(
+      opacity: _visible ? 1.0 : 0.0,
+      duration: Duration(milliseconds: 500),
+    );
+  }
+
+  Widget _buildContentSection() {
+    return SliverList(
+      delegate: SliverChildListDelegate(<Widget>[
+        addYourRating,
+        ListView.builder(
+          physics: ClampingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: widget.category.items.length,
+          itemBuilder: (BuildContext context, int index) {
+          return new SpeciesItemWidget(widget.category.items[index]);
+    },
+    )
+      ]),
     );
   }
 }

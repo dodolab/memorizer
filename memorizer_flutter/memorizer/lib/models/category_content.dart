@@ -1,12 +1,12 @@
 
 import 'package:memorizer/models/LocString.dart';
-import 'package:memorizer/models/category_item.dart';
+import 'package:memorizer/models/species_item.dart';
 
 class CategoryContent extends Object {
   final LocString name;
-  final List<CategoryItem> items;
+  final List<SpeciesItem> items;
 
   CategoryContent.fromJSON(Map<String, dynamic> json)
       : name = LocString.fromJSON(json['name']),
-        items= (json['items'] as List).map((json) => CategoryItem.fromJSON(json)).toList();
+        items= (json['items'] as List).map((json) => SpeciesItem.fromJSON(json)).toList();
 }

@@ -22,14 +22,18 @@ class ListPage extends StatelessWidget {
         stream: categoryBloc.outCategoriesList,
         builder: (BuildContext context,
             AsyncSnapshot<List<CategoryContent>> snapshot) {
-          return ListView.builder(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new CategoryItem(snapshot.data[index]);
-            },
-          );
+          if(snapshot.data != null){
+            return ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (BuildContext context, int index) {
+                return new CategoryItem(snapshot.data[index]);
+              },
+            );
+          } else{
+            return null;
+          }
         })
     );
 
