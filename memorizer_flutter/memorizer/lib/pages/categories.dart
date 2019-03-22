@@ -3,7 +3,7 @@ import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/blocs/categories_bloc.dart';
-import 'package:memorizer/models/category_card.dart';
+import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/widgets/category_card_widget.dart';
 import 'package:memorizer/pages/practice.dart';
 import 'package:rxdart/rxdart.dart';
@@ -31,10 +31,10 @@ class CategoriesPage extends StatelessWidget {
             child: StreamBuilder<int>(
           stream: categoryBloc.outTotalCategories,
           builder: (BuildContext context, AsyncSnapshot<int> snapshot1){
-            return StreamBuilder<List<CategoryCard>>(
+            return StreamBuilder<List<CategoryContent>>(
               stream: categoryBloc.outCategoriesList,
               builder: (BuildContext context,
-                  AsyncSnapshot<List<CategoryCard>> snapshot2) {
+                  AsyncSnapshot<List<CategoryContent>> snapshot2) {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
@@ -60,7 +60,7 @@ class CategoriesPage extends StatelessWidget {
       BuildContext context,
       CategoriesBloc categoryBloc,
       int index,
-      List<CategoryCard> categoryCards,
+      List<CategoryContent> categoryCards,
       int totalItems) {
 
     if(index >= totalItems) {
@@ -68,7 +68,7 @@ class CategoriesPage extends StatelessWidget {
     }
 
     // Get the CategoryCard data
-    final CategoryCard categoryCard =
+    final CategoryContent categoryCard =
     (categoryCards != null && categoryCards.length > index)
         ? categoryCards[index]
         : null;

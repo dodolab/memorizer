@@ -33,7 +33,7 @@ class _PracticeState extends State<Practice> {
                     control: new SwiperControl(),
                     itemWidth: orientation == Orientation.landscape ? MediaQuery.of(context).size.width : MediaQuery.of(context).size.height,
                     itemHeight: orientation == Orientation.landscape ? MediaQuery.of(context).size.height : MediaQuery.of(context).size.width,
-                    layout: SwiperLayout.TINDER,
+                    layout: SwiperLayout.STACK,
                     onIndexChanged: ((idx) {
                       widget.currentIndex = idx;
                       setState(() {
@@ -57,7 +57,6 @@ class _PracticeState extends State<Practice> {
                                 child: new Text(
                                   widget.items[widget.currentIndex].name.getString("cs"),
                                 ),
-
                                 onPressed: () => {},
                               ),
                             ),
@@ -73,7 +72,6 @@ class _PracticeState extends State<Practice> {
                                 child: new Text(
                                   widget.items[widget.currentIndex].name.getString("cs"),
                                 ),
-
                                 onPressed: () => {},
                               ),
                             ),
@@ -94,7 +92,6 @@ class _PracticeState extends State<Practice> {
                                 child: new Text(
                                   widget.items[widget.currentIndex].name.getString("cs"),
                                 ),
-
                                 onPressed: () => {},
                               ),
                             ),
@@ -110,7 +107,6 @@ class _PracticeState extends State<Practice> {
                                 child: new Text(
                                   widget.items[widget.currentIndex].name.getString("cs"),
                                 ),
-
                                 onPressed: () => {},
                               ),
                             ),

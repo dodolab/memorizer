@@ -2,13 +2,14 @@
   "categories": [
     {
       "name" : {
-        "cs" : "Blanokřídlí"
+        "cs" : "Blanokřídlí",
+        "la" : "Hymenoptera"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Čmelák luční",
-            "lt" : "Bombus pratorum",
+            "la" : "Bombus pratorum",
             "en" : "early bumblebee"
           },
           "images" : [
@@ -20,7 +21,7 @@
         {
           "name" : {
             "cs" : "Lumčík dutohlav",
-            "lt" : "Coeloides bostrichorum"
+            "la" : "Coeloides bostrichorum"
           },
           "images" : [
             "http://farm8.staticflickr.com/7866/47384009452_20c8bd83bd_o.jpg",
@@ -31,7 +32,7 @@
         {
           "name" : {
             "cs" : "Lumek veliký",
-            "lt" : "Rhyssa persuasoria",
+            "la" : "Rhyssa persuasoria",
             "en" : "giant ichneumon "
           },
           "images" : [
@@ -43,7 +44,7 @@
         {
           "name" : {
             "cs" : "Mravenec lesní ",
-            "lt" : "Formica rufa ",
+            "la" : "Formica rufa ",
             "en" : "red wood ant"
           },
           "images" : [
@@ -55,7 +56,7 @@
         {
           "name" : {
             "cs" : "Mravenec obecný",
-            "lt" : "Lasius niger",
+            "la" : "Lasius niger",
             "en" : "black garden ant"
           },
           "images" : [
@@ -67,7 +68,7 @@
         {
           "name" : {
             "cs" : "Pilatka zelená",
-            "lt" : "Rhogogaster viridis"
+            "la" : "Rhogogaster viridis"
           },
           "images" : [
             "http://farm8.staticflickr.com/7852/46713772064_8fa4a2cb0d_o.jpg",
@@ -78,7 +79,7 @@
         {
           "name" : {
             "cs" : "Pilořitka veliká",
-            "lt" : "Urocerus gigas",
+            "la" : "Urocerus gigas",
             "en" : "giant woodwasp"
           },
           "images" : [
@@ -90,7 +91,7 @@
         {
           "name" : {
             "cs" : "Sršeň obecná",
-            "lt" : "Vespa crabro",
+            "la" : "Vespa crabro",
             "en" : "European hornet"
           },
           "images" : [
@@ -102,7 +103,7 @@
         {
           "name" : {
             "cs" : "Včela medonosná",
-            "lt" : "Apis mellifera",
+            "la" : "Apis mellifera",
             "en" : "western honey bee"
           },
           "images" : [
@@ -114,7 +115,7 @@
         {
           "name" : {
             "cs" : "Vosa obecná",
-            "lt" : "Vespula vulgaris",
+            "la" : "Vespula vulgaris",
             "en" : "common wasp"
           },
           "images" : [
@@ -127,13 +128,15 @@
     },
     {
       "name" : {
-        "cs" : "Brouci"
+        "cs" : "Brouci",
+        "la" : "Coleoptera",
+        "en" : "Beetle"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Bázlivec",
-            "lt" : "Pyrrhalta viburni",
+            "la" : "Pyrrhalta viburni",
             "en" : "viburnum leaf beetle"
           },
           "images" : [
@@ -145,7 +148,7 @@
         {
           "name" : {
             "cs" : "Červotoč spižní",
-            "lt" : "Stegobium paniceum",
+            "la" : "Stegobium paniceum",
             "en" : "drugstore beetle "
           },
           "images" : [
@@ -157,7 +160,7 @@
         {
           "name" : {
             "cs" : "Kousavec hlodavý ",
-            "lt" : "Rhagium sycophanta "
+            "la" : "Rhagium sycophanta "
           },
           "images" : [
             "http://farm8.staticflickr.com/7864/46713775144_45977ed003_o.jpg",
@@ -168,7 +171,7 @@
         {
           "name" : {
             "cs" : "Potemník moučný",
-            "lt" : "Tenebrio molitor",
+            "la" : "Tenebrio molitor",
             "en" : "mealworm beetle"
           },
           "images" : [
@@ -180,7 +183,7 @@
         {
           "name" : {
             "cs" : "Rákosníček",
-            "lt" : "Donacia crassipes",
+            "la" : "Donacia crassipes",
             "en" : "leaf beetle"
           },
           "images" : [
@@ -192,7 +195,7 @@
         {
           "name" : {
             "cs" : "Roháček bukový",
-            "lt" : "Sinodendron cylindricum",
+            "la" : "Sinodendron cylindricum",
             "en" : "stag beetle"
           },
           "images" : [
@@ -204,7 +207,7 @@
         {
           "name" : {
             "cs" : "Scarabeus",
-            "lt" : "Scarabaeus"
+            "la" : "Scarabaeus"
           },
           "images" : [
             "http://farm8.staticflickr.com/7814/47384007762_f2e7899873_o.jpg",
@@ -215,7 +218,7 @@
         {
           "name" : {
             "cs" : "Střevlík kožitý",
-            "lt" : "Carabus coriaceus"
+            "la" : "Carabus coriaceus"
           },
           "images" : [
             "http://farm8.staticflickr.com/7838/47384007362_97f1bac9ce_o.jpg",
@@ -226,7 +229,7 @@
         {
           "name" : {
             "cs" : "Svižník lesní",
-            "lt" : "Cicindela campestris",
+            "la" : "Cicindela campestris",
             "en" : "green tiger beetle"
           },
           "images" : [
@@ -238,7 +241,7 @@
         {
           "name" : {
             "cs" : "Tesařík dubový",
-            "lt" : "Plagionotus arcuatus"
+            "la" : "Plagionotus arcuatus"
           },
           "images" : [
             "http://farm8.staticflickr.com/7813/46713770224_25d44573fd_o.jpg",
@@ -249,7 +252,7 @@
         {
           "name" : {
             "cs" : "Mandelinka bramborová",
-            "lt" : "Leptinotarsa decemlineata",
+            "la" : "Leptinotarsa decemlineata",
             "en" : "Colorado potato beetle"
           },
           "images" : [
@@ -261,7 +264,7 @@
         {
           "name" : {
             "cs" : "Kovařík obilní",
-            "lt" : "Agriotes lineatus",
+            "la" : "Agriotes lineatus",
             "en" : "lined click beetle"
           },
           "images" : [
@@ -274,13 +277,15 @@
     },
     {
       "name" : {
-        "cs" : "Motýli"
+        "cs" : "Motýli",
+        "la" : "Lepidoptera",
+        "en" : "lepidopterans"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Babočka admirál",
-            "lt" : "Vanessa atalanta",
+            "la" : "Vanessa atalanta",
             "en" : "red admiral"
           },
           "images" : [
@@ -292,7 +297,7 @@
         {
           "name" : {
             "cs" : "Babočka paví oko",
-            "lt" : "Inachis io",
+            "la" : "Inachis io",
             "en" : "European peacock "
           },
           "images" : [
@@ -304,7 +309,7 @@
         {
           "name" : {
             "cs" : "Bekyně zlatořitná",
-            "lt" : "Euproctis chrysorrhoea",
+            "la" : "Euproctis chrysorrhoea",
             "en" : "brown-tail moth"
           },
           "images" : [
@@ -316,7 +321,7 @@
         {
           "name" : {
             "cs" : "Bělopásek topolový",
-            "lt" : "Limenitis populi",
+            "la" : "Limenitis populi",
             "en" : "poplar admiral"
           },
           "images" : [
@@ -328,7 +333,7 @@
         {
           "name" : {
             "cs" : "Bourovec borový",
-            "lt" : "Dendrolimus pini",
+            "la" : "Dendrolimus pini",
             "en" : "Pine-tree lappet"
           },
           "images" : [
@@ -340,7 +345,7 @@
         {
           "name" : {
             "cs" : "Hrotnokřídlec salátový",
-            "lt" : "Hepialus sylvina",
+            "la" : "Hepialus sylvina",
             "en" : "Orange swift"
           },
           "images" : [
@@ -351,7 +356,7 @@
         {
           "name" : {
             "cs" : "Lišaj smrtihlav",
-            "lt" : "Acherontia atropos",
+            "la" : "Acherontia atropos",
             "en" : "death's-head hawkmoth"
           },
           "images" : [
@@ -363,7 +368,7 @@
         {
           "name" : {
             "cs" : "Pernatuška trnková",
-            "lt" : "Pterophorus pentadactyla",
+            "la" : "Pterophorus pentadactyla",
             "en" : "white plume moth"
           },
           "images" : [
@@ -375,7 +380,7 @@
         {
           "name" : {
             "cs" : "Tmavoskvrnka svlačcová",
-            "lt" : "Tyta luctuosa",
+            "la" : "Tyta luctuosa",
             "en" : "four-spotted moth"
           },
           "images" : [
@@ -387,7 +392,7 @@
         {
           "name" : {
             "cs" : "Žluťásek čičorečkový",
-            "lt" : "Colias hyale",
+            "la" : "Colias hyale",
             "en" : "Clouded yellow"
           },
           "images" : [
@@ -400,13 +405,15 @@
     },
     {
       "name" : {
-        "cs" : "Plazi"
+        "cs" : "Plazi",
+        "la" : "Reptilia",
+        "en" : "Reptiles"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Agama límcová",
-            "lt" : "Chlamydosaurus kingii",
+            "la" : "Chlamydosaurus kingii",
             "en" : "frilled-necked lizard"
           },
           "images" : [
@@ -418,7 +425,7 @@
         {
           "name" : {
             "cs" : "Agama vousatá",
-            "lt" : "Pogona vitticeps",
+            "la" : "Pogona vitticeps",
             "en" : "bearded dragon "
           },
           "images" : [
@@ -430,7 +437,7 @@
         {
           "name" : {
             "cs" : "Krajta angolská",
-            "lt" : "Python anchietae",
+            "la" : "Python anchietae",
             "en" : "Angolan python"
           },
           "images" : [
@@ -442,7 +449,7 @@
         {
           "name" : {
             "cs" : "Kareta novoguinejská",
-            "lt" : "Carettochelys insculpta",
+            "la" : "Carettochelys insculpta",
             "en" : "pig-nosed turtle"
           },
           "images" : [
@@ -454,7 +461,7 @@
         {
           "name" : {
             "cs" : "Ještěrka obecná",
-            "lt" : "Lacerta agilis",
+            "la" : "Lacerta agilis",
             "en" : "sand lizard"
           },
           "images" : [
@@ -466,7 +473,7 @@
         {
           "name" : {
             "cs" : "Želva bahenní",
-            "lt" : "Emys orbicularis",
+            "la" : "Emys orbicularis",
             "en" : "European pond turtle"
           },
           "images" : [
@@ -478,7 +485,7 @@
         {
           "name" : {
             "cs" : "Želva žlutohnědá",
-            "lt" : "Testudo graeca",
+            "la" : "Testudo graeca",
             "en" : "Greek tortoise"
           },
           "images" : [
@@ -490,7 +497,7 @@
         {
           "name" : {
             "cs" : "Scink uťatý",
-            "lt" : "Tiliqua rugosa"
+            "la" : "Tiliqua rugosa"
           },
           "images" : [
             "http://farm8.staticflickr.com/7883/47384007712_ae105a3120_o.jpg",
@@ -501,7 +508,7 @@
         {
           "name" : {
             "cs" : "Leguán mořský",
-            "lt" : "Amblyrhynchus cristatus",
+            "la" : "Amblyrhynchus cristatus",
             "en" : "marine iguana"
           },
           "images" : [
@@ -513,7 +520,7 @@
         {
           "name" : {
             "cs" : "Leguán zelený",
-            "lt" : "Iguana iguana",
+            "la" : "Iguana iguana",
             "en" : "green iguana"
           },
           "images" : [
@@ -526,13 +533,15 @@
     },
     {
       "name" : {
-        "cs" : "Ptáci"
+        "cs" : "Ptáci",
+        "la" : "Aves",
+        "en" : "Birds"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Datel černý",
-            "lt" : "Dryocopus martius",
+            "la" : "Dryocopus martius",
             "en" : "black woodpecker"
           },
           "images" : [
@@ -544,7 +553,7 @@
         {
           "name" : {
             "cs" : "Kačka strakatá",
-            "lt" : "Histrionicus histrionicus",
+            "la" : "Histrionicus histrionicus",
             "en" : "harlequin duck "
           },
           "images" : [
@@ -556,7 +565,7 @@
         {
           "name" : {
             "cs" : "Kalous ušatý",
-            "lt" : "Asio otus",
+            "la" : "Asio otus",
             "en" : "long-eared owl"
           },
           "images" : [
@@ -568,7 +577,7 @@
         {
           "name" : {
             "cs" : "Kukačka obecná",
-            "lt" : "Cuculus canorus",
+            "la" : "Cuculus canorus",
             "en" : "common cuckoo"
           },
           "images" : [
@@ -580,7 +589,7 @@
         {
           "name" : {
             "cs" : "Kulík hvízdavý",
-            "lt" : "Charadrius melodus",
+            "la" : "Charadrius melodus",
             "en" : "piping plover"
           },
           "images" : [
@@ -591,7 +600,7 @@
         {
           "name" : {
             "cs" : "Kulík říční",
-            "lt" : "Charadrius dubius",
+            "la" : "Charadrius dubius",
             "en" : "little ringed plover"
           },
           "images" : [
@@ -603,7 +612,7 @@
         {
           "name" : {
             "cs" : "Zoborožec rudozobý",
-            "lt" : "Tockus erythrorhynchus",
+            "la" : "Tockus erythrorhynchus",
             "en" : "northern red-billed hornbill"
           },
           "images" : [
@@ -615,7 +624,7 @@
         {
           "name" : {
             "cs" : "Zvonek zelený",
-            "lt" : "Carduelis chloris",
+            "la" : "Carduelis chloris",
             "en" : "European greenfinch"
           },
           "images" : [
@@ -627,7 +636,7 @@
         {
           "name" : {
             "cs" : "Zvonohlík obecný",
-            "lt" : "Carduelis carduelis",
+            "la" : "Carduelis carduelis",
             "en" : "European goldfinch"
           },
           "images" : [
@@ -639,7 +648,7 @@
         {
           "name" : {
             "cs" : "Žluna zelená",
-            "lt" : "Picus viridis",
+            "la" : "Picus viridis",
             "en" : "European green woodpecker"
           },
           "images" : [
@@ -652,13 +661,15 @@
     },
     {
       "name" : {
-        "cs" : "Ryby a paryby"
+        "cs" : "Ryby a paryby",
+        "la" : "Osteichthyes",
+        "en" : "bony fish"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Amur bílý",
-            "lt" : "Ctenopharyngodon idella",
+            "la" : "Ctenopharyngodon idella",
             "en" : "grass carp"
           },
           "images" : [
@@ -670,7 +681,7 @@
         {
           "name" : {
             "cs" : "Hlavatka obecná",
-            "lt" : "Hucho hucho",
+            "la" : "Hucho hucho",
             "en" : "Danube salmon"
           },
           "images" : [
@@ -682,7 +693,7 @@
         {
           "name" : {
             "cs" : "Mřenka mramorovaná",
-            "lt" : "Barbatula barbatula",
+            "la" : "Barbatula barbatula",
             "en" : "stone loach"
           },
           "images" : [
@@ -694,7 +705,7 @@
         {
           "name" : {
             "cs" : "Ouklej obecná",
-            "lt" : "Alburnus alburnus",
+            "la" : "Alburnus alburnus",
             "en" : "common bleak"
           },
           "images" : [
@@ -706,7 +717,7 @@
         {
           "name" : {
             "cs" : "Piraňa Nattererova",
-            "lt" : "Pygocentrus nattereri",
+            "la" : "Pygocentrus nattereri",
             "en" : "red-bellied piranha"
           },
           "images" : [
@@ -718,7 +729,7 @@
         {
           "name" : {
             "cs" : "Rejnok hladký",
-            "lt" : "Raja batis",
+            "la" : "Raja batis",
             "en" : "common skate"
           },
           "images" : [
@@ -730,7 +741,7 @@
         {
           "name" : {
             "cs" : "Sardinka obecná",
-            "lt" : "Sardina pilchardus",
+            "la" : "Sardina pilchardus",
             "en" : "European pilchard"
           },
           "images" : [
@@ -742,7 +753,7 @@
         {
           "name" : {
             "cs" : "Vranka pruhoploutvá",
-            "lt" : "Cottus poecilopus",
+            "la" : "Cottus poecilopus",
             "en" : "alpine bullhead"
           },
           "images" : [
@@ -754,7 +765,7 @@
         {
           "name" : {
             "cs" : "Žralok bílý",
-            "lt" : "Carcharodon carcharias",
+            "la" : "Carcharodon carcharias",
             "en" : "great white shark"
           },
           "images" : [
@@ -766,7 +777,7 @@
         {
           "name" : {
             "cs" : "Žralok galapážský",
-            "lt" : "Carcharhinus galapagensis",
+            "la" : "Carcharhinus galapagensis",
             "en" : "Galapagos shark"
           },
           "images" : [
@@ -779,13 +790,15 @@
     },
     {
       "name" : {
-        "cs" : "Savci"
+        "cs" : "Savci",
+        "la" : "Mammalia",
+        "en" : "Mammals"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Antilopa jelení",
-            "lt" : "Antilope cervicapra",
+            "la" : "Antilope cervicapra",
             "en" : "blackbuck"
           },
           "images" : [
@@ -797,7 +810,7 @@
         {
           "name" : {
             "cs" : "Grizzly",
-            "lt" : "Ursus arctos horribilis",
+            "la" : "Ursus arctos horribilis",
             "en" : "grizzly bear"
           },
           "images" : [
@@ -809,7 +822,7 @@
         {
           "name" : {
             "cs" : "Hraboš polní",
-            "lt" : "Microtus arvalis",
+            "la" : "Microtus arvalis",
             "en" : "common vole"
           },
           "images" : [
@@ -821,7 +834,7 @@
         {
           "name" : {
             "cs" : "Liška polární",
-            "lt" : "Vulpes lagopus",
+            "la" : "Vulpes lagopus",
             "en" : "Arctic fox"
           },
           "images" : [
@@ -833,7 +846,7 @@
         {
           "name" : {
             "cs" : "Medvěd hnědý",
-            "lt" : "Ursus arctos",
+            "la" : "Ursus arctos",
             "en" : "brown bear"
           },
           "images" : [
@@ -845,7 +858,7 @@
         {
           "name" : {
             "cs" : "Morče peruánské",
-            "lt" : "Cavia porcellus",
+            "la" : "Cavia porcellus",
             "en" : "guinea pig"
           },
           "images" : [
@@ -857,7 +870,7 @@
         {
           "name" : {
             "cs" : "Plejtvák obrovský",
-            "lt" : "Balaenoptera musculus",
+            "la" : "Balaenoptera musculus",
             "en" : "blue whale"
           },
           "images" : [
@@ -869,7 +882,7 @@
         {
           "name" : {
             "cs" : "Zajíc polní",
-            "lt" : "Lepus europaeus",
+            "la" : "Lepus europaeus",
             "en" : "European hare"
           },
           "images" : [
@@ -881,7 +894,7 @@
         {
           "name" : {
             "cs" : "Zebra Böhmova",
-            "lt" : "Equus quagga boehmi",
+            "la" : "Equus quagga boehmi",
             "en" : "Grant's zebra"
           },
           "images" : [
@@ -893,7 +906,7 @@
         {
           "name" : {
             "cs" : "Zubr evropský",
-            "lt" : "Bison bonasus",
+            "la" : "Bison bonasus",
             "en" : "European bison"
           },
           "images" : [
@@ -906,13 +919,15 @@
     },
     {
       "name" : {
-        "cs" : "Obojživelníci"
+        "cs" : "Obojživelníci",
+        "la" : "Amphibia",
+        "en" : "Amphibians"
       },
       "items" : [
         {
           "name" : {
             "cs" : "Axolotl",
-            "lt" : "Ambystoma mexicanum",
+            "la" : "Ambystoma mexicanum",
             "en" : "axolotl"
           },
           "images" : [
@@ -924,7 +939,7 @@
         {
           "name" : {
             "cs" : "Blatnice skvrnitá",
-            "lt" : "Pelobates fuscus"
+            "la" : "Pelobates fuscus"
           },
           "images" : [
             "http://farm8.staticflickr.com/7841/47384005092_61876b2ce0_o.jpg",
@@ -935,7 +950,7 @@
         {
           "name" : {
             "cs" : "Skokan skřehotavý",
-            "lt" : "Pelophylax ridibundus",
+            "la" : "Pelophylax ridibundus",
             "en" : "marsh frog"
           },
           "images" : [
@@ -947,7 +962,7 @@
         {
           "name" : {
             "cs" : "Ropucha zelená",
-            "lt" : "Bufo viridis",
+            "la" : "Bufo viridis",
             "en" : "European green toad"
           },
           "images" : [
@@ -959,7 +974,7 @@
         {
           "name" : {
             "cs" : "Mlok skvrnitý",
-            "lt" : "Salamandra salamandra",
+            "la" : "Salamandra salamandra",
             "en" : "fire salamander"
           },
           "images" : [
@@ -971,7 +986,7 @@
         {
           "name" : {
             "cs" : "Mlok černý",
-            "lt" : "Salamandra atra",
+            "la" : "Salamandra atra",
             "en" : "alpine salamander"
           },
           "images" : [
@@ -983,7 +998,7 @@
         {
           "name" : {
             "cs" : "Rosnička zelená",
-            "lt" : "Hyla arborea",
+            "la" : "Hyla arborea",
             "en" : "European tree frog"
           },
           "images" : [
@@ -995,7 +1010,7 @@
         {
           "name" : {
             "cs" : "Kuňka obecná",
-            "lt" : "Bombina bombina",
+            "la" : "Bombina bombina",
             "en" : "European fire-bellied toad"
           },
           "images" : [
@@ -1006,7 +1021,7 @@
         {
           "name" : {
             "cs" : "Listovnice červenooká",
-            "lt" : "Agalychnis callidryas",
+            "la" : "Agalychnis callidryas",
             "en" : "red-eyed treefrog"
           },
           "images" : [
@@ -1018,7 +1033,7 @@
         {
           "name" : {
             "cs" : "Pralesnička batiková",
-            "lt" : "Dendrobates auratus",
+            "la" : "Dendrobates auratus",
             "en" : "green-and-black poison dart frog"
           },
           "images" : [

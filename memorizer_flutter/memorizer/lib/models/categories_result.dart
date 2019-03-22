@@ -1,12 +1,12 @@
-import 'package:memorizer/models/category_card.dart';
+import 'package:memorizer/models/category_content.dart';
 
 class CategoryPageResult {
-  final List<CategoryCard> categories;
+  final List<CategoryContent> categories;
 
   int get totalResults {
     return categories.length;
   }
 
   CategoryPageResult.fromJSON(Map<String, dynamic> json)
-      : categories = (json['categories'] as List).map((json) => CategoryCard.fromJSON(json)).toList();
+      : categories = (json['categories'] as List).map((json) => CategoryContent.fromJSON(json)).toList();
 }

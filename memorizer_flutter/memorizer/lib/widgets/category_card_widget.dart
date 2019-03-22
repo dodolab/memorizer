@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
-import 'package:memorizer/models/category_card.dart';
+import 'package:memorizer/models/category_content.dart';
 
 class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget({
@@ -11,7 +11,7 @@ class CategoryCardWidget extends StatefulWidget {
     @required this.onPressed
   }) : super(key: key);
 
-  final CategoryCard categoryCard;
+  final CategoryContent categoryCard;
   final VoidCallback onPressed;
 
   @override
@@ -97,7 +97,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
     );
   }
 
-  Widget _buildTextualInfo(CategoryCard categoryCard) {
+  Widget _buildTextualInfo(CategoryContent categoryCard) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,

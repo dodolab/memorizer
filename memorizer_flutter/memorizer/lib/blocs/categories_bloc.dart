@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:memorizer/blocs/bloc_provider.dart';
-import 'package:memorizer/models/category_card.dart';
+import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/models/categories_result.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:memorizer/api/memorizer_api.dart';
@@ -18,9 +18,9 @@ class CategoriesBloc implements BlocBase {
   // ##########  STREAMS  ##############
 
 
-  BehaviorSubject<List<CategoryCard>> _categoriesController = BehaviorSubject<List<CategoryCard>>();
-  Sink<List<CategoryCard>> get _inCategoriesList => _categoriesController.sink;
-  Stream<List<CategoryCard>> get outCategoriesList => _categoriesController.stream;
+  PublishSubject<List<CategoryContent>> _categoriesController = PublishSubject<List<CategoryContent>>();
+  Sink<List<CategoryContent>> get _inCategoriesList => _categoriesController.sink;
+  Stream<List<CategoryContent>> get outCategoriesList => _categoriesController.stream;
 
   BehaviorSubject<int> _totalCategoriesController = BehaviorSubject<int>();
   Sink<int> get inTotalCategories => _totalCategoriesController.sink;
@@ -28,7 +28,6 @@ class CategoriesBloc implements BlocBase {
 
 
   void dispose(){
-    
     _categoriesController.close();
   }
 
@@ -58,7 +57,7 @@ class CategoriesBloc implements BlocBase {
     inTotalCategories.add(page.totalResults);
     // Only notify when there are categories
     if (page.categories.length > 0){
-      _inCategoriesList.add(UnmodifiableListView<CategoryCard>(page.categories));
+      _inCategoriesList.add(UnmodifiableListView<CategoryContent>(page.categories));
     }
   }
 }

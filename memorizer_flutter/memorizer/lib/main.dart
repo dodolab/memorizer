@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:memorizer/api/memorizer_api.dart';
 import 'package:memorizer/blocs/categories_bloc.dart';
+import 'package:memorizer/pages/list_page.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:memorizer/pages/categories.dart';
@@ -43,8 +44,11 @@ class MainApp extends StatelessWidget {
     return new StoreProvider(
       store: store,
       child: new MaterialApp(
+        theme: new ThemeData(brightness: Brightness.dark),
         title: title,
-        home: new CategoriesPage(),
+       // home: new CategoriesPage(),
+       // home: new MyHomePage(title: "Mojo")
+        home: new ListPage(title: "Mojo")
       ),
     );
   }

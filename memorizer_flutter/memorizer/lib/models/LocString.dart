@@ -1,6 +1,6 @@
 
 class LocString {
-  static const String DEFAULT_LOCALE = "lt";
+  static const String DEFAULT_LOCALE = "la";
   final Map<String, String> locStrings;
 
   String getString(String locale, {String defaultLocale = DEFAULT_LOCALE}) {
