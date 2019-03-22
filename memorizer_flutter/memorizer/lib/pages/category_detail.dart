@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/pages/practice_confirm.dart';
+import 'package:memorizer/pages/species_detail.dart';
 import 'package:memorizer/widgets/bottom_gradient.dart';
 import 'package:memorizer/widgets/species_item.dart';
 
@@ -146,7 +148,12 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   Widget get submitRatingButton {
     return new RaisedButton(
       child: new Text('Submit'),
-      onPressed: () => {},
+      onPressed: () => {
+        Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+          return PracticeConfirmPage(widget.category);
+        }))
+      },
       color: Colors.indigoAccent,
     );
   }
@@ -203,10 +210,19 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
           shrinkWrap: true,
           itemCount: widget.category.items.length,
           itemBuilder: (BuildContext context, int index) {
-          return new SpeciesItemWidget(widget.category.items[index]);
+          return new SpeciesItemWidget(
+              item: widget.category.items[index],
+              onPressed: () => navigateToDetail(widget.category.items[index]));
     },
     )
       ]),
     );
   }
+
+  void navigateToDetail(SpeciesItem item){
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return SpeciesDetail(item: item); // todo ret
+   }));
+ }
 }

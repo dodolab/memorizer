@@ -5,8 +5,12 @@ import 'package:memorizer/pages/category_detail.dart';
 
 class SpeciesItemWidget extends StatefulWidget {
   final SpeciesItem item;
+  final VoidCallback onPressed;
 
-  SpeciesItemWidget(this.item);
+  SpeciesItemWidget({
+    @required this.item,
+    @required this.onPressed,
+  });
 
   @override
   SpeciesItemWidgetState createState() {
@@ -62,6 +66,7 @@ class SpeciesItemWidgetState extends State<SpeciesItemWidget> {
 
   Widget get listTile {
     return ListTile(
+      onTap: widget.onPressed,
       contentPadding:
       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       leading: lessonImage,
@@ -93,9 +98,6 @@ class SpeciesItemWidgetState extends State<SpeciesItemWidget> {
       ),
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-      onTap: () {
-        showDetailPage();
-      },
     );
   }
 
@@ -109,9 +111,5 @@ class SpeciesItemWidgetState extends State<SpeciesItemWidget> {
         child: listTile,
       ),
     );
-  }
-
-  showDetailPage() {
-    // TODO
   }
 }
