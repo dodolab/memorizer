@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/pages/practice.dart';
 import 'package:memorizer/widgets/StaggerAnimation.dart';
-import 'package:memorizer/widgets/FancyButton.dart';
+import 'package:memorizer/widgets/fancy_button.dart';
 
 class PracticeConfirmPage extends StatefulWidget {
   final CategoryContent category;

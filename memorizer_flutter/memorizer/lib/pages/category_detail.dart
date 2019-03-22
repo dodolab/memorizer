@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
 import 'package:memorizer/pages/species_detail.dart';
 import 'package:memorizer/widgets/bottom_gradient.dart';
@@ -89,36 +90,51 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
           ),
           new Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
             child: new Text(widget.category.name.getString("la")),
           ),
-          new FlatButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero),
-            textColor: Colors.white,
-            color: Colors.red,
-            child: new Text("PRACTICE"),
-            onPressed: () => {
-              Navigator.of(context)
-              .push(MaterialPageRoute(builder: (BuildContext context) {
-              return PracticeConfirmPage(widget.category);
-            }))},
-          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              new FlatButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                textColor: Colors.white,
+                color: Colors.red,
+                child: new Text("PRACTICE"),
+                onPressed: () => {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return PracticeConfirmPage(widget.category);
+                      }))
+                    },
+              ),
+              new FlatButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                textColor: Colors.white,
+                color: Colors.red,
+                child: new Text("GALLERY"),
+                onPressed: () => {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return GalleryPage(title: widget.category.name.getString("cs"), items:widget.category.items);
+                      }))
+                    },
+              ),
+            ],
+          )
         ],
       ),
     );
   }
 
-
   void updateSlider(double newRating) {
     setState(() => _sliderValue = newRating);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      backgroundColor: Colors.black87,
+        backgroundColor: Colors.black87,
         body: CustomScrollView(
           slivers: <Widget>[
             _buildAppBar(),
@@ -127,7 +143,6 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         ));
   }
 
-
   Widget _buildAppBar() {
     return SliverAppBar(
       expandedHeight: 390.0,
@@ -135,10 +150,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       flexibleSpace: FlexibleSpaceBar(
         background: Stack(
           fit: StackFit.expand,
-          children: <Widget>[
-            dogProfile,
-            _buildMetaSection()
-          ],
+          children: <Widget>[dogProfile, _buildMetaSection()],
         ),
       ),
     );
@@ -160,19 +172,20 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
           shrinkWrap: true,
           itemCount: widget.category.items.length,
           itemBuilder: (BuildContext context, int index) {
-          return new SpeciesItemWidget(
-              item: widget.category.items[index],
-              onPressed: () => navigateToDetail(widget.category.items[index]));
-    },
-    )
+            return new SpeciesItemWidget(
+                item: widget.category.items[index],
+                onPressed: () =>
+                    navigateToDetail(widget.category.items[index]));
+          },
+        )
       ]),
     );
   }
 
-  void navigateToDetail(SpeciesItem item){
+  void navigateToDetail(SpeciesItem item) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
       return SpeciesDetail(item: item); // todo ret
-   }));
- }
+    }));
+  }
 }
