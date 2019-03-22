@@ -1,0 +1,14 @@
+{
+  "@@locale": "cs",
+  "@@last_modified": "2019-03-22T21:46:06.388947",
+  "memorizer": "Memorizer",
+  "@memorizer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "categories": "Kategorie",
+  "@categories": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -2,25 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/pages/category_detail.dart';
 
-class CategoryItem extends StatefulWidget {
-  final CategoryContent category;
+class CategoryItemWidget extends StatefulWidget {
 
-  CategoryItem(this.category);
+  CategoryItemWidget({
+    Key key,
+    @required this.categoryContent,
+    @required this.onPressed
+  }) : super(key: key);
+
+  final CategoryContent categoryContent;
+  final VoidCallback onPressed;
 
   @override
-  CategoryItemState createState() {
-    return new CategoryItemState(category);
+  CategoryItemWidgetState createState() {
+    return new CategoryItemWidgetState();
   }
 }
 
-class CategoryItemState extends State<CategoryItem> {
-  CategoryContent category;
+class CategoryItemWidgetState extends State<CategoryItemWidget> {
 
-  CategoryItemState(this.category);
 
   Widget get lessonImage {
     var dogAvatar = new Hero(
-      tag: category.name.getString("cs"),
+      tag: widget.categoryContent.name.getString("cs"),
       child: new Container(
         width: 70.0,
         height: 70.0,
@@ -28,7 +32,7 @@ class CategoryItemState extends State<CategoryItem> {
           shape: BoxShape.circle,
           image: new DecorationImage(
             fit: BoxFit.cover,
-            image: new NetworkImage(category.items.first.imageUrl ?? ''),
+            image: new NetworkImage(widget.categoryContent.items.first.imageUrl ?? ''),
           ),
         ),
       ),
@@ -50,7 +54,7 @@ class CategoryItemState extends State<CategoryItem> {
     var crossFade = new AnimatedCrossFade(
       firstChild: placeholder,
       secondChild: dogAvatar,
-      crossFadeState: category.items.first.imageUrl == null
+      crossFadeState: widget.categoryContent.items.first.imageUrl == null
           ? CrossFadeState.showFirst
           : CrossFadeState.showSecond,
       duration: new Duration(milliseconds: 1000),
@@ -65,7 +69,7 @@ class CategoryItemState extends State<CategoryItem> {
       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       leading: lessonImage,
       title: Text(
-        category.name.getString("cs"),
+        widget.categoryContent.name.getString("cs"),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
@@ -92,9 +96,7 @@ class CategoryItemState extends State<CategoryItem> {
       ),
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
-      onTap: () {
-        showDetailPage();
-      },
+      onTap: widget.onPressed,
     );
   }
 
@@ -108,11 +110,5 @@ class CategoryItemState extends State<CategoryItem> {
         child: listTile,
       ),
     );
-  }
-
-  showDetailPage() {
-    Navigator.of(context).push(new MaterialPageRoute(builder: (context) {
-      return new CategoryDetailPage(category);
-    }));
   }
 }

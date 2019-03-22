@@ -1,0 +1,13 @@
+{
+  "@@last_modified": "2019-03-22T21:48:10.794286",
+  "memorizer": "memorizer",
+  "@memorizer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "categories": "categories",
+  "@categories": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/utils/style.dart';
 
 class CategoryCardWidget extends StatefulWidget {
   CategoryCardWidget({
     Key key,
-    @required this.categoryCard,
+    @required this.categoryContent,
     @required this.onPressed
   }) : super(key: key);
 
-  final CategoryContent categoryCard;
+  final CategoryContent categoryContent;
   final VoidCallback onPressed;
 
   @override
@@ -56,8 +57,8 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
   Widget build(BuildContext context) {
     List<Widget> children = <Widget>[
       ClipRect(
-        clipper: _SquareClipper(),
-        child: Image.network(widget.categoryCard.items.first.imageUrls.first,
+        clipper: SquareClipper(),
+        child: Image.network(widget.categoryContent.items.first.imageUrls.first,
             fit: BoxFit.cover),
       ),
       Container(
@@ -67,7 +68,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
           left: 16.0,
           right: 16.0,
         ),
-        child: _buildTextualInfo(widget.categoryCard),
+        child: _buildTextualInfo(widget.categoryContent),
       ),
     ];
 
@@ -112,17 +113,5 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
         ),
       ],
     );
-  }
-}
-
-class _SquareClipper extends CustomClipper<Rect> {
-  @override
-  Rect getClip(Size size) {
-    return new Rect.fromLTWH(0.0, 0.0, size.width, size.width);
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Rect> oldClipper) {
-    return false;
   }
 }

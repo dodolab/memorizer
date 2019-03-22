@@ -22,11 +22,6 @@ class CategoriesBloc implements BlocBase {
   Sink<List<CategoryContent>> get _inCategoriesList => _categoriesController.sink;
   Stream<List<CategoryContent>> get outCategoriesList => _categoriesController.stream;
 
-  BehaviorSubject<int> _totalCategoriesController = BehaviorSubject<int>();
-  Sink<int> get inTotalCategories => _totalCategoriesController.sink;
-  Stream<int> get outTotalCategories => _totalCategoriesController.stream;
-
-
   void dispose(){
     _categoriesController.close();
   }
@@ -53,8 +48,6 @@ class CategoriesBloc implements BlocBase {
 
 
   void _handleFetchedPage(CategoryPageResult page) {
-    print("IN TOTAL CATEGORIES SET");
-    inTotalCategories.add(page.totalResults);
     // Only notify when there are categories
     if (page.categories.length > 0){
       _inCategoriesList.add(UnmodifiableListView<CategoryContent>(page.categories));
