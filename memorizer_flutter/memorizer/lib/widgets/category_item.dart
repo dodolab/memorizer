@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/category_content.dart';
-import 'package:memorizer/pages/category_detail.dart';
+import 'package:memorizer/utils/shared_preferences.dart';
+import 'package:memorizer/utils/style.dart';
+import 'package:memorizer/widgets/round_icon.dart';
 
 class CategoryItemWidget extends StatefulWidget {
 
@@ -21,55 +23,35 @@ class CategoryItemWidget extends StatefulWidget {
 
 class CategoryItemWidgetState extends State<CategoryItemWidget> {
 
+  String langCode;
 
-  Widget get lessonImage {
-    var dogAvatar = new Hero(
-      tag: widget.categoryContent.name.getString("cs"),
-      child: new Container(
-        width: 70.0,
-        height: 70.0,
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          image: new DecorationImage(
-            fit: BoxFit.cover,
-            image: new NetworkImage(widget.categoryContent.items.first.imageUrl ?? ''),
-          ),
+  @override
+  Widget build(BuildContext context) {
+    return new SharedPreferencesBuilder(
+      pref: PREF_LANG_CODE,
+        builder: (BuildContext context,
+            AsyncSnapshot<String> snapshot)
+    {
+      langCode = snapshot.data;
+
+      return new Card(
+        elevation: 8.0,
+        margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+        child: Container(
+          decoration: BoxDecoration(color: colorDecor),
+          child: _buildContent(),
         ),
-      ),
-    );
-
-    var placeholder = new Container(
-        width: 70.0,
-        height: 70.0,
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: new LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.black54, Colors.black, Colors.blueGrey[600]],
-          ),
-        ),
-        alignment: Alignment.center);
-
-    var crossFade = new AnimatedCrossFade(
-      firstChild: placeholder,
-      secondChild: dogAvatar,
-      crossFadeState: widget.categoryContent.items.first.imageUrl == null
-          ? CrossFadeState.showFirst
-          : CrossFadeState.showSecond,
-      duration: new Duration(milliseconds: 1000),
-    );
-
-    return crossFade;
+      );
+    });
   }
 
-  Widget get listTile {
+  Widget _buildContent() {
     return ListTile(
       contentPadding:
       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      leading: lessonImage,
+      leading: RoundIconWidget(widget.categoryContent.items.first.imageUrl),
       title: Text(
-        widget.categoryContent.name.getString("cs"),
+        widget.categoryContent.name.getString(langCode),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
@@ -89,7 +71,7 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
             flex: 4,
             child: Padding(
                 padding: EdgeInsets.only(left: 10.0),
-                child: Text("Dojo",
+                child: Text("TODO",
                     style: TextStyle(color: Colors.white))),
           )
         ],
@@ -97,18 +79,6 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),
       onTap: widget.onPressed,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Card(
-      elevation: 8.0,
-      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      child: Container(
-        decoration: BoxDecoration(color: Color.fromRGBO(64, 75, 96, .9)),
-        child: listTile,
-      ),
     );
   }
 }

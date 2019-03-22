@@ -31,7 +31,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
 
   Widget get dogImage {
     return new Hero(
-      tag: widget.category.name.getString("cs"),
+      tag: widget.category.items.first.imageUrl,
       child: new Container(
         height: dogAvatarSize,
         width: dogAvatarSize,
@@ -85,7 +85,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         children: <Widget>[
           dogImage,
           new Text(
-            widget.category.name.getString("cs") + '  🎾',
+            widget.category.name.getString("cs"),
             style: new TextStyle(fontSize: 32.0),
           ),
           new Padding(
