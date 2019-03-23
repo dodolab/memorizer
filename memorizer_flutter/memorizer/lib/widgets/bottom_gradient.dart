@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class BottomGradient extends StatelessWidget {
   final double offset;
+  final double width;
+  final double height;
 
-  BottomGradient({this.offset: 0.95});
-
-  BottomGradient.noOffset() : offset = 1.0;
+  BottomGradient({this.offset: 0.95, this.width : 10000, this.height: 100});
 
   @override
   Widget build(BuildContext context) {
     return new Container(
-        height: 50,
-        width:50,
+        width: width,
+        height: height,
         child: DecoratedBox(
           decoration: BoxDecoration(
           gradient: LinearGradient(

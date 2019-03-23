@@ -6,6 +6,7 @@ import 'package:memorizer/models/species_item.dart';
 import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
 import 'package:memorizer/pages/species_detail.dart';
+import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/widgets/bottom_gradient.dart';
 import 'package:memorizer/widgets/species_item.dart';
 
@@ -19,42 +20,22 @@ class CategoryDetailPage extends StatefulWidget {
 }
 
 class _CategoryDetailPageState extends State<CategoryDetailPage> {
-  double dogAvatarSize = 150.0;
   double _sliderValue = 10.0;
   bool _visible = false;
 
   @override
   void initState() {
     super.initState();
-    Timer(Duration(milliseconds: 100), () => setState(() => _visible = true));
+    Timer(Duration(milliseconds: 500), () => setState(() => _visible = true));
   }
 
-  Widget get dogImage {
+  Widget _buildImage() {
     return new Hero(
       tag: widget.category.items.first.imageUrl,
       child: new Container(
-        height: dogAvatarSize,
-        width: dogAvatarSize,
         constraints: new BoxConstraints(),
         decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            const BoxShadow(
-                offset: const Offset(1.0, 2.0),
-                blurRadius: 2.0,
-                spreadRadius: -1.0,
-                color: const Color(0x33000000)),
-            const BoxShadow(
-                offset: const Offset(2.0, 1.0),
-                blurRadius: 3.0,
-                spreadRadius: 0.0,
-                color: const Color(0x24000000)),
-            const BoxShadow(
-                offset: const Offset(3.0, 1.0),
-                blurRadius: 4.0,
-                spreadRadius: 2.0,
-                color: const Color(0x1F000000)),
-          ],
+          shape: BoxShape.rectangle,
           image: new DecorationImage(
             fit: BoxFit.cover,
             image: new NetworkImage(widget.category.items.first.imageUrl ?? ''),
@@ -64,67 +45,83 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     );
   }
 
-  Widget get dogProfile {
+  Widget _buildHeading() {
     return new Container(
-      padding: new EdgeInsets.symmetric(vertical: 32.0),
       decoration: new BoxDecoration(
         gradient: new LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           stops: [0.1, 0.5, 0.7, 0.9],
           colors: [
-            Colors.indigo[800],
-            Colors.indigo[700],
-            Colors.indigo[600],
-            Colors.indigo[400],
+            Colors.grey[800],
+            Colors.grey[700],
+            Colors.grey[600],
+            Colors.grey[400],
           ],
         ),
       ),
-      child: new Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: <Widget>[
-          dogImage,
-          new Text(
-            widget.category.name.getString("cs"),
-            style: new TextStyle(fontSize: 32.0),
-          ),
+          _buildImage(),
+          BottomGradient(height: 500),
           new Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-            child: new Text(widget.category.name.getString("la")),
-          ),
-          new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              new FlatButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                textColor: Colors.white,
-                color: Colors.red,
-                child: new Text("PRACTICE"),
-                onPressed: () => {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return PracticeConfirmPage(widget.category);
-                      }))
-                    },
-              ),
-              new FlatButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                textColor: Colors.white,
-                color: Colors.red,
-                child: new Text("GALLERY"),
-                onPressed: () => {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return GalleryPage(title: widget.category.name.getString("cs"), items:widget.category.items);
-                      }))
-                    },
-              ),
-            ],
+            padding: new EdgeInsets.symmetric(vertical: 132.0),
+            child: new Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new Text(
+                  widget.category.name.getString("cs"),
+                  style: new TextStyle(fontSize: 32.0),
+                ),
+                new Padding(
+                  padding:
+                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
+                  child: new Text(widget.category.name.getString("la")),
+                ),
+                _buildButtonSection()
+              ],
+            ),
           )
         ],
-      ),
+      )
     );
+  }
+
+  Widget _buildButtonSection() {
+    return AnimatedOpacity(
+        opacity: _visible ? 1.0 : 0.0,
+        duration: Duration(milliseconds: 500),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            new FlatButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              textColor: Colors.white,
+              color: Colors.red,
+              child: new Text("PRACTICE"),
+              onPressed: () => {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return PracticeConfirmPage(widget.category);
+                    }))
+                  },
+            ),
+            new FlatButton(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+              textColor: Colors.white,
+              color: Colors.red,
+              child: new Text("GALLERY"),
+              onPressed: () => {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return GalleryPage(
+                          title: widget.category.name.getString("cs"),
+                          items: widget.category.items);
+                    }))
+                  },
+            ),
+          ],
+        ));
   }
 
   void updateSlider(double newRating) {
@@ -134,7 +131,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.black87,
+        backgroundColor: defaultBgr,
         body: CustomScrollView(
           slivers: <Widget>[
             _buildAppBar(),
@@ -148,18 +145,9 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       expandedHeight: 390.0,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
-        background: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[dogProfile, _buildMetaSection()],
-        ),
+        title: Text("Mojo"),
+        background: _buildHeading(),
       ),
-    );
-  }
-
-  Widget _buildMetaSection() {
-    return AnimatedOpacity(
-      opacity: _visible ? 1.0 : 0.0,
-      duration: Duration(milliseconds: 500),
     );
   }
 
@@ -175,14 +163,14 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
             return new SpeciesItemWidget(
                 item: widget.category.items[index],
                 onPressed: () =>
-                    navigateToDetail(widget.category.items[index]));
+                    _navigateToDetail(widget.category.items[index]));
           },
         )
       ]),
     );
   }
 
-  void navigateToDetail(SpeciesItem item) {
+  void _navigateToDetail(SpeciesItem item) {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
       return SpeciesDetail(item: item); // todo ret
