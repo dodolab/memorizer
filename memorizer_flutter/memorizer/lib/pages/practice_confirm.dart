@@ -1,9 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:memorizer/lang/sit_localizations.dart';
 import 'package:memorizer/models/category_content.dart';
 import 'package:memorizer/pages/practice.dart';
-import 'package:memorizer/widgets/StaggerAnimation.dart';
+import 'package:memorizer/widgets/stagger_animation.dart';
 import 'package:memorizer/widgets/fancy_button.dart';
 
 class PracticeConfirmPage extends StatefulWidget {
@@ -15,16 +16,18 @@ class PracticeConfirmPage extends StatefulWidget {
   _PracticeConfirmPageState createState() => new _PracticeConfirmPageState();
 }
 
-class _PracticeConfirmPageState extends State<PracticeConfirmPage> with TickerProviderStateMixin {
-  double dogAvatarSize = 150.0;
-  double _sliderValue = 10.0;
+class _PracticeConfirmPageState extends State<PracticeConfirmPage>
+    with TickerProviderStateMixin {
+  double _sliderValue = 1;
   var animationStatus = 0;
   AnimationController _loginButtonController;
+
   @override
   void initState() {
     super.initState();
     _loginButtonController = new AnimationController(
         duration: new Duration(milliseconds: 3000), vsync: this);
+    _sliderValue = widget.category.items.length.toDouble();
   }
 
   @override
@@ -37,125 +40,111 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage> with TickerPr
     try {
       await _loginButtonController.forward();
 
-      // navigate to the practice page
-      Navigator
-          .of(context)
+      Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
-        return new Practice(title: "Dojo", items: widget.category.items); // todo return detail page
+        return new Practice(title: "Dojo", items: widget.category.items);
       }));
     } on TickerCanceled {}
-  }
-
-
-  Widget get dogProfile {
-    return new Container(
-      padding: new EdgeInsets.symmetric(vertical: 32.0),
-      decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5, 0.7, 0.9],
-          colors: [
-            Colors.indigo[800],
-            Colors.indigo[700],
-            Colors.indigo[600],
-            Colors.indigo[400],
-          ],
-        ),
-      ),
-      child: ClipRect(
-        clipper: _SquareClipper(),
-        child: Image.network(widget.category.items.first.imageUrl,
-            fit: BoxFit.cover),
-      ),
-    );
-  }
-
-
-
-  Widget get addYourRating {
-    return new Column(
-      children: <Widget>[
-        new Container(
-          padding: new EdgeInsets.symmetric(
-            vertical: 16.0,
-            horizontal: 16.0,
-          ),
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              new Flexible(
-                flex: 1,
-                child: new Slider(
-                  activeColor: Colors.indigoAccent,
-                  min: 0.0,
-                  max: 15.0,
-                  onChanged: (newRating) => updateSlider(newRating),
-                  value: _sliderValue,
-                ),
-              ),
-              new Container(
-                width: 50.0,
-                alignment: Alignment.center,
-                child: new Text('${_sliderValue.toInt()}',
-                    style: Theme.of(context).textTheme.display1),
-              ),
-            ],
-          ),
-        ),
-        submitRatingButton,
-      ],
-    );
-  }
-
-  Widget get submitRatingButton {
-    return animationStatus == 0
-        ? new Padding(
-      padding: const EdgeInsets.only(bottom: 50.0),
-      child: new InkWell(
-          onTap: () {
-            setState(() {
-              animationStatus = 1;
-            });
-            _playAnimation();
-          },
-          child: new FancyButton()),
-    )
-        : new StaggerAnimation(
-        buttonController:
-        _loginButtonController.view);
   }
 
   void updateSlider(double newRating) {
     setState(() => _sliderValue = newRating);
   }
 
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         appBar: AppBar(
-        title: Text('List Page'),
-    ),
-    body: Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        dogProfile,
-        addYourRating
-      ],
-    ));
+          title: Text(SitLocalizations.of(context).practice),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            _buildImage(),
+            Row(
+              children: <Widget>[
+                Container(
+                    padding: new EdgeInsets.symmetric(
+                      horizontal: 26.0,
+                    ),
+                    child: new Text("Select number of entities", style: TextStyle(fontSize: 16))
+                )
+              ],
+            ),
+            _buildSlider(),
+            new Container(
+              margin: EdgeInsets.only(bottom: 20),
+              color: Colors.redAccent,
+              height: 1,
+            ),
+            _buildSubmitButton()
+          ],
+        ));
   }
-}
 
-class _SquareClipper extends CustomClipper<Rect> {
-  @override
-  Rect getClip(Size size) {
-    return new Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+  Widget _buildImage() {
+    return new Hero(
+      tag: widget.category.items.first.imageUrl,
+      child: new Container(
+        height:200,
+        margin: EdgeInsets.only(top: 100, bottom: 50),
+        constraints: new BoxConstraints(),
+        decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          image: new DecorationImage(
+            fit: BoxFit.contain,
+            image: new AssetImage("assets/ic_practice.png"),
+          ),
+        ),
+      ),
+    );
   }
 
-  @override
-  bool shouldReclip(CustomClipper<Rect> oldClipper) {
-    return false;
+  Widget _buildSlider() {
+    return new Container(
+        padding: new EdgeInsets.symmetric(
+          vertical: 16.0,
+          horizontal: 16.0,
+        ),
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            new Flexible(
+              flex: 1,
+              child: new Slider(
+                activeColor: Colors.indigoAccent,
+                min: 1,
+                max: widget.category.items.length.toDouble(),
+                onChanged: (newRating) => updateSlider(newRating),
+                value: _sliderValue,
+              ),
+            ),
+            new Container(
+              width: 50.0,
+              alignment: Alignment.center,
+              child: new Text('${_sliderValue.toInt()}',
+                  style: Theme.of(context).textTheme.display1),
+            ),
+          ],
+        ));
+  }
+
+  Widget _buildSubmitButton() {
+    return animationStatus == 0
+        ? new Padding(
+            padding: const EdgeInsets.only(bottom: 50.0),
+            child: new InkWell(
+                onTap: () {
+                  setState(() {
+                    animationStatus = 1;
+                  });
+                  _playAnimation();
+                },
+                child:
+                    new FancyButton(title: SitLocalizations.of(context).start)),
+          )
+        : new StaggerAnimation(
+            title: SitLocalizations.of(context).start,
+            buttonController: _loginButtonController.view);
   }
 }

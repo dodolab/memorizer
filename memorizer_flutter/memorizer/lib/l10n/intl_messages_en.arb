@@ -20,5 +20,10 @@
    "@gallery": {
      "type": "text",
      "placeholders": {}
+   },
+   "start": "START",
+   "@start": {
+     "type": "text",
+     "placeholders": {}
    }
 }

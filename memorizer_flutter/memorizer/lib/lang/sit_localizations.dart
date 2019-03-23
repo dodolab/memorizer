@@ -41,4 +41,5 @@ class SitLocalizations {
   String get categories => Intl.message('categories');
   String get practice => Intl.message('practice');
   String get gallery => Intl.message('gallery');
+  String get start => Intl.message('start');
 }

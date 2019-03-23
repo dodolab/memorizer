@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class StaggerAnimation extends StatelessWidget {
-  StaggerAnimation({Key key, this.buttonController})
+  StaggerAnimation({Key key, this.buttonController, this.title})
       : buttonSqueezeanimation = new Tween(
-    begin: 320.0,
-    end: 70.0,
-  )
-      .animate(
-    new CurvedAnimation(
-      parent: buttonController,
-      curve: new Interval(
-        0.0,
-        0.150,
-      ),
-    ),
-  ),
+          begin: 220.0,
+          end: 70.0,
+        ).animate(
+          new CurvedAnimation(
+            parent: buttonController,
+            curve: new Interval(
+              0.0,
+              0.150,
+            ),
+          ),
+        ),
         containerCircleAnimation = new EdgeInsetsTween(
           begin: const EdgeInsets.only(bottom: 50.0),
           end: const EdgeInsets.only(bottom: 0.0),
-        )
-            .animate(
+        ).animate(
           new CurvedAnimation(
             parent: buttonController,
             curve: new Interval(
@@ -35,6 +33,7 @@ class StaggerAnimation extends StatelessWidget {
   final AnimationController buttonController;
   final Animation<EdgeInsets> containerCircleAnimation;
   final Animation buttonSqueezeanimation;
+  final String title;
 
   Future<Null> _playAnimation() async {
     try {
@@ -54,40 +53,35 @@ class StaggerAnimation extends StatelessWidget {
             tag: "fade",
             child: new Container(
                 width: buttonSqueezeanimation.value,
-                height:
-                60.0,
+                height: 60.0,
                 alignment: FractionalOffset.center,
                 decoration: new BoxDecoration(
                   color: const Color.fromRGBO(247, 64, 106, 1.0),
-                  borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
+                  borderRadius:
+                      new BorderRadius.all(const Radius.circular(30.0)),
                 ),
                 child: buttonSqueezeanimation.value > 75.0
                     ? new Text(
-                  "Sign In",
-                  style: new TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w300,
-                    letterSpacing: 0.3,
-                  ),
-                )
+                        title,
+                        style: new TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w300,
+                          letterSpacing: 0.3,
+                        ),
+                      )
                     : new CircularProgressIndicator(
-                  value: null,
-                  strokeWidth: 1.0,
-                  valueColor: new AlwaysStoppedAnimation<Color>(
-                      Colors.white),
-                )),
+                        value: null,
+                        strokeWidth: 1.0,
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.white),
+                      )),
           )),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    buttonController.addListener(() {
-      if (buttonController.isCompleted) {
-        Navigator.pushNamed(context, "/home");
-      }
-    });
     return new AnimatedBuilder(
       builder: _buildAnimation,
       animation: buttonController,

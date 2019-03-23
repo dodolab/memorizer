@@ -23,6 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "categories" : MessageLookupByLibrary.simpleMessage("Categories"),
     "gallery" : MessageLookupByLibrary.simpleMessage("Gallery"),
     "memorizer" : MessageLookupByLibrary.simpleMessage("Memorizer"),
-    "practice" : MessageLookupByLibrary.simpleMessage("Practice")
+    "practice" : MessageLookupByLibrary.simpleMessage("Practice"),
+    "start" : MessageLookupByLibrary.simpleMessage("START")
   };
 }

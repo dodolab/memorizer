@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class FancyButton extends StatelessWidget {
-  FancyButton();
+  final String title;
+
+  FancyButton({this.title});
   @override
   Widget build(BuildContext context) {
     return (new Container(
-      width: 320.0,
+      width: 220.0,
       height: 60.0,
       alignment: FractionalOffset.center,
       decoration: new BoxDecoration(
@@ -13,7 +15,7 @@ class FancyButton extends StatelessWidget {
         borderRadius: new BorderRadius.all(const Radius.circular(30.0)),
       ),
       child: new Text(
-        "PRACTICE",
+        title,
         style: new TextStyle(
           color: Colors.white,
           fontSize: 20.0,
