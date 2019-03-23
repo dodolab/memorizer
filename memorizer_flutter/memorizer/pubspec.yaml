@@ -48,6 +48,8 @@ flutter:
   - assets/flag_cs.png
   - assets/flag_en.png
   - assets/flag_la.png
+  - assets/ic_gallery.png
+  - assets/ic_practice.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

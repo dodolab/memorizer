@@ -66,50 +66,9 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         children: <Widget>[
           _buildImage(),
           BottomGradient(height: 500),
-          new Padding(
-            padding: new EdgeInsets.symmetric(vertical: 132.0),
-            child: _buildButtonSection(),
-          )
         ],
       )
     );
-  }
-
-  Widget _buildButtonSection() {
-    return AnimatedOpacity(
-        opacity: _visible ? 1.0 : 0.0,
-        duration: Duration(milliseconds: 500),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            new FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-              textColor: Colors.white,
-              color: Colors.red,
-              child: new Text("PRACTICE"),
-              onPressed: () => {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return PracticeConfirmPage(widget.category);
-                    }))
-                  },
-            ),
-            new FlatButton(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-              textColor: Colors.white,
-              color: Colors.red,
-              child: new Text("GALLERY"),
-              onPressed: () => {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return GalleryPage(
-                          title: widget.category.name.getString(langCode),
-                          items: widget.category.items);
-                    }))
-                  },
-            ),
-          ],
-        ));
   }
 
   void updateSlider(double newRating) {
@@ -135,6 +94,21 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
 
   Widget _buildAppBar() {
     return SliverAppBar(
+      actions: <Widget>[
+     AnimatedOpacity(
+    opacity: _visible ? 1.0 : 0.0,
+        duration: Duration(milliseconds: 500),
+        child: new Row(
+          children: <Widget>[
+            IconButton(
+                icon: Image.asset("assets/ic_practice.png"),
+                onPressed: () { _navigateToPractice(); }),
+            IconButton(
+                icon: Image.asset("assets/ic_gallery.png"),
+                onPressed: () { _navigateToGallery(); })
+          ],
+        ))
+      ],
       expandedHeight: 390.0,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
@@ -146,6 +120,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               widget.category.name.getString(langCode),
               style: new TextStyle(fontSize: 20.0),
             ),
+            langCode == "la" ? Container() :
             new Container(
               margin: const EdgeInsets.only(left: 10.0, bottom: 3.0),
                 child: new Text("(${widget.category.name.getString("la")})",
@@ -175,6 +150,22 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         )
       ]),
     );
+  }
+
+  void _navigateToGallery() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) {
+          return GalleryPage(
+              title: widget.category.name.getString(langCode),
+              items: widget.category.items);
+        }));
+  }
+
+  void _navigateToPractice() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) {
+          return PracticeConfirmPage(widget.category);
+        }));
   }
 
   void _navigateToDetail(SpeciesItem item) {
