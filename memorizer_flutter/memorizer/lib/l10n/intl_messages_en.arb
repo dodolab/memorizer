@@ -10,5 +10,15 @@
   "@categories": {
     "type": "text",
     "placeholders": {}
-  }
+  },
+   "practice": "Practice",
+   "@practice": {
+     "type": "text",
+     "placeholders": {}
+   },
+   "gallery": "Gallery",
+   "@gallery": {
+     "type": "text",
+     "placeholders": {}
+   }
 }

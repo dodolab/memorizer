@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-03-22T21:48:10.794286",
+  "@@last_modified": "2019-03-23T19:14:20.537917",
   "memorizer": "memorizer",
   "@memorizer": {
     "type": "text",
@@ -7,6 +7,16 @@
   },
   "categories": "categories",
   "@categories": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "practice": "practice",
+  "@practice": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "gallery": "gallery",
+  "@gallery": {
     "type": "text",
     "placeholders": {}
   }

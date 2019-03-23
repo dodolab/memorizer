@@ -10,5 +10,15 @@
   "@categories": {
     "type": "text",
     "placeholders": {}
-  }
+  },
+   "practice": "Cvičení",
+   "@practice": {
+     "type": "text",
+     "placeholders": {}
+   },
+   "gallery": "Galerie",
+   "@gallery": {
+     "type": "text",
+     "placeholders": {}
+   }
 }

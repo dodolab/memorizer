@@ -39,4 +39,6 @@ class SitLocalizations {
   // Localized Messages
   String get title => Intl.message('memorizer');
   String get categories => Intl.message('categories');
+  String get practice => Intl.message('practice');
+  String get gallery => Intl.message('gallery');
 }

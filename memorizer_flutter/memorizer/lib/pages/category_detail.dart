@@ -6,6 +6,7 @@ import 'package:memorizer/models/species_item.dart';
 import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
 import 'package:memorizer/pages/species_detail.dart';
+import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/widgets/bottom_gradient.dart';
 import 'package:memorizer/widgets/species_item.dart';
@@ -22,6 +23,7 @@ class CategoryDetailPage extends StatefulWidget {
 class _CategoryDetailPageState extends State<CategoryDetailPage> {
   double _sliderValue = 10.0;
   bool _visible = false;
+  String langCode;
 
   @override
   void initState() {
@@ -66,21 +68,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
           BottomGradient(height: 500),
           new Padding(
             padding: new EdgeInsets.symmetric(vertical: 132.0),
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                new Text(
-                  widget.category.name.getString("cs"),
-                  style: new TextStyle(fontSize: 32.0),
-                ),
-                new Padding(
-                  padding:
-                  const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
-                  child: new Text(widget.category.name.getString("la")),
-                ),
-                _buildButtonSection()
-              ],
-            ),
+            child: _buildButtonSection(),
           )
         ],
       )
@@ -115,7 +103,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
                     Navigator.of(context).push(
                         MaterialPageRoute(builder: (BuildContext context) {
                       return GalleryPage(
-                          title: widget.category.name.getString("cs"),
+                          title: widget.category.name.getString(langCode),
                           items: widget.category.items);
                     }))
                   },
@@ -130,14 +118,19 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        backgroundColor: defaultBgr,
-        body: CustomScrollView(
-          slivers: <Widget>[
-            _buildAppBar(),
-            _buildContentSection(),
-          ],
-        ));
+    return new SharedPreferencesBuilder(
+        pref: PREF_LANG_CODE,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          langCode = snapshot.data;
+          return new Scaffold(
+              backgroundColor: defaultBgr,
+              body: CustomScrollView(
+                slivers: <Widget>[
+                  _buildAppBar(),
+                  _buildContentSection(),
+                ],
+              ));
+        });
   }
 
   Widget _buildAppBar() {
@@ -145,7 +138,21 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
       expandedHeight: 390.0,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
-        title: Text("Mojo"),
+        title: new Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            new Text(
+              widget.category.name.getString(langCode),
+              style: new TextStyle(fontSize: 20.0),
+            ),
+            new Container(
+              margin: const EdgeInsets.only(left: 10.0, bottom: 3.0),
+                child: new Text("(${widget.category.name.getString("la")})",
+                    style: new TextStyle(fontSize: 10))
+            ),
+          ],
+        ),
         background: _buildHeading(),
       ),
     );
