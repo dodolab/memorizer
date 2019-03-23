@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gallery" : MessageLookupByLibrary.simpleMessage("Gallery"),
     "memorizer" : MessageLookupByLibrary.simpleMessage("Memorizer"),
     "practice" : MessageLookupByLibrary.simpleMessage("Practice"),
+    "select" : MessageLookupByLibrary.simpleMessage("Select number of entities"),
     "start" : MessageLookupByLibrary.simpleMessage("START")
   };
 }

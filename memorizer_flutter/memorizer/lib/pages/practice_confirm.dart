@@ -42,7 +42,7 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage>
 
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
-        return new Practice(title: "Dojo", items: widget.category.items);
+        return new Practice(itemsNum: _sliderValue.toInt(), items: widget.category.items);
       }));
     } on TickerCanceled {}
   }
@@ -67,7 +67,7 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage>
                     padding: new EdgeInsets.symmetric(
                       horizontal: 26.0,
                     ),
-                    child: new Text("Select number of entities", style: TextStyle(fontSize: 16))
+                    child: new Text(SitLocalizations.of(context).select, style: TextStyle(fontSize: 16))
                 )
               ],
             ),

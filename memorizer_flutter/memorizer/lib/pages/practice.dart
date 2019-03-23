@@ -5,38 +5,53 @@ import 'package:memorizer/models/species_item.dart';
 import 'dart:math';
 
 import 'package:memorizer/pages/summary.dart';
+import 'package:memorizer/utils/style.dart';
+import 'package:memorizer/utils/utils.dart';
 
 const STATE_NEUTRAL = 1;
 const STATE_ERROR = 2;
 const STATE_CORRECT = 3;
 
 class Practice extends StatefulWidget {
-  Practice({Key key, this.title, this.items}) : super(key: key);
-
-
-  final String title;
+  Practice({Key key, this.itemsNum, this.items}) : super(key: key);
+  int itemsNum;
   List<SpeciesItem> items;
+
+  @override
+  _PracticeState createState() => new _PracticeState(itemsNum: itemsNum, items: items);
+}
+
+class _PracticeState extends State<Practice> {
+
+  List<SpeciesItem> items;
+  int itemsNum;
   List<SpeciesItem> failedItems = List();
   List<SpeciesItem> failedAnswers = List();
   int currentIndex = 0;
   int errors = 0;
-
   List<SpeciesItem> offeredItems = new List();
   var offeredItemStates = [STATE_NEUTRAL, STATE_NEUTRAL,STATE_NEUTRAL, STATE_NEUTRAL];
   var rnd = new Random();
 
-  foldItems(){
-    items.sort((a1, a2) => rnd.nextInt(2)-1);
+  _PracticeState({this.itemsNum, this.items});
+
+  @override
+  void initState() {
+    super.initState();
+    shuffle(items);
+    currentIndex = -1;
+    goToNext();
   }
 
   bool goToNext() {
-    if(currentIndex >= items.length-1) return false;
+    if(currentIndex >= itemsNum-1) return false;
 
     offeredItemStates = [STATE_NEUTRAL, STATE_NEUTRAL,STATE_NEUTRAL, STATE_NEUTRAL];
     currentIndex++;
 
     var offerIndices = [];
     offerIndices.add(currentIndex);
+
     while(true){
       var next = rnd.nextInt(items.length-1);
       if(!offerIndices.contains(next)){
@@ -44,7 +59,8 @@ class Practice extends StatefulWidget {
       }
       if(offerIndices.length == 4) break;
     }
-    offerIndices.sort((a1, a2) => rnd.nextInt(2)-1);
+
+    shuffle(offerIndices);
 
     offeredItems.clear();
     offerIndices.forEach((idx){
@@ -71,25 +87,11 @@ class Practice extends StatefulWidget {
     }
   }
 
-  @override
-  _PracticeState createState() => new _PracticeState();
-}
-
-class _PracticeState extends State<Practice> {
-
-  @override
-  void initState() {
-    super.initState();
-    widget.foldItems();
-    widget.currentIndex = -1;
-    widget.goToNext();
-  }
-
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: defaultBgr,
         body: OrientationBuilder(
           builder: (context, orientation) {
             return Stack(
@@ -98,7 +100,6 @@ class _PracticeState extends State<Practice> {
                   builder: (context, orientation) {
                     return Card(
                         elevation: 8.0,
-                        color: Colors.grey,
                         margin: new EdgeInsets.symmetric(
                             horizontal: 10.0, vertical: 6.0),
                         child: Padding(
@@ -113,7 +114,7 @@ class _PracticeState extends State<Practice> {
                               decoration: BoxDecoration(
                                   color: Color.fromRGBO(64, 75, 96, .9)),
                               child: Image.network(
-                                  widget.items[widget.currentIndex].imageUrls
+                                  items[currentIndex].imageUrls
                                       .first,
                                   fit: BoxFit.cover),
                             )));
@@ -125,15 +126,15 @@ class _PracticeState extends State<Practice> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _buildButton(widget.offeredItems[0], 0),
-                        _buildButton(widget.offeredItems[1], 1)
+                        _buildButton(offeredItems[0], 0),
+                        _buildButton(offeredItems[1], 1)
                       ],
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _buildButton(widget.offeredItems[2], 2),
-                        _buildButton(widget.offeredItems[3], 3)
+                        _buildButton(offeredItems[2], 2),
+                        _buildButton(offeredItems[3], 3)
                       ],
                     ),
                   ],
@@ -145,37 +146,44 @@ class _PracticeState extends State<Practice> {
   }
 
 
-  Widget _buildButton(SpeciesItem item, int index){
-    var state = widget.offeredItemStates[index];
+  Widget _buildButton(SpeciesItem item, int index) {
+    var state = offeredItemStates[index];
     return Expanded(
       child: new SizedBox(
         height: 50,
-        child: FlatButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.zero),
+        child: state == STATE_NEUTRAL ? OutlineButton (
+          borderSide: BorderSide(color: Colors.grey[700]),
           textColor: Colors.white,
-          color: state == STATE_NEUTRAL ? Colors.black : state == STATE_ERROR ? Colors.red : Colors.green,
+          color:  state == STATE_NEUTRAL ? Colors.black: state == STATE_ERROR ? Colors.red : Colors.green,
           child: new Text(
             item.name.getString("cs"),
           ),
-          onPressed: () {
-            widget.submitItem(item, index);
-            setState(() {
-
-            });
-            Timer(Duration(milliseconds: 1000), () {
-              setState(() => {});
-              if(!widget.goToNext()) {
-                // go to summary page
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                return SummaryPage(widget.errors, widget.items.length, widget.failedItems, widget.failedAnswers);}
-                ));
-              }
-            });
-          },
+          onPressed: () {_onItemPressed(item, index);},
+        ) :
+        FlatButton (
+          textColor: Colors.white,
+          color:  state == STATE_ERROR ? Colors.red : Colors.green,
+          child: new Text(
+            item.name.getString("cs"),
+          ),
+          onPressed: () {_onItemPressed(item, index);},
         ),
       ),
     );
+  }
+
+  _onItemPressed(SpeciesItem item, int index){
+    submitItem(item, index);
+    setState(() { });
+    Timer(Duration(milliseconds: 1000), () {
+      setState(() => {});
+      if(!goToNext()) {
+        // go to summary page
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return SummaryPage(errors, items.length, failedItems, failedAnswers);}
+        ));
+      }
+    });
   }
 }

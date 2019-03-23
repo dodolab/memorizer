@@ -25,5 +25,10 @@
    "@start": {
      "type": "text",
      "placeholders": {}
-   }
+  },
+  "select": "Vyberte počet entit",
+  "@select": {
+    "type": "text",
+    "placeholders": {}
+  }
 }

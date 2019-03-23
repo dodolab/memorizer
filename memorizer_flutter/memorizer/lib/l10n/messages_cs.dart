@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "gallery" : MessageLookupByLibrary.simpleMessage("Galerie"),
     "memorizer" : MessageLookupByLibrary.simpleMessage("Memorizer"),
     "practice" : MessageLookupByLibrary.simpleMessage("Cvičení"),
+    "select" : MessageLookupByLibrary.simpleMessage("Vyberte počet entit"),
     "start" : MessageLookupByLibrary.simpleMessage("START")
   };
 }

@@ -25,5 +25,10 @@
    "@start": {
      "type": "text",
      "placeholders": {}
-   }
+  },
+  "select": "Select number of entities",
+  "@select": {
+    "type": "text",
+    "placeholders": {}
+  }
 }
