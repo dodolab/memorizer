@@ -144,9 +144,13 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
                 if (_switchController.isAnimating) {
                   if (_switchAnimation.previousImageOpacity.value > 0) {
                     opacity = _switchAnimation.previousImageOpacity.value;
-                  } else {
+                  } else if(_canGoNext()) {
                     opacity = _switchAnimation.nextImageOpacity.value;
+                  } else {
+                    opacity = 0;
                   }
+                } else if(!_canGoNext() && _switchAnimation.previousImageOpacity.value == 0){
+                  opacity = 0;
                 }
 
                 var imageToShow = (_switchController.isAnimating &&
@@ -224,8 +228,6 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     var showSelectButton = _switchAnimation.selectButtonOpacity.value < 1;
     var hideSelectButton = _switchAnimation.selectButtonOpacity2.value > 0;
     var showCorrectButton = _switchAnimation.correctButtonOpacity.value > 0;
-    var displayResults = _switchAnimation.selectButtonOpacity2.value != 0;
-    var displayNextImage = _switchAnimation.nextImageOpacity.value != 0;
     Color buttonColor;
 
     if (index == this.selectedItemIndex &&
