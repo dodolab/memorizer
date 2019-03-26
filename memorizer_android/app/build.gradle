@@ -47,7 +47,11 @@ dependencies {
     implementation "com.android.support:design:28.0.0"
     implementation "com.android.support:support-vector-drawable:28.0.0"
     implementation "com.android.support.constraint:constraint-layout:1.1.3"
+    implementation "com.android.support:recyclerview-v7:28.0.0"
 
+    //RxJava
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     // Reactive binding
     implementation "com.jakewharton.rxbinding2:rxbinding:2.1.1"
@@ -56,6 +60,17 @@ dependencies {
     implementation "com.jakewharton.rxbinding2:rxbinding-design:2.1.1"
     implementation "com.jakewharton.rxbinding2:rxbinding-recyclerview-v7:2.1.1"
 
+    // Picasso
+    implementation "com.squareup.picasso:picasso:2.5.2"
+    implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"
+
+    // GSON
+    implementation "com.google.code.gson:gson:2.8.5"
+
+    // PaperParcel https://github.com/grandstaish/paperparcel
+    implementation "nz.bradcampbell:paperparcel:2.0.6"
+    implementation "nz.bradcampbell:paperparcel-kotlin:2.0.6"
+    kapt "nz.bradcampbell:paperparcel-compiler:2.0.6"
     // Progress view
     implementation "com.github.rahatarmanahmed:circularprogressview:2.5.0"
 
@@ -65,6 +80,15 @@ dependencies {
     // Dagger
     kapt "com.google.dagger:dagger-compiler:2.15"
     kapt "com.google.dagger:dagger-android-processor:2.15"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:2.4.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.11.0"
+
+    // Stetho
+    implementation "com.facebook.stetho:stetho-okhttp3:1.5.0"
 
     // UI
     implementation "com.android.support:cardview-v7:28.0.0"
