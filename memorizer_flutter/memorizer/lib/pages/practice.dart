@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:memorizer/models/species_item.dart';
@@ -6,6 +7,7 @@ import 'dart:math';
 
 import 'package:memorizer/pages/summary.dart';
 import 'package:memorizer/utils/style.dart';
+import 'package:memorizer/utils/switch_animation.dart';
 import 'package:memorizer/utils/utils.dart';
 
 const STATE_NEUTRAL = 1;
@@ -18,11 +20,15 @@ class Practice extends StatefulWidget {
   List<SpeciesItem> items;
 
   @override
-  _PracticeState createState() => new _PracticeState(itemsNum: itemsNum, items: items);
+  _PracticeState createState() =>
+      new _PracticeState(itemsNum: itemsNum, items: items);
 }
 
-class _PracticeState extends State<Practice> {
+class _PracticeState extends State<Practice> with TickerProviderStateMixin {
+  AnimationController _switchController;
+  SwitchAnimation _switchAnimation;
 
+  bool _evaluationPending = false;
   List<SpeciesItem> items;
   int itemsNum;
   List<SpeciesItem> failedItems = List();
@@ -30,7 +36,14 @@ class _PracticeState extends State<Practice> {
   int currentIndex = 0;
   int errors = 0;
   List<SpeciesItem> offeredItems = new List();
-  var offeredItemStates = [STATE_NEUTRAL, STATE_NEUTRAL,STATE_NEUTRAL, STATE_NEUTRAL];
+  var offeredItemStates = [
+    STATE_NEUTRAL,
+    STATE_NEUTRAL,
+    STATE_NEUTRAL,
+    STATE_NEUTRAL
+  ];
+  int selectedItemIndex = 0;
+
   var rnd = new Random();
 
   _PracticeState({this.itemsNum, this.items});
@@ -38,32 +51,57 @@ class _PracticeState extends State<Practice> {
   @override
   void initState() {
     super.initState();
+    _switchController = new AnimationController(
+        duration: new Duration(milliseconds: 2000), vsync: this);
+    _switchAnimation = new SwitchAnimation(_switchController);
     shuffle(items);
     currentIndex = -1;
+
     goToNext();
   }
 
-  bool goToNext() {
-    if(currentIndex >= itemsNum-1) return false;
+  @override
+  void dispose() {
+    _switchController.dispose();
+    super.dispose();
+  }
 
-    offeredItemStates = [STATE_NEUTRAL, STATE_NEUTRAL,STATE_NEUTRAL, STATE_NEUTRAL];
+  Future<Null> _playAnimation() async {
+    try {
+      await _switchController.forward(from: 0);
+    } on TickerCanceled {}
+  }
+
+  bool _canGoNext() {
+    return (currentIndex < itemsNum - 1);
+  }
+
+  bool goToNext() {
+    if (!_canGoNext()) return false;
+
+    offeredItemStates = [
+      STATE_NEUTRAL,
+      STATE_NEUTRAL,
+      STATE_NEUTRAL,
+      STATE_NEUTRAL
+    ];
     currentIndex++;
 
     var offerIndices = [];
     offerIndices.add(currentIndex);
 
-    while(true){
-      var next = rnd.nextInt(items.length-1);
-      if(!offerIndices.contains(next)){
+    while (true) {
+      var next = rnd.nextInt(items.length - 1);
+      if (!offerIndices.contains(next)) {
         offerIndices.add(next);
       }
-      if(offerIndices.length == 4) break;
+      if (offerIndices.length == 4) break;
     }
 
     shuffle(offerIndices);
 
     offeredItems.clear();
-    offerIndices.forEach((idx){
+    offerIndices.forEach((idx) {
       offeredItems.add(items[idx]);
     });
     return true;
@@ -73,13 +111,14 @@ class _PracticeState extends State<Practice> {
     var correctItem = items[currentIndex];
     var isCorrect = item == correctItem;
     offeredItemStates[index] = isCorrect ? STATE_CORRECT : STATE_ERROR;
+    selectedItemIndex = index;
 
-    if(!isCorrect){
+    if (!isCorrect) {
       errors++;
       failedItems.add(item);
       // find correct item
-      for(var i=0; i<offeredItems.length; i++){
-        if(offeredItems[i] == correctItem){
+      for (var i = 0; i < offeredItems.length; i++) {
+        if (offeredItems[i] == correctItem) {
           offeredItemStates[i] = STATE_CORRECT;
           break;
         }
@@ -87,13 +126,34 @@ class _PracticeState extends State<Practice> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    return new AnimatedBuilder(
+      animation: _switchController,
+      builder: _buildContent,
+    );
+  }
+
+  Widget _buildContent(BuildContext context, Widget child) {
     return new Scaffold(
         backgroundColor: defaultBgr,
         body: OrientationBuilder(
           builder: (context, orientation) {
+            var opacity = 1.0;
+            if (_switchController.isAnimating) {
+              if (_switchAnimation.previousImageOpacity.value > 0) {
+                opacity = _switchAnimation.previousImageOpacity.value;
+              } else {
+                opacity = _switchAnimation.nextImageOpacity.value;
+              }
+            }
+
+            var imageToShow = (_switchController.isAnimating &&
+                    _switchAnimation.previousImageOpacity.value == 0 &&
+                    _canGoNext())
+                ? items[currentIndex + 1].imageUrls.first
+                : items[currentIndex].imageUrls.first;
+
             return Stack(
               children: <Widget>[
                 Center(child: OrientationBuilder(
@@ -113,10 +173,10 @@ class _PracticeState extends State<Practice> {
                                   : MediaQuery.of(context).size.width,
                               decoration: BoxDecoration(
                                   color: Color.fromRGBO(64, 75, 96, .9)),
-                              child: Image.network(
-                                  items[currentIndex].imageUrls
-                                      .first,
-                                  fit: BoxFit.cover),
+                              child: Opacity(
+                                  opacity: opacity,
+                                  child: Image.network(imageToShow,
+                                      fit: BoxFit.cover)),
                             )));
                   },
                 )),
@@ -145,45 +205,90 @@ class _PracticeState extends State<Practice> {
         ));
   }
 
-
   Widget _buildButton(SpeciesItem item, int index) {
     var state = offeredItemStates[index];
+    var showSelectButton = _switchAnimation.selectButtonOpacity.value < 1;
+    var hideSelectButton = _switchAnimation.selectButtonOpacity2.value > 0;
+    var showCorrectButton = _switchAnimation.correctButtonOpacity.value > 0;
+    var displayResults = _switchAnimation.selectButtonOpacity2.value != 0;
+    var displayNextImage = _switchAnimation.nextImageOpacity.value != 0;
+    Color buttonColor;
+
+    if (index == this.selectedItemIndex &&
+        (showSelectButton || hideSelectButton)) {
+      buttonColor = Color.fromARGB(
+        ((showSelectButton
+                      ? _switchAnimation.selectButtonOpacity.value
+                      : _switchAnimation.selectButtonOpacity2.value)
+                  * 255).toInt(),
+          255,
+          125,
+          0);
+    } else {
+      if (state == STATE_ERROR) {
+        buttonColor = Color.fromARGB(
+            (_switchAnimation.correctButtonOpacity.value * 255).toInt(),
+            255,
+            0,
+            0);
+      } else if (state == STATE_CORRECT) {
+        buttonColor = Color.fromARGB(
+            (_switchAnimation.correctButtonOpacity.value * 255).toInt(),
+            0,
+            255,
+            0);
+      }
+    }
+
     return Expanded(
       child: new SizedBox(
         height: 50,
-        child: state == STATE_NEUTRAL ? OutlineButton (
-          borderSide: BorderSide(color: Colors.grey[700]),
-          textColor: Colors.white,
-          color:  state == STATE_NEUTRAL ? Colors.black: state == STATE_ERROR ? Colors.red : Colors.green,
-          child: new Text(
-            item.name.getString("cs"),
-          ),
-          onPressed: () {_onItemPressed(item, index);},
-        ) :
-        FlatButton (
-          textColor: Colors.white,
-          color:  state == STATE_ERROR ? Colors.red : Colors.green,
-          child: new Text(
-            item.name.getString("cs"),
-          ),
-          onPressed: () {_onItemPressed(item, index);},
-        ),
+        child: (state == STATE_NEUTRAL || (_switchController.isAnimating && !showCorrectButton))
+            ? OutlineButton(
+                borderSide: BorderSide(color: Colors.grey[700]),
+                textColor: Colors.white,
+                child: new Text(
+                  item.name.getString("cs"),
+                ),
+                onPressed: _evaluationPending
+                    ? null
+                    : () {
+                        _onItemPressed(item, index);
+                      },
+              )
+            : FlatButton(
+                textColor: Colors.white,
+                color: buttonColor,
+                child: new Text(
+                  item.name.getString("cs"),
+                ),
+                onPressed: () {},
+              ),
       ),
     );
   }
 
-  _onItemPressed(SpeciesItem item, int index){
+  _onItemPressed(SpeciesItem item, int index) async {
+    print("ON PRESSED");
+    _evaluationPending = true;
+    print("SUBMIT");
     submitItem(item, index);
-    setState(() { });
-    Timer(Duration(milliseconds: 1000), () {
-      setState(() => {});
-      if(!goToNext()) {
+    print("PLAY");
+    _playAnimation().whenComplete(() {
+      print("COMPLETE");
+      _evaluationPending = false;
+
+      if (!goToNext()) {
         // go to summary page
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) {
-          return SummaryPage(errors, items.length, failedItems, failedAnswers);}
-        ));
+        _navigateToEvalPage();
       }
     });
+  }
+
+  _navigateToEvalPage() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return SummaryPage(errors, items.length, failedItems, failedAnswers);
+    }));
   }
 }
