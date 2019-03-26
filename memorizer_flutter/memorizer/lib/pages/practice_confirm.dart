@@ -40,6 +40,7 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage>
     try {
       await _loginButtonController.forward();
 
+      Navigator.of(context).pop();
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (BuildContext context) {
         return new Practice(itemsNum: _sliderValue.toInt(), items: widget.category.items);

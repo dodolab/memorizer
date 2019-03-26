@@ -34,7 +34,6 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   List<SpeciesItem> failedItems = List();
   List<SpeciesItem> failedAnswers = List();
   int currentIndex = 0;
-  int errors = 0;
   List<SpeciesItem> offeredItems = new List();
   var offeredItemStates = [
     STATE_NEUTRAL,
@@ -114,8 +113,8 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     selectedItemIndex = index;
 
     if (!isCorrect) {
-      errors++;
-      failedItems.add(item);
+      failedItems.add(correctItem);
+      failedAnswers.add(item);
       // find correct item
       for (var i = 0; i < offeredItems.length; i++) {
         if (offeredItems[i] == correctItem) {
@@ -135,74 +134,89 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   }
 
   Widget _buildContent(BuildContext context, Widget child) {
-    return new Scaffold(
-        backgroundColor: defaultBgr,
-        body: OrientationBuilder(
-          builder: (context, orientation) {
-            var opacity = 1.0;
-            if (_switchController.isAnimating) {
-              if (_switchAnimation.previousImageOpacity.value > 0) {
-                opacity = _switchAnimation.previousImageOpacity.value;
-              } else {
-                opacity = _switchAnimation.nextImageOpacity.value;
-              }
-            }
+    return new WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+            backgroundColor: defaultBgr,
+            body: OrientationBuilder(
+              builder: (context, orientation) {
+                var opacity = 1.0;
+                if (_switchController.isAnimating) {
+                  if (_switchAnimation.previousImageOpacity.value > 0) {
+                    opacity = _switchAnimation.previousImageOpacity.value;
+                  } else {
+                    opacity = _switchAnimation.nextImageOpacity.value;
+                  }
+                }
 
-            var imageToShow = (_switchController.isAnimating &&
+                var imageToShow = (_switchController.isAnimating &&
                     _switchAnimation.previousImageOpacity.value == 0 &&
                     _canGoNext())
-                ? items[currentIndex + 1].imageUrls.first
-                : items[currentIndex].imageUrls.first;
+                    ? items[currentIndex + 1].imageUrls.first
+                    : items[currentIndex].imageUrls.first;
 
-            return Stack(
-              children: <Widget>[
-                Center(child: OrientationBuilder(
-                  builder: (context, orientation) {
-                    return Card(
-                        elevation: 8.0,
-                        margin: new EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 6.0),
-                        child: Padding(
-                            padding: EdgeInsets.all(2),
-                            child: Container(
-                              width: orientation == Orientation.landscape
-                                  ? MediaQuery.of(context).size.width
-                                  : MediaQuery.of(context).size.height,
-                              height: orientation == Orientation.landscape
-                                  ? MediaQuery.of(context).size.height
-                                  : MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  color: Color.fromRGBO(64, 75, 96, .9)),
-                              child: Opacity(
-                                  opacity: opacity,
-                                  child: Image.network(imageToShow,
-                                      fit: BoxFit.cover)),
-                            )));
-                  },
-                )),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                return Stack(
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _buildButton(offeredItems[0], 0),
-                        _buildButton(offeredItems[1], 1)
+                    Center(child: OrientationBuilder(
+                      builder: (context, orientation) {
+                        return Card(
+                            elevation: 8.0,
+                            margin: new EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 6.0),
+                            child: Padding(
+                                padding: EdgeInsets.all(2),
+                                child: Container(
+                                  width: orientation == Orientation.landscape
+                                      ? MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width
+                                      : MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height,
+                                  height: orientation == Orientation.landscape
+                                      ? MediaQuery
+                                      .of(context)
+                                      .size
+                                      .height
+                                      : MediaQuery
+                                      .of(context)
+                                      .size
+                                      .width,
+                                  decoration: BoxDecoration(
+                                      color: Color.fromRGBO(64, 75, 96, .9)),
+                                  child: Opacity(
+                                      opacity: opacity,
+                                      child: Image.network(imageToShow,
+                                          fit: BoxFit.cover)),
+                                )));
+                      },
+                    )),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _buildButton(offeredItems[0], 0),
+                            _buildButton(offeredItems[1], 1)
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _buildButton(offeredItems[2], 2),
+                            _buildButton(offeredItems[3], 3)
+                          ],
+                        ),
                       ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        _buildButton(offeredItems[2], 2),
-                        _buildButton(offeredItems[3], 3)
-                      ],
-                    ),
+                    )
                   ],
-                )
-              ],
-            );
-          },
-        ));
+                );
+              },
+            ))
+    );
   }
 
   Widget _buildButton(SpeciesItem item, int index) {
@@ -217,10 +231,10 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     if (index == this.selectedItemIndex &&
         (showSelectButton || hideSelectButton)) {
       buttonColor = Color.fromARGB(
-        ((showSelectButton
-                      ? _switchAnimation.selectButtonOpacity.value
-                      : _switchAnimation.selectButtonOpacity2.value)
-                  * 255).toInt(),
+          ((showSelectButton
+              ? _switchAnimation.selectButtonOpacity.value
+              : _switchAnimation.selectButtonOpacity2.value)
+              * 255).toInt(),
           255,
           125,
           0);
@@ -243,39 +257,36 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     return Expanded(
       child: new SizedBox(
         height: 50,
-        child: (state == STATE_NEUTRAL || (_switchController.isAnimating && !showCorrectButton))
+        child: (state == STATE_NEUTRAL ||
+            (_switchController.isAnimating && !showCorrectButton))
             ? OutlineButton(
-                borderSide: BorderSide(color: Colors.grey[700]),
-                textColor: Colors.white,
-                child: new Text(
-                  item.name.getString("cs"),
-                ),
-                onPressed: _evaluationPending
-                    ? null
-                    : () {
-                        _onItemPressed(item, index);
-                      },
-              )
+          borderSide: BorderSide(color: Colors.grey[700]),
+          textColor: Colors.white,
+          child: new Text(
+            item.name.getString("cs"),
+          ),
+          onPressed: _evaluationPending
+              ? null
+              : () {
+            _onItemPressed(item, index);
+          },
+        )
             : FlatButton(
-                textColor: Colors.white,
-                color: buttonColor,
-                child: new Text(
-                  item.name.getString("cs"),
-                ),
-                onPressed: () {},
-              ),
+          textColor: Colors.white,
+          color: buttonColor,
+          child: new Text(
+            item.name.getString("cs"),
+          ),
+          onPressed: () {},
+        ),
       ),
     );
   }
 
   _onItemPressed(SpeciesItem item, int index) async {
-    print("ON PRESSED");
     _evaluationPending = true;
-    print("SUBMIT");
     submitItem(item, index);
-    print("PLAY");
     _playAnimation().whenComplete(() {
-      print("COMPLETE");
       _evaluationPending = false;
 
       if (!goToNext()) {
@@ -286,9 +297,31 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   }
 
   _navigateToEvalPage() {
+    Navigator.of(context).pop();
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
-      return SummaryPage(errors, items.length, failedItems, failedAnswers);
+      return SummaryPage(itemsNum, failedItems, failedAnswers);
     }));
+  }
+
+  Future<bool> _onWillPop() {
+    return showDialog(
+      context: context,
+      builder: (context) =>
+      new AlertDialog(
+        title: new Text('Are you sure?'),
+        content: new Text('Do you want to exit the test'),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: new Text('No'),
+          ),
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: new Text('Yes'),
+          ),
+        ],
+      ),
+    ) ?? false;
   }
 }

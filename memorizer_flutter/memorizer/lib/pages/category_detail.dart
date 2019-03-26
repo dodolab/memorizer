@@ -50,17 +50,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
   Widget _buildHeading() {
     return new Container(
       decoration: new BoxDecoration(
-        gradient: new LinearGradient(
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-          stops: [0.1, 0.5, 0.7, 0.9],
-          colors: [
-            Colors.grey[800],
-            Colors.grey[700],
-            Colors.grey[600],
-            Colors.grey[400],
-          ],
-        ),
+        gradient: detailGradient,
       ),
       child: Stack(
         children: <Widget>[
