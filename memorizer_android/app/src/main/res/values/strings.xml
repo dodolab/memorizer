@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">memorizer</string>
+    <string name="app_name">Memorizer</string>
+    <string name="categories">Categories</string>
+    <string name="gallery">Gallery</string>
+    <string name="memorizer">Memorizer</string>
+    <string name="practice">Practice</string>
+    <string name="select">Select number of entities</string>
+    <string name="start">START</string>
 </resources>
