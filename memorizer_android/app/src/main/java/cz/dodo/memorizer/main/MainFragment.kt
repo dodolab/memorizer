@@ -46,7 +46,11 @@ class MainFragment : androidx.fragment.app.Fragment() {
         val viewModel = ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
 
         viewModel.liveData.observe(this, Observer {
-            text_view.text = it
+            //text_view.text = it
+        })
+
+        viewModel.speciesData.observe(this, Observer {
+            text_view.text = it.toString()
         })
     }
 }
