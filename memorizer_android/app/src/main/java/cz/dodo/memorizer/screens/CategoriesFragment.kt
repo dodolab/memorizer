@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens
 
 import android.content.Context
 import android.os.Bundle
@@ -8,22 +8,23 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
-import cz.dodo.memorizer.viewmodels.MainViewModel
-import kotlinx.android.synthetic.main.fragment_main.*
+import cz.dodo.memorizer.entities.Category
+import cz.dodo.memorizer.viewmodels.CategoriesViewModel
+import kotlinx.android.synthetic.main.fragment_categories.*
 import javax.inject.Inject
 
-
-class MainFragment : androidx.fragment.app.Fragment() {
+class CategoriesFragment : androidx.fragment.app.Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     companion object {
 
-        fun newInstance(): MainFragment {
-            val fragment = MainFragment()
+        fun newInstance(): CategoriesFragment {
+            val fragment = CategoriesFragment()
             val args = Bundle(0)
             fragment.arguments = args
             return fragment
@@ -37,21 +38,25 @@ class MainFragment : androidx.fragment.app.Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel = ViewModelProviders.of(this, viewModelFactory)[MainViewModel::class.java]
-
-        viewModel.liveData.observe(this, Observer {
-            //text_view.text = it
-        })
+        val viewModel = ViewModelProviders.of(this, viewModelFactory)[CategoriesViewModel::class.java]
+        list_categories.layoutManager = LinearLayoutManager(context)
 
         viewModel.speciesData.observe(this, Observer {
-            text_view.text = it.toString()
+            list_categories.adapter = CategoriesAdapter(it.categories, onCategoryDetailClick)
+
         })
+    }
+
+    private var onCategoryDetailClick = object : CategoriesAdapter.OnCategoryClick {
+        override fun performCategoryClick(category: Category) {
+
+        }
     }
 }

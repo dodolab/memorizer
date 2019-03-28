@@ -7,6 +7,7 @@ apply plugin: "com.github.ben-manes.versions"
 
 android {
     compileSdkVersion 28
+
     defaultConfig {
         applicationId "cz.dodo.memorizer"
         minSdkVersion 21
@@ -26,6 +27,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation 'com.google.android.material:material:1.0.0'
+
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     kapt 'androidx.lifecycle:lifecycle-compiler:2.0.0'
