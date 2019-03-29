@@ -1,11 +1,14 @@
 package cz.dodo.memorizer.screens
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
+import kotlinx.android.synthetic.main.item_category.view.*
 
 class CategoriesAdapter (
         private val items: List<Category>,
@@ -33,7 +36,10 @@ class CategoriesAdapter (
             itemView.layout_line_detail.onClick {
                 onLineDetailClick.performOnLineDetailClick(segment)
             } */
-        }
 
+            Log.d("mojo", items[position].items.first().images.first())
+            Picasso.with(itemView.context).isLoggingEnabled =true
+            Picasso.with(itemView.context).load(items[position].items.first().images.first()).into(itemView.img_category)
+        }
     }
 }

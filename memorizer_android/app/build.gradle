@@ -67,7 +67,7 @@ dependencies {
     implementation "com.github.rahatarmanahmed:circularprogressview:2.5.0"
 
     // Circular Image View
-    implementation "de.hdodenhof:circleimageview:2.2.0"
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.4.0"
