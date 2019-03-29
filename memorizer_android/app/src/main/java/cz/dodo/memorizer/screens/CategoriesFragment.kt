@@ -50,7 +50,6 @@ class CategoriesFragment : androidx.fragment.app.Fragment() {
 
         viewModel.speciesData.observe(this, Observer {
             list_categories.adapter = CategoriesAdapter(it.categories, onCategoryDetailClick)
-
         })
     }
 
