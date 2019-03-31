@@ -7,19 +7,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
-import kotlinx.android.synthetic.main.item_category.view.*
+import kotlinx.android.synthetic.main.item_category_grid.view.*
 
-class CategoriesAdapter (
+class CategoriesGridAdapter (
         private val items: List<Category>,
         private val onCategoryClick: OnCategoryClick
-) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<CategoriesGridAdapter.ViewHolder>() {
 
     interface OnCategoryClick {
         fun performCategoryClick(category: Category)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false))
+        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_category_grid, parent, false))
     }
 
     override fun getItemCount() = items.size

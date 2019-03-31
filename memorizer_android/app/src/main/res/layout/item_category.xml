@@ -4,18 +4,34 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="120dp"
     card_view:cardBackgroundColor="@color/colorDecor"
     card_view:cardCornerRadius="5dp"
     card_view:cardElevation="5dp"
     card_view:cardUseCompatPadding="true">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/img_category"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/img_category"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
+        <TextView
+            android:id="@+id/txt_category"
+            android:layout_gravity="bottom"
+            android:paddingLeft="20dp"
+            android:paddingStart="20dp"
+            android:textColor="@color/lb_tv_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>

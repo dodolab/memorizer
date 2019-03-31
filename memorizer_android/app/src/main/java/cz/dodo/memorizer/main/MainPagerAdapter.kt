@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import cz.dodo.memorizer.screens.CategoriesFragment
+import cz.dodo.memorizer.screens.CategoriesGridFragment
 
 class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -12,8 +13,8 @@ class MainPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     override fun getItem(i: Int): Fragment {
         return when(i){
             0 -> CategoriesFragment.newInstance()
-            1 -> MainFragment.newInstance()
-            else -> MainFragment.newInstance()
+            1 -> CategoriesGridFragment.newInstance()
+            else -> CategoriesGridFragment.newInstance()
         }
     }
 
