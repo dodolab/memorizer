@@ -3,6 +3,7 @@ package cz.dodo.memorizer.inject
 import cz.dodo.memorizer.main.MainFragment
 import cz.dodo.memorizer.screens.CategoriesFragment
 import cz.dodo.memorizer.screens.CategoriesGridFragment
+import cz.dodo.memorizer.screens.CategoryDetailFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -20,4 +21,6 @@ interface AppComponent {
     fun inject(categoriesFragment: CategoriesFragment)
 
     fun inject(categoriesGridFragment: CategoriesGridFragment)
+
+    fun inject(categoryDetailFragment: CategoryDetailFragment)
 }

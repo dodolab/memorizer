@@ -1,6 +1,7 @@
 package cz.dodo.memorizer.screens
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,9 @@ class CategoriesFragment : androidx.fragment.app.Fragment() {
 
     private var onCategoryDetailClick = object : CategoriesAdapter.OnCategoryClick {
         override fun performCategoryClick(category: Category) {
-
+            val intent = Intent(context, CategoryDetailActivity::class.java)
+            intent.putExtra("mojo", "dojo")
+            startActivity(intent)
         }
     }
 }
