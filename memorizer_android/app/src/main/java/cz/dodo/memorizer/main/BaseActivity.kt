@@ -17,7 +17,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
+import android.widget.SimpleAdapter
+import android.widget.TextView
 import cz.dodo.memorizer.R
+import cz.dodo.memorizer.extension.onClick
+import kotlinx.android.synthetic.main.activity_fragment_base.*
+
 
 open class BaseFragmentActivity : FragmentActivity() {
 
@@ -31,6 +36,9 @@ open class BaseFragmentActivity : FragmentActivity() {
         setContentViewInternal(view, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
         setActionBar(findViewById(R.id.toolbar))
 
+        img_flag.onClick {
+            showFlagPicker()
+        }
 
         val fragmentName = getFragmentName()
         val args = intent.getBundleExtra(EXTRA_ARGUMENTS)
@@ -126,6 +134,50 @@ open class BaseFragmentActivity : FragmentActivity() {
      * @return name of fragment class
      */
     open fun getFragmentName(): String = intent.getStringExtra(EXTRA_FRAGMENT_NAME)
+
+
+    fun showFlagPicker() {
+
+        // Each image in array will be displayed at each item beginning.
+        val imageIdArr = intArrayOf(R.drawable.ic_school, R.drawable.ic_school, R.drawable.ic_school)
+        // Each item text.
+        val listItemArr = arrayOf("Candy Cane", "Present", "Snow Man")
+
+        // Image and text item data's key.
+        val CUSTOM_ADAPTER_IMAGE = "image"
+        val CUSTOM_ADAPTER_TEXT = "text"
+
+
+        // Create a alert dialog builder.
+        val builder = AlertDialog.Builder(this)
+        // Set icon value.
+        builder.setIcon(R.mipmap.ic_launcher)
+        // Set title value.
+        builder.setTitle("Simple Adapter Alert Dialog")
+
+        // Create SimpleAdapter list data.
+        val dialogItemList = ArrayList<Map<String, Any>>()
+        val listItemLen = listItemArr.size
+        for (i in 0 until listItemLen) {
+            val itemMap = HashMap<String, Any>()
+            itemMap[CUSTOM_ADAPTER_IMAGE] = imageIdArr[i]
+            itemMap[CUSTOM_ADAPTER_TEXT] = listItemArr[i]
+
+            dialogItemList.add(itemMap)
+        }
+
+        // Create SimpleAdapter object.
+        val simpleAdapter = SimpleAdapter(this, dialogItemList,
+                R.layout.item_flag,
+                arrayOf(CUSTOM_ADAPTER_IMAGE, CUSTOM_ADAPTER_TEXT),
+                intArrayOf(R.id.alertDialogItemImageView, R.id.alertDialogItemTextView))
+
+        // Set the data adapter.
+        builder.setAdapter(simpleAdapter) { dialogInterface, itemIndex ->  }
+        builder.setCancelable(false)
+        builder.create()
+        builder.show()
+    }
 
     companion object {
         val TAG = "BaseFragmentActivity"
