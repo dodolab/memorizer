@@ -25,4 +25,6 @@ interface AppComponent {
     fun inject(practiceConfirmFragment: PracticeConfirmFragment)
 
     fun inject(practiceFragment: PracticeFragment)
+
+    fun inject(summaryFragment: SummaryFragment)
 }

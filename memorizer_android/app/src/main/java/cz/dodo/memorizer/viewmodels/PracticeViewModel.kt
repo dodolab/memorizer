@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.entities.PracticeModel
+import cz.dodo.memorizer.entities.PracticeResultModel
 import cz.dodo.memorizer.entities.SpeciesItem
-import cz.dodo.memorizer.extension.default
 import cz.dodo.memorizer.main.PracticeService
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -15,7 +15,6 @@ class PracticeViewModel @Inject constructor(private val practiceService: Practic
 
     companion object {
         const val KEY_MODEL = "MODEL"
-        const val KEY_CATEGORY = "CATEGORY"
     }
 
     val currentItem: MutableLiveData<SpeciesItem> = MutableLiveData()
@@ -26,7 +25,6 @@ class PracticeViewModel @Inject constructor(private val practiceService: Practic
     val selectedAndCorrectAnswerIndex: MutableLiveData<Pair<Int, Int>> = MutableLiveData<Pair<Int, Int>>()
 
     lateinit var model : PracticeModel
-    lateinit var category: Category
 
     fun selectAnswer(index: Int) {
         val correctIndex = practiceService.submitItem(model, index)
@@ -50,17 +48,15 @@ class PracticeViewModel @Inject constructor(private val practiceService: Practic
         practiceService.initModel(model)
     }
 
-    fun getResult() {
-
+    fun getResult() : PracticeResultModel {
+        return PracticeResultModel(model.failedItems, model.failedAnswers, model.itemsNum)
     }
 
     fun saveState(output: Bundle) {
         output.putParcelable(KEY_MODEL, model)
-        output.putParcelable(KEY_CATEGORY, category)
     }
 
     fun restoreState(savedState: Bundle) {
         this.model = savedState.getParcelable(KEY_MODEL)
-        this.category = savedState.getParcelable(KEY_CATEGORY)
     }
 }

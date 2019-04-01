@@ -20,6 +20,8 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Callback
+import cz.dodo.memorizer.extension.startFragmentActivity
+import kotlinx.android.synthetic.main.fragment_practice_confirm.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -79,12 +81,10 @@ class PracticeFragment : BaseFragment() {
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)[PracticeViewModel::class.java]
 
-        if (savedInstanceState == null) {
-            arguments?.let {it ->
+        arguments?.let {it ->
                 val category = it.getParcelable<Category>(KEY_CATEGORY)
                 val itemsNum = it.getInt(KEY_ITEMS)
                 viewModel?.initViewModel(category, itemsNum)
-            }
         }
 
         viewModel?.currentItem?.observe(this, Observer {item ->
@@ -173,7 +173,7 @@ class PracticeFragment : BaseFragment() {
                     delay(1000)
                     // start image transition
                     if(viewModel?.gotoNext() !== true) {
-
+                        startFragmentActivity<SummaryFragment>(SummaryFragment.newInstance(viewModel!!.getResult()))
                     } else {
                         btn_answer1.background = ContextCompat.getDrawable(context!!, R.drawable.selector_button_answer)
                         btn_answer2.background = ContextCompat.getDrawable(context!!, R.drawable.selector_button_answer)
