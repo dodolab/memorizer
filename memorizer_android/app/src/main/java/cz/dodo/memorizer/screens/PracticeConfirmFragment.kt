@@ -2,10 +2,17 @@ package cz.dodo.memorizer.screens
 
 import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.InverseBindingAdapter
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
+import cz.dodo.memorizer.databinding.FragmentPracticeConfirmBinding
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.main.BaseFragment
 import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
@@ -13,6 +20,7 @@ import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
 class PracticeConfirmFragment : BaseFragment() {
 
     var viewModel: PracticeConfirmViewModel? = null
+    lateinit var binding: FragmentPracticeConfirmBinding
 
     override val layoutId: Int
         get() = R.layout.fragment_practice_confirm
@@ -38,9 +46,20 @@ class PracticeConfirmFragment : BaseFragment() {
     override fun onResume() {
         super.onResume()
         viewModel?.let {
-            setTitle(it.title)
+            setTitle("Practice")
         }
     }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
+
+        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        binding.data = viewModel
+        // restore binding states
+        savedInstanceState?.let { binding.executePendingBindings() }
+        return binding.root
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,8 +71,17 @@ class PracticeConfirmFragment : BaseFragment() {
             category?.let { cat ->
                 setTitle(cat.name.cs)
                 viewModel?.title = cat.name.cs!!
-
             }
+
+            viewModel?.minVal?.value = 0
+            viewModel?.maxVal?.value = 6
+            viewModel?.sliderValue?.value = 1
+
+
+
+            viewModel?.sliderValue?.observe(this, Observer {
+
+            })
         }
     }
 }

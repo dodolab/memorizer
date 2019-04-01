@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</LinearLayout>
+    <data>
+        <import type="java.lang.Integer" />
+        <variable
+            name="data"
+            type="cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel" />
+    </data>
+
+    <LinearLayout
+        android:background="@color/defaultBgr"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            >
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_school"
+                />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            >
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/select"
+                />
+
+            <com.mohammedalaa.seekbar.RangeSeekBarView
+                android:id="@+id/range_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barHeight="@dimen/value_bar_barHeight"
+                app:baseColor="@color/navy"
+                app:circleRadius="@dimen/value_bar_circleRadius"
+                app:circleTextColor="@color/white"
+                app:circleTextSize="@dimen/value_bar_circleTextSize"
+                app:fillColor="@color/red"
+                app:minValue="0"
+                app:maxValue="10"
+                app:currentValue="@={data.sliderValue}"
+                app:stepValue="1"
+                />
+
+            <TextView
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Integer.toString(data.sliderValue)}"
+                />
+        </LinearLayout>
+
+        
+    </LinearLayout>
+</layout>
