@@ -8,6 +8,8 @@ import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.entities.SpeciesItem
+import cz.dodo.memorizer.extension.onClick
+import cz.dodo.memorizer.extension.startFragmentActivity
 import cz.dodo.memorizer.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_category_detail.*
 
@@ -23,7 +25,6 @@ class CategoryDetailFragment : BaseFragment() {
         const val KEY_CATEGORY = "CATEGORY"
 
         fun newInstance(category: Category): Bundle {
-            val fragment = CategoryDetailFragment()
             val args = Bundle(0).also { it.putParcelable(KEY_CATEGORY, category) }
             return args
         }
@@ -40,9 +41,13 @@ class CategoryDetailFragment : BaseFragment() {
         list_items.layoutManager = LinearLayoutManager(context)
 
         arguments?.let {
-            val category = it.getParcelable(KEY_CATEGORY) as Category
-            toolbar_collapsing.title = category.name.cs
+            val category = it.getParcelable<Category>(KEY_CATEGORY)
+            toolbar_collapsing.title = category!!.name.cs
             list_items.adapter = CategoryItemsAdapter(category.items, onItemDetailClick)
+
+            btn_practice.onClick {
+                startFragmentActivity<PracticeConfirmFragment>(PracticeConfirmFragment.newInstance(category))
+            }
         }
     }
 

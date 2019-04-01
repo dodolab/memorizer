@@ -4,6 +4,7 @@ import cz.dodo.memorizer.main.MainFragment
 import cz.dodo.memorizer.screens.CategoriesFragment
 import cz.dodo.memorizer.screens.CategoriesGridFragment
 import cz.dodo.memorizer.screens.CategoryDetailFragment
+import cz.dodo.memorizer.screens.PracticeConfirmFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -23,4 +24,6 @@ interface AppComponent {
     fun inject(categoriesGridFragment: CategoriesGridFragment)
 
     fun inject(categoryDetailFragment: CategoryDetailFragment)
+
+    fun inject(practiceConfirmFragment: PracticeConfirmFragment)
 }
