@@ -1,10 +1,6 @@
 package cz.dodo.memorizer.main
 
 import cz.dodo.memorizer.entities.PracticeModel
-import cz.dodo.memorizer.entities.PracticeModel.Companion.STATE_CORRECT
-import cz.dodo.memorizer.entities.PracticeModel.Companion.STATE_ERROR
-import cz.dodo.memorizer.entities.PracticeModel.Companion.STATE_NEUTRAL
-import cz.dodo.memorizer.entities.SpeciesItem
 import java.util.*
 import javax.inject.Inject
 
@@ -23,13 +19,6 @@ class PracticeServiceImpl  @Inject constructor() : PracticeService {
 
     override fun gotoNext(model: PracticeModel): Boolean {
         if (!canGoNext(model)) return false
-
-        val offeredItemStates = arrayListOf(
-            STATE_NEUTRAL,
-            STATE_NEUTRAL,
-            STATE_NEUTRAL,
-            STATE_NEUTRAL
-        )
 
         model.currentIndex++
 
@@ -51,22 +40,23 @@ class PracticeServiceImpl  @Inject constructor() : PracticeService {
         return true
     }
 
-    override fun submitItem(model: PracticeModel, item: SpeciesItem, index: Int) {
+    override fun submitItem(model: PracticeModel, index: Int) : Int {
         val correctItem = model.items[model.currentIndex]
-        val isCorrect = item === correctItem
-        model.offeredItemStates[index] = if (isCorrect) STATE_CORRECT else STATE_ERROR
+        val selectedItem = model.offeredItems[index]
+        val isCorrect = selectedItem === correctItem
         model.selectedItemIndex = index
 
         if (!isCorrect) {
             model.failedItems.add(correctItem)
-            model.failedAnswers.add(item)
+            model.failedAnswers.add(selectedItem)
             // find correct item
             for (i in 0 until model.offeredItems.size) {
                 if (model.offeredItems[i] === correctItem) {
-                    model.offeredItemStates[i] = STATE_CORRECT
-                    break
+                    return i
                 }
             }
         }
+
+        return index
     }
 }

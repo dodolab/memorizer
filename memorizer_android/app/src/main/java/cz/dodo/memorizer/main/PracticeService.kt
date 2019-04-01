@@ -11,5 +11,5 @@ interface PracticeService {
 
     fun gotoNext(model: PracticeModel): Boolean
 
-    fun submitItem(model: PracticeModel, item: SpeciesItem, index: Int)
+    fun submitItem(model: PracticeModel, index: Int) : Int
 }
