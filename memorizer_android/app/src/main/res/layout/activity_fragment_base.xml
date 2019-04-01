@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:id="@+id/layout_progress_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/progressOverlay"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:id="@android:id/progress"
+                android:layout_width="@dimen/progressbar_size"
+                android:layout_height="@dimen/progressbar_size"
+                android:layout_gravity="center"
+                app:cpv_animAutostart="true"
+                app:cpv_color="@color/colorFields"
+                app:cpv_indeterminate="true" />
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>

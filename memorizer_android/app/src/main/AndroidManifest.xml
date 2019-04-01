@@ -25,5 +25,6 @@
         <activity android:name=".screens.CategoryDetailActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             />
+        <activity android:name=".main.BaseFragmentActivity" />
     </application>
 </manifest>
