@@ -9,7 +9,6 @@ import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.main.BaseFragment
 import cz.dodo.memorizer.viewmodels.PracticeViewModel
 
-
 class PracticeFragment : BaseFragment() {
 
     var viewModel: PracticeViewModel? = null
@@ -45,7 +44,6 @@ class PracticeFragment : BaseFragment() {
     override fun onBackPressed() = if (progressShown()) {
         // hide progress and interrupt the current request
         hideProgress()
-        viewModel?.dispose()
         true
     } else {
         super.onBackPressed()
@@ -61,11 +59,11 @@ class PracticeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (savedInstanceState == null) {
-            viewModel?.retrieve()
-        }
-
-        arguments?.let {
-            //initializeMap(it.getSerializable(KEY_LINE) as Segment)
+            arguments?.let {it ->
+                val category = it.getParcelable<Category>(KEY_CATEGORY)
+                val itemsNum = it.getInt(KEY_ITEMS)
+                viewModel?.initViewModel(category, itemsNum)
+            }
         }
     }
 }

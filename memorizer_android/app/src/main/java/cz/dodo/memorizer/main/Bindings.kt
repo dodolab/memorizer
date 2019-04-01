@@ -5,5 +5,5 @@ import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
-import androidx.databinding.InverseBindingListener 
+import androidx.databinding.InverseBindingListener
 
