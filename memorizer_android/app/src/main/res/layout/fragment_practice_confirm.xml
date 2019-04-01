@@ -44,7 +44,7 @@
                 />
 
             <com.mohammedalaa.seekbar.RangeSeekBarView
-                android:id="@+id/range_seekbar"
+                android:id="@+id/seekbar_entities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:barHeight="@dimen/value_bar_barHeight"
@@ -53,21 +53,16 @@
                 app:circleTextColor="@color/white"
                 app:circleTextSize="@dimen/value_bar_circleTextSize"
                 app:fillColor="@color/red"
-                app:minValue="0"
-                app:maxValue="10"
-                app:currentValue="@={data.sliderValue}"
+                app:minValue="1"
+                app:maxValue="100000"
+                app:currentValue="1"
                 app:stepValue="1"
-                />
-
-            <TextView
-                android:textColor="@color/white"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{Integer.toString(data.sliderValue)}"
                 />
 
             <Button
                 android:id="@+id/btn_practice"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_button_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/practice"

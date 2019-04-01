@@ -6,9 +6,6 @@ import javax.inject.Inject
 
 
 class PracticeConfirmViewModel @Inject constructor() : ViewModel() {
-    val sliderValue: MutableLiveData<Int> = MutableLiveData()
-    val minVal: MutableLiveData<Int> = MutableLiveData()
-    val maxVal: MutableLiveData<Int> = MutableLiveData()
 
     var title: String = ""
 }

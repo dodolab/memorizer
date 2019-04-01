@@ -72,20 +72,14 @@ class PracticeConfirmFragment : BaseFragment() {
             category?.let { cat ->
                 setTitle(cat.name.cs)
                 viewModel?.title = cat.name.cs!!
+                seekbar_entities.minValue = 1
+                seekbar_entities.value = cat.items.size
+                seekbar_entities.maxValue = cat.items.size
             }
 
-            viewModel?.minVal?.value = 0
-            viewModel?.maxVal?.value = 6
-            viewModel?.sliderValue?.value = 1
-
-
-
-            viewModel?.sliderValue?.observe(this, Observer {
-
-            })
 
             btn_practice.onClick {
-                startFragmentActivity<PracticeFragment>(PracticeFragment.newInstance(category))
+                startFragmentActivity<PracticeFragment>(PracticeFragment.newInstance(category, seekbar_entities.value))
             }
         }
     }

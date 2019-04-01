@@ -33,7 +33,7 @@ class DemoApplication : Application() {
                 .build()
 
         val picasso = Picasso.Builder(this)
-                .downloader(OkHttp3Downloader(client))
+               // .downloader(OkHttp3Downloader(client))
                 .build()
 
         Picasso.setSingletonInstance(picasso)

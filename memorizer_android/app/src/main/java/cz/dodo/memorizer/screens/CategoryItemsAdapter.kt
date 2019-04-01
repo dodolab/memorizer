@@ -39,8 +39,8 @@ class CategoryItemsAdapter (
                 onItemClick.performItemClick(item)
             }
 
-            Picasso.with(itemView.context).isLoggingEnabled =true
-            Picasso.with(itemView.context).load(item.images.first()).into(itemView.img_category)
+            Picasso.get().isLoggingEnabled =true
+            Picasso.get().load(item.images.first()).into(itemView.img_category)
         }
     }
 }

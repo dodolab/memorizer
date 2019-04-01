@@ -17,7 +17,7 @@ import cz.dodo.memorizer.main.BaseFragmentActivity
  * ImageView extension that loads url with Picasso
  */
 fun ImageView.loadUrl(url: String?) {
-    Picasso.with(context).load(url).into(this)
+    Picasso.get().load(url).into(this)
 }
 
 var View.show: Boolean

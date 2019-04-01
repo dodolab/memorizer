@@ -21,8 +21,13 @@ class PracticeFragment : BaseFragment() {
         get() = R.layout.fragment_practice
 
     companion object {
-        fun newInstance(category: Category): Bundle {
+        const val KEY_CATEGORY = "CATEGORY"
+        const val KEY_ITEMS = "ITEMS"
+
+        fun newInstance(category: Category, items: Int): Bundle {
             val args = Bundle(0)
+            args.putParcelable(KEY_CATEGORY, category)
+            args.putInt(KEY_ITEMS, items)
             return args
         }
     }
