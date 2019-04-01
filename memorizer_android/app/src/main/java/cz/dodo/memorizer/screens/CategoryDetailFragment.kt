@@ -2,32 +2,30 @@ package cz.dodo.memorizer.screens
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
-import cz.dodo.memorizer.viewmodels.CategoriesViewModel
+import cz.dodo.memorizer.entities.SpeciesItem
+import cz.dodo.memorizer.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_category_detail.*
-import javax.inject.Inject
 
-class CategoryDetailFragment : androidx.fragment.app.Fragment() {
+class CategoryDetailFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override val layoutId: Int
+        get() = R.layout.fragment_category_detail
+
+    override val shouldHaveActionBar: Boolean
+        get() = false
 
     companion object {
+        const val KEY_CATEGORY = "CATEGORY"
 
-        fun newInstance(): CategoryDetailFragment {
+        fun newInstance(category: Category): Bundle {
             val fragment = CategoryDetailFragment()
-            val args = Bundle(0)
-            fragment.arguments = args
-            return fragment
+            val args = Bundle(0).also { it.putParcelable(KEY_CATEGORY, category) }
+            return args
         }
     }
 
@@ -37,26 +35,19 @@ class CategoryDetailFragment : androidx.fragment.app.Fragment() {
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_category_detail, container, false)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        list_items.layoutManager = LinearLayoutManager(context)
 
-        toolbar_collapsing.title = "Mojo"
-
-        val viewModel = ViewModelProviders.of(this, viewModelFactory)[CategoriesViewModel::class.java]
-        list_categories.layoutManager = LinearLayoutManager(context)
-
-        viewModel.speciesData.observe(this, Observer {
-            list_categories.adapter = CategoriesAdapter(it.categories, onCategoryDetailClick)
-        })
+        arguments?.let {
+            val category = it.getParcelable(KEY_CATEGORY) as Category
+            toolbar_collapsing.title = category.name.cs
+            list_items.adapter = CategoryItemsAdapter(category.items, onItemDetailClick)
+        }
     }
 
-    private var onCategoryDetailClick = object : CategoriesAdapter.OnCategoryClick {
-        override fun performCategoryClick(category: Category) {
+    private var onItemDetailClick = object : CategoryItemsAdapter.OnItemClick {
+        override fun performItemClick(item: SpeciesItem) {
 
         }
     }

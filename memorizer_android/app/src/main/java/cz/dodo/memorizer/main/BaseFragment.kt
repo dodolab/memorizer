@@ -1,15 +1,14 @@
 package cz.dodo.memorizer.main
 
+import android.app.ActionBar
 import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -54,7 +53,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
     override fun onResume() {
         super.onResume()
         setTitle(title)
-        onInitActionBar((activity as AppCompatActivity).supportActionBar)
+        onInitActionBar((activity as BaseFragmentActivity).actionBar)
         showHideKeyboard()
     }
 
@@ -64,7 +63,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     protected fun setTitle(title: String?) {
         // we want to crash an app when activity is null since we are probably doing something bad
-        activity!!.toolbar_title.text = title
+        activity!!.toolbar_title?.text = title
         activity!!.title = ""
     }
 
@@ -97,13 +96,13 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
      */
     open fun showHideActionBar() {
         if (shouldHaveActionBar) {
-            (activity as AppCompatActivity).supportActionBar?.show()
+            (activity as BaseFragmentActivity).actionBar?.show()
             activity?.findViewById<TextView>(R.id.toolbar_title)?.setTextColor(ContextCompat.getColor(context!!, actionBarTitleColor))
             activity?.findViewById<Toolbar>(R.id.toolbar)?.setBackgroundColor(ContextCompat.getColor(context!!, actionBarColor))
             activity?.findViewById<Toolbar>(R.id.toolbar)?.setNavigationIcon(actionBarBackIcon)
             changeStatusBarColor(ContextCompat.getColor(context!!, actionBarColor))
         } else {
-            (activity as AppCompatActivity).supportActionBar?.hide()
+            (activity as BaseFragmentActivity).actionBar?.hide()
         }
     }
 

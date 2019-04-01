@@ -1,29 +1,27 @@
 package cz.dodo.memorizer.screens
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
+import cz.dodo.memorizer.extension.startFragmentActivity
+import cz.dodo.memorizer.main.BaseFragment
 import cz.dodo.memorizer.viewmodels.CategoriesViewModel
 import kotlinx.android.synthetic.main.fragment_categories.*
-import javax.inject.Inject
 
-class CategoriesFragment : androidx.fragment.app.Fragment() {
+class CategoriesFragment : BaseFragment() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    override val shouldHaveActionBar: Boolean
+        get() = true
+    override val layoutId: Int
+        get() = R.layout.fragment_categories
 
     companion object {
-
         fun newInstance(): CategoriesFragment {
             val fragment = CategoriesFragment()
             val args = Bundle(0)
@@ -36,12 +34,6 @@ class CategoriesFragment : androidx.fragment.app.Fragment() {
         DemoApplication.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_categories, container, false)
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,9 +48,7 @@ class CategoriesFragment : androidx.fragment.app.Fragment() {
 
     private var onCategoryDetailClick = object : CategoriesAdapter.OnCategoryClick {
         override fun performCategoryClick(category: Category) {
-            val intent = Intent(context, CategoryDetailActivity::class.java)
-            intent.putExtra("mojo", "dojo")
-            startActivity(intent)
+            startFragmentActivity<CategoryDetailFragment>(CategoryDetailFragment.newInstance(category))
         }
     }
 }

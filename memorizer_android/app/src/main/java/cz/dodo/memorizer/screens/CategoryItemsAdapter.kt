@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import cz.dodo.memorizer.R
-import cz.dodo.memorizer.entities.Category
+import cz.dodo.memorizer.entities.SpeciesItem
 import kotlinx.android.synthetic.main.item_general.view.*
 
-class CategoriesAdapter (
-        private val items: List<Category>,
-        private val onCategoryClick: OnCategoryClick
-) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
+class CategoryItemsAdapter (
+        private val items: List<SpeciesItem>,
+        private val onItemClick: OnItemClick
+) : RecyclerView.Adapter<CategoryItemsAdapter.ViewHolder>() {
 
-    interface OnCategoryClick {
-        fun performCategoryClick(category: Category)
+    interface OnItemClick {
+        fun performItemClick(item: SpeciesItem)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,23 +24,23 @@ class CategoriesAdapter (
 
     override fun getItemCount() = items.size
 
-    fun getItem(index: Int): Category = items[index]
+    fun getItem(index: Int): SpeciesItem = items[index]
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-            holder.bindViewHolder(items, position, holder.itemViewType, onCategoryClick)
+            holder.bindViewHolder(items, position, holder.itemViewType, onItemClick)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindViewHolder(items: List<Category>, position: Int, viewType: Int, onCategoryClick: OnCategoryClick) {
+        fun bindViewHolder(items: List<SpeciesItem>, position: Int, viewType: Int, onItemClick: OnItemClick) {
 
             val item = items[position]
 
             itemView.txt_name.text = item.name.cs
             itemView.card_view.setOnClickListener {
-                onCategoryClick.performCategoryClick(item)
+                onItemClick.performItemClick(item)
             }
 
             Picasso.with(itemView.context).isLoggingEnabled =true
-            Picasso.with(itemView.context).load(item.items.first().images.first()).into(itemView.img_category)
+            Picasso.with(itemView.context).load(item.images.first()).into(itemView.img_category)
         }
     }
 }

@@ -1,12 +1,16 @@
 package cz.dodo.memorizer.extension
 
+import android.content.Intent
 import android.graphics.Color
+import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.squareup.picasso.Picasso
+import cz.dodo.memorizer.main.BaseFragment
+import cz.dodo.memorizer.main.BaseFragmentActivity
 
 
 /**
@@ -61,4 +65,29 @@ fun EditText.setTextIfNotSame(text: String?) {
 
 fun View.onClick(l: ((View) -> Unit)) {
     setOnClickListener(l)
+}
+
+
+
+inline fun <reified T : BaseFragment> BaseFragment.startFragmentActivityClearTop(args: Bundle) {
+    val intent = Intent(context, BaseFragmentActivity::class.java).putExtra(BaseFragmentActivity.EXTRA_FRAGMENT_NAME, T::class.java.name)
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+    intent.putExtra(BaseFragmentActivity.EXTRA_ARGUMENTS, args)
+    context?.startActivity(intent)
+}
+
+inline fun <reified T : BaseFragment> BaseFragment.startFragmentActivity() {
+    BaseFragmentActivity.startActivity(context!!, T::class.java.name)
+}
+
+inline fun <reified T : BaseFragment> BaseFragment.startFragmentActivity(args: Bundle) {
+    BaseFragmentActivity.startActivity(context!!, T::class.java.name, args)
+}
+
+inline fun <reified T : BaseFragment> BaseFragment.startFragmentActivityForResult(requestCode: Int) {
+    BaseFragmentActivity.startActivityForResult(context!!, T::class.java.name, BaseFragmentActivity::class.java, requestCode)
+}
+
+inline fun <reified T : BaseFragment> BaseFragment.startFragmentActivityForResult(requestCode: Int, args: Bundle) {
+    BaseFragmentActivity.startActivityForResult(context!!, T::class.java.name, BaseFragmentActivity::class.java, requestCode, args)
 }
