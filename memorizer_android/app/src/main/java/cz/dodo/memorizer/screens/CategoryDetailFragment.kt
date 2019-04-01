@@ -48,6 +48,10 @@ class CategoryDetailFragment : BaseFragment() {
             btn_practice.onClick {
                 startFragmentActivity<PracticeConfirmFragment>(PracticeConfirmFragment.newInstance(category))
             }
+
+            btn_gallery.onClick {
+                startFragmentActivity<GalleryFragment>(GalleryFragment.newInstance(category))
+            }
         }
     }
 

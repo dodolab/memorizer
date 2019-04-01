@@ -27,4 +27,6 @@ interface AppComponent {
     fun inject(practiceFragment: PracticeFragment)
 
     fun inject(summaryFragment: SummaryFragment)
+
+    fun inject(galleryFragment: GalleryFragment)
 }
