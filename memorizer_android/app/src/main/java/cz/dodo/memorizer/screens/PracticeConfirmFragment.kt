@@ -5,17 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseBindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import cz.dodo.memorizer.DemoApplication
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.databinding.FragmentPracticeConfirmBinding
 import cz.dodo.memorizer.entities.Category
+import cz.dodo.memorizer.extension.onClick
+import cz.dodo.memorizer.extension.startFragmentActivity
 import cz.dodo.memorizer.main.BaseFragment
 import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
+import kotlinx.android.synthetic.main.fragment_practice_confirm.*
 
 class PracticeConfirmFragment : BaseFragment() {
 
@@ -82,6 +83,10 @@ class PracticeConfirmFragment : BaseFragment() {
             viewModel?.sliderValue?.observe(this, Observer {
 
             })
+
+            btn_practice.onClick {
+                startFragmentActivity<PracticeFragment>(PracticeFragment.newInstance(category))
+            }
         }
     }
 }
