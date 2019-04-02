@@ -10,4 +10,6 @@
     <string name="lang_en">English</string>
     <string name="lang_la">Latin</string>
     <string name="select_language">Select Language</string>
+    <string name="summary">Summary</string>
+    <string name="error_entities">Species that were wrong:</string>
 </resources>

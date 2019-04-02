@@ -3,6 +3,7 @@ package cz.dodo.memorizer.screens
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.models.PracticeResultModel
@@ -18,6 +19,9 @@ class SummaryFragment : BaseFragment() {
     override val shouldHaveActionBar: Boolean
         get() = true
 
+    override val title: String
+        get() = getString(R.string.summary)
+
     companion object {
         const val KEY_RESULT = "RESULT"
 
@@ -32,11 +36,6 @@ class SummaryFragment : BaseFragment() {
         super.onAttach(context)
     }
 
-    override fun onResume() {
-        super.onResume()
-        setTitle("Summary")
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,7 +43,9 @@ class SummaryFragment : BaseFragment() {
         arguments?.let {
             val result = it.getParcelable<PracticeResultModel>(KEY_RESULT)
             txt_result.text = "${result.itemsNum - result.failedItems.size}/${result.itemsNum}"
-            list_items.adapter = CategoryItemsAdapter(result.failedItems, onItemDetailClick)
+
+            list_items.layoutManager = LinearLayoutManager(context)
+            list_items.adapter = CategoryItemsAdapter(result.failedItems, onItemDetailClick, sharedPrefService.getLanguageCode())
 
         }
     }

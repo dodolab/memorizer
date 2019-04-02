@@ -11,7 +11,8 @@ import kotlinx.android.synthetic.main.item_general.view.*
 
 class CategoryItemsAdapter (
         private val items: List<SpeciesItem>,
-        private val onItemClick: OnItemClick
+        private val onItemClick: OnItemClick,
+        private val langCode: String
 ) : RecyclerView.Adapter<CategoryItemsAdapter.ViewHolder>() {
 
     interface OnItemClick {
@@ -27,19 +28,18 @@ class CategoryItemsAdapter (
     fun getItem(index: Int): SpeciesItem = items[index]
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-            holder.bindViewHolder(items, position, holder.itemViewType, onItemClick)
+            holder.bindViewHolder(items, position, holder.itemViewType, onItemClick, langCode)
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindViewHolder(items: List<SpeciesItem>, position: Int, viewType: Int, onItemClick: OnItemClick) {
+        fun bindViewHolder(items: List<SpeciesItem>, position: Int, viewType: Int, onItemClick: OnItemClick, langCode: String) {
 
             val item = items[position]
 
-            itemView.txt_name.text = item.name.cs
+            itemView.txt_name.text = item.name.getLocString(langCode)
             itemView.card_view.setOnClickListener {
                 onItemClick.performItemClick(item)
             }
 
-            Picasso.get().isLoggingEnabled =true
             Picasso.get().load(item.images.first()).into(itemView.img_category)
         }
     }

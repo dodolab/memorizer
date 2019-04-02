@@ -50,6 +50,7 @@ class PracticeConfirmFragment : BaseFragment() {
             }
 
             btn_practice.onClick {
+                activity?.finish()
                 startFragmentActivity<PracticeFragment>(PracticeFragment.newInstance(category, seekbar_entities.value))
             }
         }

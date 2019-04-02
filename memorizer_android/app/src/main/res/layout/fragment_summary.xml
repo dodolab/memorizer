@@ -22,6 +22,13 @@
                 android:layout_height="wrap_content" />
         </FrameLayout>
 
+        <TextView
+            android:text="@string/error_entities"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_items"
             android:nestedScrollingEnabled="true"

@@ -70,9 +70,11 @@ class PracticeFragment : BaseFragment() {
         viewModel = ViewModelProviders.of(this, viewModelFactory)[PracticeViewModel::class.java]
 
         arguments?.let {it ->
+            if(savedInstanceState == null) {
                 val category = it.getParcelable<Category>(KEY_CATEGORY)
                 val itemsNum = it.getInt(KEY_ITEMS)
                 viewModel?.initViewModel(category, itemsNum)
+            }
         }
 
         viewModel?.currentItem?.observe(this, Observer {item ->
@@ -98,20 +100,20 @@ class PracticeFragment : BaseFragment() {
         })
 
         viewModel?.currentItemAnswers?.observe(this,Observer {answers ->
-            btn_answer1.text = answers[0].name.cs
-            btn_answer2.text = answers[1].name.cs
-            btn_answer3.text = answers[2].name.cs
-            btn_answer4.text = answers[3].name.cs
+            btn_answer1.text = answers[0].name.getLocString(sharedPrefService.getLanguageCode())
+            btn_answer2.text = answers[1].name.getLocString(sharedPrefService.getLanguageCode())
+            btn_answer3.text = answers[2].name.getLocString(sharedPrefService.getLanguageCode())
+            btn_answer4.text = answers[3].name.getLocString(sharedPrefService.getLanguageCode())
         })
 
-        btn_answer1.onClick { viewModel?.selectAnswer(0) }
-        btn_answer2.onClick { viewModel?.selectAnswer(1) }
-        btn_answer3.onClick { viewModel?.selectAnswer(2) }
-        btn_answer4.onClick { viewModel?.selectAnswer(3) }
+        btn_answer1.onClick { if(viewModel?.answerSelected !== true) viewModel?.selectAnswer(0) }
+        btn_answer2.onClick { if(viewModel?.answerSelected !== true) viewModel?.selectAnswer(1) }
+        btn_answer3.onClick { if(viewModel?.answerSelected !== true) viewModel?.selectAnswer(2) }
+        btn_answer4.onClick { if(viewModel?.answerSelected !== true) viewModel?.selectAnswer(3) }
 
         viewModel?.selectedAndCorrectAnswerIndex?.observe(this,Observer { idx ->
 
-            if(idx.first != -1) {
+            if(viewModel?.answerSelected == true) {
 
                 val selectedBtn = when(idx.first) {
                     0 -> btn_answer1
@@ -161,6 +163,7 @@ class PracticeFragment : BaseFragment() {
                     delay(1000)
                     // start image transition
                     if(viewModel?.gotoNext() !== true) {
+                        activity?.finish()
                         startFragmentActivity<SummaryFragment>(SummaryFragment.newInstance(viewModel!!.getResult()))
                     } else {
                         btn_answer1.background = ContextCompat.getDrawable(context!!, R.drawable.selector_button_answer)

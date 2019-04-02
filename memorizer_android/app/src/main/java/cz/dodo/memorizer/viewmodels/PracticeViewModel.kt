@@ -1,6 +1,7 @@
 package cz.dodo.memorizer.viewmodels
 
 import android.os.Bundle
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.entities.Category
@@ -23,15 +24,18 @@ class PracticeViewModel @Inject constructor(private val practiceService: Practic
     val currentItemAnswers: MutableLiveData<List<SpeciesItem>> = MutableLiveData()
 
     val selectedAndCorrectAnswerIndex: MutableLiveData<Pair<Int, Int>> = MutableLiveData<Pair<Int, Int>>()
+    var answerSelected = false
 
     lateinit var model : PracticeModel
 
     fun selectAnswer(index: Int) {
+        answerSelected = true
         val correctIndex = practiceService.submitItem(model, index)
         selectedAndCorrectAnswerIndex.value = Pair(index, correctIndex)
     }
 
     fun gotoNext(): Boolean {
+        answerSelected = false
         val output = practiceService.gotoNext(model)
         if(output){
             currentItem.value = model.items[model.currentIndex]

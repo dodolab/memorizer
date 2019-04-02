@@ -45,7 +45,7 @@ class CategoryDetailFragment : BaseFragment() {
         arguments?.let {
             val category = it.getParcelable<Category>(KEY_CATEGORY)
             toolbar_collapsing.title = category!!.name.getLocString(sharedPrefService.getLanguageCode())
-            list_items.adapter = CategoryItemsAdapter(category.items, onItemDetailClick)
+            list_items.adapter = CategoryItemsAdapter(category.items, onItemDetailClick, sharedPrefService.getLanguageCode())
 
             Picasso.get().load(category.items.first().images.first()).into(img_category)
 

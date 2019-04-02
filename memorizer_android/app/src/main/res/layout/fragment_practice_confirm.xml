@@ -16,7 +16,7 @@
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_school"
+                android:src="@drawable/img_practice"
                 />
         </FrameLayout>
 
@@ -25,13 +25,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="vertical"
-            android:layout_weight="1"
+            android:layout_weight="2"
             >
 
             <TextView
                 android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="@string/select"
                 />
 
@@ -40,11 +41,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:barHeight="@dimen/value_bar_barHeight"
-                app:baseColor="@color/navy"
+                app:baseColor="@color/colorDecor"
                 app:circleRadius="@dimen/value_bar_circleRadius"
                 app:circleTextColor="@color/white"
                 app:circleTextSize="@dimen/value_bar_circleTextSize"
-                app:fillColor="@color/red"
+                app:fillColor="@color/colorAccent"
+                android:layout_marginBottom="20dp"
                 app:minValue="1"
                 app:maxValue="100000"
                 app:currentValue="1"
@@ -54,10 +56,11 @@
             <Button
                 android:id="@+id/btn_practice"
                 android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
                 android:background="@drawable/selector_button_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/practice"
+                android:text="@string/start"
                 />
         </LinearLayout>
     </LinearLayout>
