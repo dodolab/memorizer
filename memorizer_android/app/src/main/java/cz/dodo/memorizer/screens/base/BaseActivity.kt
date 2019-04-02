@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import android.widget.SimpleAdapter
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.extension.onClick
@@ -53,6 +55,16 @@ open class BaseFragmentActivity : FragmentActivity() {
             }
             supportFragmentManager.beginTransaction().add(CONTENT_VIEW_ID, fragment, fragment.javaClass.name).commit()
         }
+
+        sharedPrefService.getLanguageCodeReactive().observe(this, Observer {langCode ->
+            val langFlag = when(langCode){
+                "cs" -> R.drawable.flag_cs
+                "en" -> R.drawable.flag_en
+                "la" -> R.drawable.flag_la
+                else -> R.drawable.flag_cs
+            }
+            img_flag.setImageDrawable(ContextCompat.getDrawable(this, langFlag))
+        })
     }
 
     override fun onBackPressed() {
@@ -113,32 +125,24 @@ open class BaseFragmentActivity : FragmentActivity() {
         // Each image in array will be displayed at each item beginning.
         val imageIdArr = intArrayOf(R.drawable.flag_cs, R.drawable.flag_en, R.drawable.flag_la)
         // Each item text.
-        val listItemArr = arrayOf("Česky", "English", "Latin")
+        val listItemArr = arrayOf(getString(R.string.lang_cs), getString(R.string.lang_en), getString(R.string.lang_la))
 
         // Image and text item data's key.
         val CUSTOM_ADAPTER_IMAGE = "image"
         val CUSTOM_ADAPTER_TEXT = "text"
 
-
-        // Create a alert dialog builder.
         val builder = AlertDialog.Builder(this)
-        // Set icon value.
-        builder.setIcon(R.mipmap.ic_launcher)
-        // Set title value.
-        builder.setTitle("Select language")
+        builder.setTitle(getString(R.string.select_language))
 
-        // Create SimpleAdapter list data.
         val dialogItemList = ArrayList<Map<String, Any>>()
         val listItemLen = listItemArr.size
         for (i in 0 until listItemLen) {
             val itemMap = HashMap<String, Any>()
             itemMap[CUSTOM_ADAPTER_IMAGE] = imageIdArr[i]
             itemMap[CUSTOM_ADAPTER_TEXT] = listItemArr[i]
-
             dialogItemList.add(itemMap)
         }
 
-        // Create SimpleAdapter object.
         val simpleAdapter = SimpleAdapter(this, dialogItemList,
                 R.layout.item_flag,
                 arrayOf(CUSTOM_ADAPTER_IMAGE, CUSTOM_ADAPTER_TEXT),
@@ -158,7 +162,7 @@ open class BaseFragmentActivity : FragmentActivity() {
     }
 
     fun selectLanguage(langCode: String) {
-
+        sharedPrefService.setLanguageCode(langCode)
     }
 
     companion object {

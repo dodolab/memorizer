@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
+import cz.dodo.memorizer.extension.startFragmentActivity
+import cz.dodo.memorizer.services.SharedPrefService
 import cz.dodo.memorizer.viewmodels.CategoriesViewModel
 import kotlinx.android.synthetic.main.fragment_categories.*
 import javax.inject.Inject
@@ -20,16 +22,8 @@ class CategoriesGridFragment : androidx.fragment.app.Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    companion object {
-
-        fun newInstance(): CategoriesGridFragment {
-            val fragment = CategoriesGridFragment()
-            val args = Bundle(0)
-            fragment.arguments = args
-            return fragment
-        }
-    }
+    @Inject
+    lateinit var sharedPrefService: SharedPrefService
 
     override fun onAttach(context: Context) {
         MemorizerApp.getAppComponent(context).inject(this)
@@ -49,13 +43,17 @@ class CategoriesGridFragment : androidx.fragment.app.Fragment() {
         list_categories.layoutManager = GridLayoutManager(context, 2)
 
         viewModel.speciesData.observe(this, Observer {
-            list_categories.adapter = CategoriesGridAdapter(it.categories, onCategoryDetailClick)
+            list_categories.adapter = CategoriesAdapter(it.categories, onCategoryDetailClick, sharedPrefService.getLanguageCodeReactive(), CategoriesMode.GRID)
+        })
+
+        sharedPrefService.getLanguageCodeReactive().observe(this, Observer {langCode ->
+            (list_categories.adapter as CategoriesAdapter?)?.notifyDataSetChanged()
         })
     }
 
-    private var onCategoryDetailClick = object : CategoriesGridAdapter.OnCategoryClick {
+    private var onCategoryDetailClick = object : CategoriesAdapter.OnCategoryClick {
         override fun performCategoryClick(category: Category) {
-
+            startFragmentActivity<CategoryDetailFragment>(CategoryDetailFragment.newInstance(category))
         }
     }
 }

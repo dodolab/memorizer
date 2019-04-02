@@ -19,6 +19,9 @@ class PracticeConfirmFragment : BaseFragment() {
     override val shouldHaveActionBar: Boolean
         get() = true
 
+    override val title: String
+        get() = getString(R.string.practice)
+
     companion object {
         const val KEY_CATEGORY = "CATEGORY"
 
@@ -33,12 +36,6 @@ class PracticeConfirmFragment : BaseFragment() {
         MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
-
-    override fun onResume() {
-        super.onResume()
-        setTitle("Practice")
-    }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -6,4 +6,8 @@
     <string name="practice">Practice</string>
     <string name="select">Select number of entities</string>
     <string name="start">START</string>
+    <string name="lang_cs">Czech</string>
+    <string name="lang_en">English</string>
+    <string name="lang_la">Latin</string>
+    <string name="select_language">Select Language</string>
 </resources>

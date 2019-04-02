@@ -9,12 +9,17 @@ import android.widget.Toolbar
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import cz.dodo.memorizer.R
+import cz.dodo.memorizer.services.SharedPrefService
 import kotlinx.android.synthetic.main.activity_fragment_base.*
 import javax.inject.Inject
 
 abstract class BaseFragment : androidx.fragment.app.Fragment() {
+
+    @Inject
+    lateinit var sharedPrefService: SharedPrefService
 
     abstract val shouldHaveActionBar: Boolean
     private var actionBarBackIcon = 0
@@ -32,6 +37,14 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        sharedPrefService.getLanguageCodeReactive().observe(this, Observer {langCode ->
+            view.requestLayout()
+        })
     }
 
     open fun onBackPressed(): Boolean = false
@@ -52,11 +65,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         activity!!.title = ""
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        // TODO destroy all observers of the network state
-    }
-
     open fun onInitActionBar(actionBar: ActionBar?) {
         // override where needed
         actionBar?.setHomeButtonEnabled(true)
@@ -69,7 +77,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
      * Init action bar colors
      */
     open fun initActionBarValues(actionBarBackIcon: Int = R.drawable.ic_arrow_back,
-                                 actionBarColor: Int = R.color.colorPrimary,
+                                 actionBarColor: Int = R.color.colorHeader,
                                  actionBarTitleColor: Int = R.color.white) {
         this.actionBarBackIcon = actionBarBackIcon
         this.actionBarColor = actionBarColor
@@ -85,7 +93,7 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
             activity?.findViewById<TextView>(R.id.toolbar_title)?.setTextColor(ContextCompat.getColor(context!!, actionBarTitleColor))
             activity?.findViewById<Toolbar>(R.id.toolbar)?.setBackgroundColor(ContextCompat.getColor(context!!, actionBarColor))
             activity?.findViewById<Toolbar>(R.id.toolbar)?.setNavigationIcon(actionBarBackIcon)
-            changeStatusBarColor(ContextCompat.getColor(context!!, actionBarColor))
+            changeStatusBarColor(ContextCompat.getColor(context!!, R.color.colorStatusBar))
         } else {
             (activity as BaseFragmentActivity).actionBar?.hide()
         }

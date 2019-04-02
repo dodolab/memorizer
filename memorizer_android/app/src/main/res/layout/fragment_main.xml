@@ -8,6 +8,8 @@
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/layout_tabs"
         android:layout_width="match_parent"
+        android:background="@color/colorHeader"
+        app:tabIndicatorColor="@color/colorTabIndicator"
         android:layout_height="wrap_content"
         app:tabMode="fixed" />
 

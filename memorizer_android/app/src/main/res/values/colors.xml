@@ -3,8 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorStatusBar">#1A2236</color>
+    <color name="colorHeader">#2A3246</color>
     <color name="defaultBgr">#3A4256</color>
     <color name="colorDecor">#404B60</color>
+    <color name="colorTabIndicator">#00AB60</color>
     <color name="progressOverlay">#66FFFFFF</color>
     <color name="colorFields">#3350a4</color>
     <color name="white">#FFFFFF</color>
