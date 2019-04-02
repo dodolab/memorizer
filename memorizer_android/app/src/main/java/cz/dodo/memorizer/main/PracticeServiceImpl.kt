@@ -1,6 +1,5 @@
 package cz.dodo.memorizer.main
 
-import cz.dodo.memorizer.entities.PracticeModel
 import java.util.*
 import javax.inject.Inject
 

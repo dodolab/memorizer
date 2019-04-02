@@ -4,14 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.denzcoskun.imageslider.models.SlideModel
-import cz.dodo.memorizer.DemoApplication
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
-import cz.dodo.memorizer.entities.PracticeResultModel
-import cz.dodo.memorizer.entities.SpeciesItem
 import cz.dodo.memorizer.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_gallery.*
-import kotlinx.android.synthetic.main.fragment_summary.*
 
 class GalleryFragment : BaseFragment() {
 
@@ -31,7 +28,7 @@ class GalleryFragment : BaseFragment() {
     }
 
     override fun onAttach(context: Context) {
-        DemoApplication.getAppComponent(context).inject(this)
+        MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
 

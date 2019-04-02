@@ -18,13 +18,17 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
 import android.widget.SimpleAdapter
-import android.widget.TextView
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.extension.onClick
 import kotlinx.android.synthetic.main.activity_fragment_base.*
+import javax.inject.Inject
 
 
 open class BaseFragmentActivity : FragmentActivity() {
+
+    @Inject
+    lateinit var sharedPrefService: SharedPrefService
 
     var view: View? = null
 
@@ -32,6 +36,7 @@ open class BaseFragmentActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        MemorizerApp.getAppComponent(application).inject(this)
         view = layoutInflater.inflate(R.layout.activity_fragment_base, null)
         setContentViewInternal(view, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT))
         setActionBar(findViewById(R.id.toolbar))
@@ -139,9 +144,9 @@ open class BaseFragmentActivity : FragmentActivity() {
     fun showFlagPicker() {
 
         // Each image in array will be displayed at each item beginning.
-        val imageIdArr = intArrayOf(R.drawable.ic_school, R.drawable.ic_school, R.drawable.ic_school)
+        val imageIdArr = intArrayOf(R.drawable.flag_cs, R.drawable.flag_en, R.drawable.flag_la)
         // Each item text.
-        val listItemArr = arrayOf("Candy Cane", "Present", "Snow Man")
+        val listItemArr = arrayOf("Česky", "English", "Latin")
 
         // Image and text item data's key.
         val CUSTOM_ADAPTER_IMAGE = "image"
@@ -153,7 +158,7 @@ open class BaseFragmentActivity : FragmentActivity() {
         // Set icon value.
         builder.setIcon(R.mipmap.ic_launcher)
         // Set title value.
-        builder.setTitle("Simple Adapter Alert Dialog")
+        builder.setTitle("Select language")
 
         // Create SimpleAdapter list data.
         val dialogItemList = ArrayList<Map<String, Any>>()
@@ -170,13 +175,23 @@ open class BaseFragmentActivity : FragmentActivity() {
         val simpleAdapter = SimpleAdapter(this, dialogItemList,
                 R.layout.item_flag,
                 arrayOf(CUSTOM_ADAPTER_IMAGE, CUSTOM_ADAPTER_TEXT),
-                intArrayOf(R.id.alertDialogItemImageView, R.id.alertDialogItemTextView))
+                intArrayOf(R.id.txt_flag, R.id.txt_text))
 
         // Set the data adapter.
-        builder.setAdapter(simpleAdapter) { dialogInterface, itemIndex ->  }
+        builder.setAdapter(simpleAdapter) { dialogInterface, itemIndex ->
+            when(itemIndex) {
+                0 -> selectLanguage("cs")
+                1 -> selectLanguage("en")
+                2 -> selectLanguage("la")
+            }
+        }
         builder.setCancelable(false)
         builder.create()
         builder.show()
+    }
+
+    fun selectLanguage(langCode: String) {
+
     }
 
     companion object {

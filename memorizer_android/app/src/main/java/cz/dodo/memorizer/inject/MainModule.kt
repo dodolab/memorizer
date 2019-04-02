@@ -1,10 +1,7 @@
 package cz.dodo.memorizer.inject
 
 import androidx.lifecycle.ViewModel
-import cz.dodo.memorizer.main.CategoryService
-import cz.dodo.memorizer.main.CategoryServiceImpl
-import cz.dodo.memorizer.main.PracticeService
-import cz.dodo.memorizer.main.PracticeServiceImpl
+import cz.dodo.memorizer.main.*
 import cz.dodo.memorizer.viewmodels.CategoriesViewModel
 import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
 import cz.dodo.memorizer.viewmodels.PracticeViewModel
@@ -18,6 +15,10 @@ internal abstract class MainModule {
 
     @Binds
     internal abstract fun bindCategoriesService(serviceImpl: CategoryServiceImpl): CategoryService
+
+    @Binds
+    internal abstract fun bindSharedPrefService(serviceImpl: SharedPrefServiceImpl): SharedPrefService
+
 
     @Binds
     internal abstract fun bindPracticeService(serviceImpl: PracticeServiceImpl): PracticeService

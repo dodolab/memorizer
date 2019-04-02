@@ -9,7 +9,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "cz.dodo.memorizer"
+        applicationId "cz.dodo.memorizer_android"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -21,9 +21,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-    dataBinding {
-        enabled = true
     }
 }
 
@@ -45,16 +42,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
     implementation "com.akaita.java:rxjava2-debug:1.2.2"
-
-    // Reactive binding
-    implementation 'com.jakewharton.rxbinding3:rxbinding-core:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-appcompat:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-drawerlayout:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-leanback:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-recyclerview:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-slidingpanelayout:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-swiperefreshlayout:3.0.0-alpha2'
-    implementation 'com.jakewharton.rxbinding3:rxbinding-viewpager:3.0.0-alpha2'
     // Picasso
     implementation "com.squareup.picasso:picasso:2.5.2"
     implementation "com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0"

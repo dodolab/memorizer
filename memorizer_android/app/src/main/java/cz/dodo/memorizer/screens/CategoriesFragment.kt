@@ -6,7 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import cz.dodo.memorizer.DemoApplication
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.extension.startFragmentActivity
@@ -31,7 +31,7 @@ class CategoriesFragment : BaseFragment() {
     }
 
     override fun onAttach(context: Context) {
-        DemoApplication.getAppComponent(context).inject(this)
+        MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
 

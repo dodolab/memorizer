@@ -2,15 +2,10 @@ package cz.dodo.memorizer.screens
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import cz.dodo.memorizer.DemoApplication
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
-import cz.dodo.memorizer.databinding.FragmentPracticeConfirmBinding
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.extension.onClick
 import cz.dodo.memorizer.extension.startFragmentActivity
@@ -21,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_practice_confirm.*
 class PracticeConfirmFragment : BaseFragment() {
 
     var viewModel: PracticeConfirmViewModel? = null
-    lateinit var binding: FragmentPracticeConfirmBinding
 
     override val layoutId: Int
         get() = R.layout.fragment_practice_confirm
@@ -40,7 +34,7 @@ class PracticeConfirmFragment : BaseFragment() {
     }
 
     override fun onAttach(context: Context) {
-        DemoApplication.getAppComponent(context).inject(this)
+        MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
 
@@ -49,16 +43,6 @@ class PracticeConfirmFragment : BaseFragment() {
         viewModel?.let {
             setTitle("Practice")
         }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-
-        binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        binding.data = viewModel
-        // restore binding states
-        savedInstanceState?.let { binding.executePendingBindings() }
-        return binding.root
     }
 
 

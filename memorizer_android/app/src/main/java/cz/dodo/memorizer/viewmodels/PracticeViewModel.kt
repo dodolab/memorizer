@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.entities.Category
-import cz.dodo.memorizer.entities.PracticeModel
-import cz.dodo.memorizer.entities.PracticeResultModel
+import cz.dodo.memorizer.main.PracticeModel
+import cz.dodo.memorizer.main.PracticeResultModel
 import cz.dodo.memorizer.entities.SpeciesItem
 import cz.dodo.memorizer.main.PracticeService
 import javax.inject.Inject

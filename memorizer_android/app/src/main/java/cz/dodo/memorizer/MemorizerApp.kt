@@ -6,18 +6,16 @@ import cz.dodo.memorizer.inject.AppComponent
 import cz.dodo.memorizer.inject.AppModule
 import cz.dodo.memorizer.inject.DaggerAppComponent
 import com.squareup.picasso.Picasso
-import com.jakewharton.picasso.OkHttp3Downloader
-import java.util.Collections.singletonList
 import okhttp3.OkHttpClient
 import okhttp3.Protocol
 import java.util.*
 
 
-class DemoApplication : Application() {
+class MemorizerApp : Application() {
 
     companion object {
         fun getAppComponent(context: Context): AppComponent {
-            val app = context.applicationContext as DemoApplication
+            val app = context.applicationContext as MemorizerApp
             return app.appComponent
         }
     }

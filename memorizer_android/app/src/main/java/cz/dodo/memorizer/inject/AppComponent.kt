@@ -1,5 +1,6 @@
 package cz.dodo.memorizer.inject
 
+import cz.dodo.memorizer.main.BaseFragmentActivity
 import cz.dodo.memorizer.main.MainFragment
 import cz.dodo.memorizer.screens.*
 import dagger.Component
@@ -13,6 +14,8 @@ import javax.inject.Singleton
     MainModule::class
 ])
 interface AppComponent {
+
+    fun inject(baseFragmentActivity: BaseFragmentActivity)
 
     fun inject(mainFragment: MainFragment)
 

@@ -1,5 +1,6 @@
-package cz.dodo.memorizer.entities
+package cz.dodo.memorizer.main
 
+import cz.dodo.memorizer.entities.SpeciesItem
 import paperparcel.PaperParcel
 import paperparcel.PaperParcelable
 import java.io.Serializable

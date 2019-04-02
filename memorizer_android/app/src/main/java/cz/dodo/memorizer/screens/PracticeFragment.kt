@@ -6,7 +6,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.squareup.picasso.Picasso
-import cz.dodo.memorizer.DemoApplication
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.extension.onClick
@@ -14,14 +14,10 @@ import cz.dodo.memorizer.main.BaseFragment
 import cz.dodo.memorizer.viewmodels.PracticeViewModel
 import kotlinx.android.synthetic.main.fragment_practice.*
 import android.graphics.drawable.TransitionDrawable
-import android.util.Log
 import android.view.animation.AccelerateInterpolator
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Callback
 import cz.dodo.memorizer.extension.startFragmentActivity
-import kotlinx.android.synthetic.main.fragment_practice_confirm.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -72,7 +68,7 @@ class PracticeFragment : BaseFragment() {
 
 
     override fun onAttach(context: Context) {
-        DemoApplication.getAppComponent(context).inject(this)
+        MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
 

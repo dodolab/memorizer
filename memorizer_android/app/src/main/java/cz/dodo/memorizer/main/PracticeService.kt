@@ -1,8 +1,5 @@
 package cz.dodo.memorizer.main
 
-import cz.dodo.memorizer.entities.PracticeModel
-import cz.dodo.memorizer.entities.SpeciesItem
-
 interface PracticeService {
 
     fun initModel(model: PracticeModel)

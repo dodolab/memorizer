@@ -3,7 +3,7 @@ package cz.dodo.memorizer.main
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import cz.dodo.memorizer.DemoApplication
+import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -17,7 +17,7 @@ class MainFragment : BaseFragment() {
         get() = R.layout.fragment_main
 
     override fun onAttach(context: Context) {
-        DemoApplication.getAppComponent(context).inject(this)
+        MemorizerApp.getAppComponent(context).inject(this)
         super.onAttach(context)
     }
 
