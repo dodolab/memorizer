@@ -10,6 +10,16 @@ data class LocString(val cs: String?, val en: String?, val la: String?)   : Pape
     companion object {
         @JvmField
         val CREATOR = PaperParcelLocString.CREATOR
-        const val DEFAULT_LOCALE = "la"
+    }
+
+    fun getLocString(langCode: String) : String {
+        val output = when(langCode) {
+            "cs" -> cs
+            "en" -> en
+            "la" -> la
+            else -> la
+        }
+
+        return output ?: la!! // default is latin
     }
 }

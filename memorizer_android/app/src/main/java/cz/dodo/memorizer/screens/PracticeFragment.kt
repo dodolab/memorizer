@@ -58,14 +58,6 @@ class PracticeFragment : BaseFragment() {
         savedInstanceState?.let { viewModel?.restoreState(savedInstanceState) }
     }
 
-    override fun onBackPressed() = if (progressShown()) {
-        // hide progress and interrupt the current request
-        hideProgress()
-        true
-    } else {
-        super.onBackPressed()
-    }
-
 
     override fun onAttach(context: Context) {
         MemorizerApp.getAppComponent(context).inject(this)

@@ -1,8 +1,8 @@
 package cz.dodo.memorizer.services
 
 import cz.dodo.memorizer.entities.SpeciesData
-import io.reactivex.Single
+import kotlinx.coroutines.Deferred
 
 interface CategoryService {
-    fun loadAssets(): Single<SpeciesData>
+    fun loadAssets(): Deferred<SpeciesData>
 }

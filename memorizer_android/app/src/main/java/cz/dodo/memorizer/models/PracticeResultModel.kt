@@ -6,7 +6,8 @@ import paperparcel.PaperParcelable
 import java.io.Serializable
 
 @PaperParcel
-data class PracticeResultModel(val failedItems: ArrayList<SpeciesItem>, val failedAnswers: ArrayList<SpeciesItem>, val itemsNum: Int)  : PaperParcelable, Serializable {
+data class PracticeResultModel(val failedItems: ArrayList<SpeciesItem>, val failedAnswers: ArrayList<SpeciesItem>,
+                               val itemsNum: Int)  : PaperParcelable, Serializable {
 
     companion object {
         @JvmField

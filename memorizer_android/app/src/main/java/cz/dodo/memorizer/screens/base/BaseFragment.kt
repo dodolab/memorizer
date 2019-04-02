@@ -13,7 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import cz.dodo.memorizer.R
-import cz.dodo.memorizer.extension.show
 import kotlinx.android.synthetic.main.activity_fragment_base.*
 import javax.inject.Inject
 
@@ -154,16 +153,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         } else {
             activity?.finish()
         }
-    }
-
-    fun progressShown() = activity?.findViewById<View>(R.id.layout_progress_overlay)?.show == true
-
-    fun showProgress() {
-        activity?.findViewById<View>(R.id.layout_progress_overlay)?.show = true
-    }
-
-    fun hideProgress() {
-        activity?.findViewById<View>(R.id.layout_progress_overlay)?.show = false
     }
 
     fun updateStatusBarColor(@ColorRes color: Int) {
