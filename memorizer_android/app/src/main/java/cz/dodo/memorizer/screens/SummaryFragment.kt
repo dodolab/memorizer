@@ -8,12 +8,9 @@ import cz.dodo.memorizer.R
 import cz.dodo.memorizer.models.PracticeResultModel
 import cz.dodo.memorizer.entities.SpeciesItem
 import cz.dodo.memorizer.screens.base.BaseFragment
-import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
 import kotlinx.android.synthetic.main.fragment_summary.*
 
 class SummaryFragment : BaseFragment() {
-
-    var viewModel: PracticeConfirmViewModel? = null
 
     override val layoutId: Int
         get() = R.layout.fragment_summary
@@ -37,9 +34,8 @@ class SummaryFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        viewModel?.let {
-            setTitle("Summary")
-        }
+        setTitle("Summary")
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

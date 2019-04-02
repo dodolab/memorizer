@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.entities.SpeciesData
 import cz.dodo.memorizer.services.CategoryService
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 

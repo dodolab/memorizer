@@ -48,15 +48,13 @@ dependencies {
     implementation "nz.bradcampbell:paperparcel:2.0.6"
     implementation "nz.bradcampbell:paperparcel-kotlin:2.0.6"
     kapt "nz.bradcampbell:paperparcel-compiler:2.0.6"
-    // Progress view
-    implementation "com.github.rahatarmanahmed:circularprogressview:2.5.0"
 
     // Circular Image View
     implementation 'de.hdodenhof:circleimageview:3.0.0'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.0.1'
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.0.1"
-    
+
 
     implementation 'com.github.denzcoskun:ImageSlideshow:0.0.2'
 

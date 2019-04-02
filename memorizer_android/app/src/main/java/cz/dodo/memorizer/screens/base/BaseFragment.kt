@@ -1,7 +1,6 @@
 package cz.dodo.memorizer.screens.base
 
 import android.app.ActionBar
-import android.graphics.Rect
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -11,7 +10,6 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.snackbar.Snackbar
 import cz.dodo.memorizer.R
 import kotlinx.android.synthetic.main.activity_fragment_base.*
 import javax.inject.Inject
@@ -38,22 +36,10 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
 
     open fun onBackPressed(): Boolean = false
 
-
-    fun showSnack(resId: Int) {
-        showSnack(getString(resId))
-    }
-
-    fun showSnack(message: String) {
-        if (view != null) {
-            Snackbar.make(view!!, message, Snackbar.LENGTH_LONG).show()
-        }
-    }
-
     override fun onResume() {
         super.onResume()
         setTitle(title)
         onInitActionBar((activity as BaseFragmentActivity).actionBar)
-        showHideKeyboard()
     }
 
     protected fun setTitle(@StringRes title: Int) {
@@ -117,35 +103,6 @@ abstract class BaseFragment : androidx.fragment.app.Fragment() {
         }
     }
 
-    /**
-     * Show keyboard or hide it
-     * Showing keyboard if shouldShowKeyboard is true, otherwise hide it
-     *
-     * @param shouldShowKeyboard
-     */
-    open fun showHideKeyboard(shouldShowKeyboard: Boolean = false) {
-        if (shouldShowKeyboard) {
-            showKeyboard()
-        } else {
-            hideKeyboard()
-        }
-    }
-
-    /**
-     * Hide Keyboard
-     */
-    private fun hideKeyboard() =
-            activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-
-    /**
-     * Show Keyboard
-     */
-    private fun showKeyboard() =
-            activity?.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-
-    protected fun scrollToView(view: View, padding: Int = 0) {
-        view.post { view.requestRectangleOnScreen(Rect(0, padding, view.width, view.height)) }
-    }
 
     protected fun finish() {
         if (fragmentManager != null && fragmentManager!!.backStackEntryCount > 0) {

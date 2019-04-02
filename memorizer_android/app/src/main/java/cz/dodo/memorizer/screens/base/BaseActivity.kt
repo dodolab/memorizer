@@ -3,20 +3,16 @@ package cz.dodo.memorizer.screens.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.snackbar.Snackbar
 import android.widget.SimpleAdapter
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
@@ -59,13 +55,6 @@ open class BaseFragmentActivity : FragmentActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            android.R.id.home -> onBackPressed()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onBackPressed() {
         // current implementation (Navigation component) allows only one fragment at a time
         val currentFragment = supportFragmentManager.fragments.firstOrNull()
@@ -74,31 +63,12 @@ open class BaseFragmentActivity : FragmentActivity() {
         }
     }
 
-    fun showSnack(message: String) {
-        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    fun showSnack(@StringRes resId: Int) {
-        showSnack(getString(resId))
-    }
-
-    fun showErrorDialog(message: String, onClickListener: DialogInterface.OnClickListener? = null) {
-        val alertDialog = AlertDialog.Builder(this)
-                .setTitle("Error")
-                .setMessage(message)
-                .setNeutralButton("OK", onClickListener)
-                .create()
-        alertDialog.show()
-    }
-
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (currentFragment != null) {
             currentFragment!!.onActivityResult(requestCode, resultCode, data)
         }
     }
-
 
     fun replaceFragment(fragment: Fragment, addToBackStack: Boolean) {
         replaceFragment(fragment, fragment.javaClass.name, addToBackStack)
@@ -134,10 +104,6 @@ open class BaseFragmentActivity : FragmentActivity() {
 
     /**
      * Returns the name of the fragment to be instantiated.
-
-     * Note: IF you will NOT override this function, the activity is immediately finished
-
-     * @return name of fragment class
      */
     open fun getFragmentName(): String = intent.getStringExtra(EXTRA_FRAGMENT_NAME)
 
@@ -200,7 +166,6 @@ open class BaseFragmentActivity : FragmentActivity() {
         val CONTENT_VIEW_ID = R.id.fragment_container
         val EXTRA_FRAGMENT_NAME = "fragment"
         val EXTRA_ARGUMENTS = "arguments"
-        const val TOOLBAR_TYPE: String = "toolbar_type"
 
         fun generateIntent(ctx: Context, fragmentName: String): Intent {
             return Intent(ctx, BaseFragmentActivity::class.java).putExtra(EXTRA_FRAGMENT_NAME, fragmentName)

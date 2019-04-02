@@ -40,24 +40,5 @@
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <FrameLayout
-            android:id="@+id/layout_progress_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/progressOverlay"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone">
-
-            <com.github.rahatarmanahmed.cpv.CircularProgressView
-                android:id="@android:id/progress"
-                android:layout_width="@dimen/progressbar_size"
-                android:layout_height="@dimen/progressbar_size"
-                android:layout_gravity="center"
-                app:cpv_animAutostart="true"
-                app:cpv_color="@color/colorFields"
-                app:cpv_indeterminate="true" />
-        </FrameLayout>
     </FrameLayout>
 </LinearLayout>

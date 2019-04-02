@@ -2,7 +2,6 @@ package cz.dodo.memorizer.inject
 
 import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.viewmodels.CategoriesViewModel
-import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
 import cz.dodo.memorizer.viewmodels.PracticeViewModel
 import dagger.Binds
 import dagger.Module
@@ -15,11 +14,6 @@ internal abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
     internal abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(PracticeConfirmViewModel::class)
-    internal abstract fun bindPracticeConfirmViewModel(viewModel: PracticeConfirmViewModel): ViewModel
 
     @Binds
     @IntoMap
