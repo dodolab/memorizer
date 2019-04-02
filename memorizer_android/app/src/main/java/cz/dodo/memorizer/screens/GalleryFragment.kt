@@ -40,7 +40,7 @@ class GalleryFragment : BaseFragment() {
             val category = it.getParcelable<Category>(KEY_CATEGORY)
             val imageList = ArrayList<SlideModel>()
             category.items.forEach {
-                imageList.add(SlideModel(it.images.first(), it.name.cs))
+                imageList.add(SlideModel(it.images.first(), it.name.getLocString(sharedPrefService.getLanguageCode())))
             }
             slider_images.setImageList(imageList)
         }

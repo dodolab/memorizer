@@ -2,11 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/defaultBgr"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/slider_images"
+        android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         app:auto_cycle="false"

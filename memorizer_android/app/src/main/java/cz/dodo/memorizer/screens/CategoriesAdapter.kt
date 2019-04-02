@@ -50,7 +50,6 @@ class CategoriesAdapter (
                            catMode: CategoriesMode, onCategoryClick: OnCategoryClick) {
 
             val item = items[position]
-            Log.d("mojo", "dojo")
 
             if(catMode == CategoriesMode.LIST) {
                 itemView.txt_name.text = item.name.getLocString(langCode)
