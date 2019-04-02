@@ -9,8 +9,8 @@ import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import com.squareup.picasso.Picasso
-import cz.dodo.memorizer.main.BaseFragment
-import cz.dodo.memorizer.main.BaseFragmentActivity
+import cz.dodo.memorizer.screens.base.BaseFragment
+import cz.dodo.memorizer.screens.base.BaseFragmentActivity
 
 
 /**

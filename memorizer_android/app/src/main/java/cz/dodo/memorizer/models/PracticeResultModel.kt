@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.models
 
 import cz.dodo.memorizer.entities.SpeciesItem
 import paperparcel.PaperParcel

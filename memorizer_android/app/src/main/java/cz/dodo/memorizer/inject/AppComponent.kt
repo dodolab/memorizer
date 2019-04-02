@@ -1,7 +1,7 @@
 package cz.dodo.memorizer.inject
 
-import cz.dodo.memorizer.main.BaseFragmentActivity
-import cz.dodo.memorizer.main.MainFragment
+import cz.dodo.memorizer.screens.base.BaseFragmentActivity
+import cz.dodo.memorizer.screens.MainFragment
 import cz.dodo.memorizer.screens.*
 import dagger.Component
 import javax.inject.Singleton
@@ -11,7 +11,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AppModule::class,
     ViewModelBuilder::class,
-    MainModule::class
+    ViewModelModule::class,
+    ServiceModule::class
 ])
 interface AppComponent {
 

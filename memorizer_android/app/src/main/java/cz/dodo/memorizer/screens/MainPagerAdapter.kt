@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

@@ -7,7 +7,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
-import cz.dodo.memorizer.main.BaseFragment
+import cz.dodo.memorizer.screens.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_gallery.*
 
 class GalleryFragment : BaseFragment() {

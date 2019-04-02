@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens.base
 
 import android.app.ActionBar
 import android.graphics.Rect

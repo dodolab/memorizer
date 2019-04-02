@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import cz.dodo.memorizer.entities.SpeciesData
-import cz.dodo.memorizer.main.CategoryService
+import cz.dodo.memorizer.services.CategoryService
 import javax.inject.Inject
 
 

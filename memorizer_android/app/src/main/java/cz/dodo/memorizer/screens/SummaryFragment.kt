@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.view.View
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
-import cz.dodo.memorizer.main.PracticeResultModel
+import cz.dodo.memorizer.models.PracticeResultModel
 import cz.dodo.memorizer.entities.SpeciesItem
-import cz.dodo.memorizer.main.BaseFragment
+import cz.dodo.memorizer.screens.base.BaseFragment
 import cz.dodo.memorizer.viewmodels.PracticeConfirmViewModel
 import kotlinx.android.synthetic.main.fragment_summary.*
 

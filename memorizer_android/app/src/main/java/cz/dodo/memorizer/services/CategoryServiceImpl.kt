@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.services
 
 import android.app.Application
 import com.google.gson.Gson

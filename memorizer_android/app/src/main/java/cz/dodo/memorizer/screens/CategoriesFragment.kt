@@ -10,7 +10,7 @@ import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.extension.startFragmentActivity
-import cz.dodo.memorizer.main.BaseFragment
+import cz.dodo.memorizer.screens.base.BaseFragment
 import cz.dodo.memorizer.viewmodels.CategoriesViewModel
 import kotlinx.android.synthetic.main.fragment_categories.*
 

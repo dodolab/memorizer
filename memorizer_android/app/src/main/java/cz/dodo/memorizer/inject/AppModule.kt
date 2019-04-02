@@ -13,7 +13,5 @@ class AppModule(private val application: Application) {
     fun provideContext() = application
 
     @Provides
-    fun provideGson() = GsonBuilder()
-            // todo register adapters if any
-            .create()
+    fun provideGson() = GsonBuilder().create()
 }

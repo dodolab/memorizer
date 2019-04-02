@@ -1,10 +1,11 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
+import cz.dodo.memorizer.screens.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_main.*
 
 

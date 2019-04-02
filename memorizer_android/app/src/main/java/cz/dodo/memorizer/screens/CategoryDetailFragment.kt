@@ -10,7 +10,7 @@ import cz.dodo.memorizer.entities.Category
 import cz.dodo.memorizer.entities.SpeciesItem
 import cz.dodo.memorizer.extension.onClick
 import cz.dodo.memorizer.extension.startFragmentActivity
-import cz.dodo.memorizer.main.BaseFragment
+import cz.dodo.memorizer.screens.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_category_detail.*
 
 class CategoryDetailFragment : BaseFragment() {

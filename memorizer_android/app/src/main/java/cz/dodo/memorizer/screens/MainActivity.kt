@@ -1,4 +1,6 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens
+
+import cz.dodo.memorizer.screens.base.BaseFragmentActivity
 
 
 class MainActivity : BaseFragmentActivity() {

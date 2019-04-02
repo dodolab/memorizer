@@ -1,4 +1,4 @@
-package cz.dodo.memorizer.main
+package cz.dodo.memorizer.screens.base
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -21,6 +21,7 @@ import android.widget.SimpleAdapter
 import cz.dodo.memorizer.MemorizerApp
 import cz.dodo.memorizer.R
 import cz.dodo.memorizer.extension.onClick
+import cz.dodo.memorizer.services.SharedPrefService
 import kotlinx.android.synthetic.main.activity_fragment_base.*
 import javax.inject.Inject
 
