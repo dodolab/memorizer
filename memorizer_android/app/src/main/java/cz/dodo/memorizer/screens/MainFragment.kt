@@ -24,7 +24,7 @@ class MainFragment : BaseFragment() {
     }
 
     override val title: String
-        get() = getString(R.string.categories)
+        get() = getString(R.string.memorizer)
 
 
     override fun onInitActionBar(actionBar: ActionBar?) {

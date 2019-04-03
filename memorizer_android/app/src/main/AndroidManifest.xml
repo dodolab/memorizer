@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".screens.MainActivity">
+        <activity android:name=".screens.MainActivity"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +24,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="cz.dodo.memorizer.screens.base.BaseFragmentActivity" />
+        <activity android:name="cz.dodo.memorizer.screens.base.BaseFragmentActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 </manifest>
