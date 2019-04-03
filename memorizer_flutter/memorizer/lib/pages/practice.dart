@@ -7,6 +7,7 @@ import 'package:memorizer/models/species_item.dart';
 import 'dart:math';
 
 import 'package:memorizer/pages/summary.dart';
+import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/utils/switch_animation.dart';
 import 'package:memorizer/utils/utils.dart';
@@ -36,6 +37,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   List<SpeciesItem> failedAnswers = List();
   int currentIndex = 0;
   List<SpeciesItem> offeredItems = new List();
+  String langCode;
   var offeredItemStates = [
     STATE_NEUTRAL,
     STATE_NEUTRAL,
@@ -128,10 +130,15 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return new AnimatedBuilder(
-      animation: _switchController,
-      builder: _buildContent,
-    );
+    return new SharedPreferencesBuilder(
+        pref: PREF_LANG_CODE,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          langCode = snapshot.data;
+          return new AnimatedBuilder(
+            animation: _switchController,
+            builder: _buildContent,
+          );
+        });
   }
 
   Widget _buildContent(BuildContext context, Widget child) {
@@ -266,7 +273,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
           borderSide: BorderSide(color: Colors.grey[700]),
           textColor: Colors.white,
           child: new Text(
-            item.name.getString("cs"),
+            item.name.getString(langCode),
           ),
           onPressed: _evaluationPending
               ? null
@@ -278,7 +285,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
           textColor: Colors.white,
           color: buttonColor,
           child: new Text(
-            item.name.getString("cs"),
+            item.name.getString(langCode),
           ),
           onPressed: () {},
         ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 
 class CategoryCardWidget extends StatefulWidget {
@@ -15,11 +16,14 @@ class CategoryCardWidget extends StatefulWidget {
   final CategoryContent categoryContent;
   final VoidCallback onPressed;
 
+
   @override
   CategoryCardWidgetState createState() => CategoryCardWidgetState();
 }
 
 class CategoryCardWidgetState extends State<CategoryCardWidget> {
+
+  String langCode;
 
   @override
   void initState() {
@@ -55,6 +59,15 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    return new SharedPreferencesBuilder(
+        pref: PREF_LANG_CODE,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          langCode = snapshot.data;
+          return _buildContent();
+        });
+  }
+
+  Widget _buildContent() {
     List<Widget> children = <Widget>[
       ClipRect(
         clipper: SquareClipper(),
@@ -104,7 +117,7 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text(
-          categoryCard.name.getString("cs"),
+          categoryCard.name.getString(langCode),
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16.0,
