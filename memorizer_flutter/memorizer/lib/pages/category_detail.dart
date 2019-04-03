@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:memorizer/models/category_content.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/category_content.dart';
+import 'package:memorizer/entities/species_item.dart';
 import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
 import 'package:memorizer/pages/species_detail.dart';
@@ -10,6 +10,7 @@ import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/widgets/bottom_gradient.dart';
 import 'package:memorizer/widgets/species_item.dart';
+import 'package:sliver_fab/sliver_fab.dart';
 
 class CategoryDetailPage extends StatefulWidget {
   final CategoryContent category;
@@ -30,6 +31,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
     super.initState();
     Timer(Duration(milliseconds: 500), () => setState(() => _visible = true));
   }
+
 
   Widget _buildImage() {
     return new Hero(
@@ -72,13 +74,26 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           langCode = snapshot.data;
           return new Scaffold(
-              backgroundColor: defaultBgr,
-              body: CustomScrollView(
+            backgroundColor: defaultBgr,
+            body: new Builder(
+              builder: (context) =>
+              new SliverFab(
+                floatingWidget: FloatingActionButton(
+                  backgroundColor: colorDecor,
+                  onPressed: () =>
+                      Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text("You clicked FAB!"))),
+                  child: Icon(Icons.add),
+                ),
+                floatingPosition: FloatingPosition(right: 16),
+                expandedHeight: 400.0,
                 slivers: <Widget>[
                   _buildAppBar(),
-                  _buildContentSection(),
+                  _buildContentSection()
                 ],
-              ));
+              ),
+            ),
+          );
         });
   }
 

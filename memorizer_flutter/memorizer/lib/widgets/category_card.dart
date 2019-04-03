@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:memorizer/blocs/bloc_provider.dart';
-import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 
@@ -25,37 +24,6 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
 
   String langCode;
 
-  @override
-  void initState() {
-    super.initState();
-    _createBloc();
-  }
-
-  ///
-  /// As Widgets can be changed by the framework at any time,
-  /// we need to make sure that if this happens, we keep on
-  /// listening to the stream that notifies us about favorites
-  ///
-  @override
-  void didUpdateWidget(CategoryCardWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    _disposeBloc();
-    _createBloc();
-  }
-
-  @override
-  void dispose() {
-    _disposeBloc();
-    super.dispose();
-  }
-
-  void _createBloc() {
-
-  }
-
-  void _disposeBloc() {
-
-  }
 
   @override
   Widget build(BuildContext context) {

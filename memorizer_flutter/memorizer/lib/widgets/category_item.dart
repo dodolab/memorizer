@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/widgets/round_icon.dart';
@@ -54,14 +54,12 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
         widget.categoryContent.name.getString(langCode),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-      // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
       subtitle: Row(
         children: <Widget>[
           Expanded(
               flex: 1,
               child: Container(
-                // tag: 'hero',
                 child: LinearProgressIndicator(
                     backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
                     value: 10,
@@ -71,8 +69,8 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
             flex: 4,
             child: Padding(
                 padding: EdgeInsets.only(left: 10.0),
-                child: Text("TODO",
-                    style: TextStyle(color: Colors.white))),
+                child: Text(widget.categoryContent.name.getString("la"),
+                    style: TextStyle(color: Colors.white, fontStyle: FontStyle.italic))),
           )
         ],
       ),

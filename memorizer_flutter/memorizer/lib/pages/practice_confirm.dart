@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:memorizer/lang/sit_localizations.dart';
-import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/pages/practice.dart';
 import 'package:memorizer/widgets/stagger_animation.dart';
 import 'package:memorizer/widgets/fancy_button.dart';

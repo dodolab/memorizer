@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:memorizer/lang/sit_localizations.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/species_item.dart';
 import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
 import 'package:memorizer/pages/species_detail.dart';

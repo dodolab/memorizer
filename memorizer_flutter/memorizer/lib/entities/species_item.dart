@@ -1,6 +1,5 @@
 
-import 'package:memorizer/models/LocString.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/loc_string.dart';
 
 class SpeciesItem extends Object {
   final LocString name;

@@ -1,20 +1,13 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:memorizer/lang/sit_localizations.dart';
-import 'package:memorizer/models/species_item.dart';
-import 'dart:math';
-
+import 'package:memorizer/entities/species_item.dart';
+import 'package:memorizer/models/practice_model.dart';
 import 'package:memorizer/pages/summary.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
 import 'package:memorizer/utils/switch_animation.dart';
-import 'package:memorizer/utils/utils.dart';
 
-const STATE_NEUTRAL = 1;
-const STATE_ERROR = 2;
-const STATE_CORRECT = 3;
 
 class Practice extends StatefulWidget {
   Practice({Key key, this.itemsNum, this.items}) : super(key: key);
@@ -23,7 +16,7 @@ class Practice extends StatefulWidget {
 
   @override
   _PracticeState createState() =>
-      new _PracticeState(itemsNum: itemsNum, items: items);
+      new _PracticeState(model: PracticeModel(itemsNum: itemsNum, items: items));
 }
 
 class _PracticeState extends State<Practice> with TickerProviderStateMixin {
@@ -31,24 +24,11 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   SwitchAnimation _switchAnimation;
 
   bool _evaluationPending = false;
-  List<SpeciesItem> items;
-  int itemsNum;
-  List<SpeciesItem> failedItems = List();
-  List<SpeciesItem> failedAnswers = List();
-  int currentIndex = 0;
-  List<SpeciesItem> offeredItems = new List();
   String langCode;
-  var offeredItemStates = [
-    STATE_NEUTRAL,
-    STATE_NEUTRAL,
-    STATE_NEUTRAL,
-    STATE_NEUTRAL
-  ];
   int selectedItemIndex = 0;
+  PracticeModel model;
 
-  var rnd = new Random();
-
-  _PracticeState({this.itemsNum, this.items});
+  _PracticeState({this.model});
 
   @override
   void initState() {
@@ -56,10 +36,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     _switchController = new AnimationController(
         duration: new Duration(milliseconds: 2000), vsync: this);
     _switchAnimation = new SwitchAnimation(_switchController);
-    shuffle(items);
-    currentIndex = -1;
-
-    goToNext();
+    model.init();
   }
 
   @override
@@ -74,58 +51,9 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     } on TickerCanceled {}
   }
 
-  bool _canGoNext() {
-    return (currentIndex < itemsNum - 1);
-  }
-
-  bool goToNext() {
-    if (!_canGoNext()) return false;
-
-    offeredItemStates = [
-      STATE_NEUTRAL,
-      STATE_NEUTRAL,
-      STATE_NEUTRAL,
-      STATE_NEUTRAL
-    ];
-    currentIndex++;
-
-    var offerIndices = [];
-    offerIndices.add(currentIndex);
-
-    while (true) {
-      var next = rnd.nextInt(items.length - 1);
-      if (!offerIndices.contains(next)) {
-        offerIndices.add(next);
-      }
-      if (offerIndices.length == 4) break;
-    }
-
-    shuffle(offerIndices);
-
-    offeredItems.clear();
-    offerIndices.forEach((idx) {
-      offeredItems.add(items[idx]);
-    });
-    return true;
-  }
-
-  submitItem(SpeciesItem item, int index) {
-    var correctItem = items[currentIndex];
-    var isCorrect = item == correctItem;
-    offeredItemStates[index] = isCorrect ? STATE_CORRECT : STATE_ERROR;
+  selectItem(SpeciesItem item, int index) {
     selectedItemIndex = index;
-
-    if (!isCorrect) {
-      failedItems.add(correctItem);
-      failedAnswers.add(item);
-      // find correct item
-      for (var i = 0; i < offeredItems.length; i++) {
-        if (offeredItems[i] == correctItem) {
-          offeredItemStates[i] = STATE_CORRECT;
-          break;
-        }
-      }
-    }
+    model.submitItem(item, index);
   }
 
   @override
@@ -152,20 +80,20 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
                 if (_switchController.isAnimating) {
                   if (_switchAnimation.previousImageOpacity.value > 0) {
                     opacity = _switchAnimation.previousImageOpacity.value;
-                  } else if(_canGoNext()) {
+                  } else if(model.canGoNext()) {
                     opacity = _switchAnimation.nextImageOpacity.value;
                   } else {
                     opacity = 0;
                   }
-                } else if(!_canGoNext() && _switchAnimation.previousImageOpacity.value == 0){
+                } else if(!model.canGoNext() && _switchAnimation.previousImageOpacity.value == 0){
                   opacity = 0;
                 }
 
                 var imageToShow = (_switchController.isAnimating &&
                     _switchAnimation.previousImageOpacity.value == 0 &&
-                    _canGoNext())
-                    ? items[currentIndex + 1].imageUrls.first
-                    : items[currentIndex].imageUrls.first;
+                    model.canGoNext())
+                    ? model.items[model.currentIndex + 1].imageUrls.first
+                    : model.items[model.currentIndex].imageUrls.first;
 
                 return Stack(
                   children: <Widget>[
@@ -211,15 +139,15 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            _buildButton(offeredItems[0], 0),
-                            _buildButton(offeredItems[1], 1)
+                            _buildButton(model.offeredItems[0], 0),
+                            _buildButton(model.offeredItems[1], 1)
                           ],
                         ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            _buildButton(offeredItems[2], 2),
-                            _buildButton(offeredItems[3], 3)
+                            _buildButton(model.offeredItems[2], 2),
+                            _buildButton(model.offeredItems[3], 3)
                           ],
                         ),
                       ],
@@ -232,7 +160,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
   }
 
   Widget _buildButton(SpeciesItem item, int index) {
-    var state = offeredItemStates[index];
+    var state = model.offeredItemStates[index];
     var showSelectButton = _switchAnimation.selectButtonOpacity.value < 1;
     var hideSelectButton = _switchAnimation.selectButtonOpacity2.value > 0;
     var showCorrectButton = _switchAnimation.correctButtonOpacity.value > 0;
@@ -295,11 +223,11 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
 
   _onItemPressed(SpeciesItem item, int index) async {
     _evaluationPending = true;
-    submitItem(item, index);
+    selectItem(item, index);
     _playAnimation().whenComplete(() {
       _evaluationPending = false;
 
-      if (!goToNext()) {
+      if (!model.goToNext()) {
         // go to summary page
         _navigateToEvalPage();
       }
@@ -310,7 +238,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
     Navigator.of(context).pop();
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
-      return SummaryPage(itemsNum, failedItems, failedAnswers);
+      return SummaryPage(model.itemsNum, model.failedItems, model.failedAnswers);
     }));
   }
 

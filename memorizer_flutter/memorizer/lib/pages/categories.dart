@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:memorizer/lang/sit_localizations.dart';
-import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/pages/category_detail.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
 import 'package:memorizer/utils/style.dart';
-import 'package:memorizer/widgets/category_card_widget.dart';
+import 'package:memorizer/widgets/category_card.dart';
 import 'package:memorizer/blocs/categories_bloc.dart';
 import 'package:memorizer/blocs/bloc_provider.dart';
 import 'package:memorizer/widgets/category_item.dart';
@@ -65,7 +65,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 Tab(icon: Icon(Icons.image)),
               ],
             ),
-            title: Text(SitLocalizations.of(context).categories),
+            title: Text(SitLocalizations.of(context).memorizer),
           ),
           // wait for the bloc to load all categories
           body: StreamBuilder<List<CategoryContent>>(

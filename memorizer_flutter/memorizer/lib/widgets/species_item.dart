@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:memorizer/models/category_content.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/category_content.dart';
+import 'package:memorizer/entities/species_item.dart';
 import 'package:memorizer/pages/category_detail.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
 

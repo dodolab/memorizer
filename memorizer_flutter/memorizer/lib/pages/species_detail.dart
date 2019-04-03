@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/species_item.dart';
 
 class SpeciesDetail extends StatelessWidget {
   SpeciesDetail({Key key, this.item}) : super(key: key);

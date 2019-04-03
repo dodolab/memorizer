@@ -1,4 +1,4 @@
-import 'package:memorizer/models/category_content.dart';
+import 'package:memorizer/entities/category_content.dart';
 
 class CategoryPageResult {
   final List<CategoryContent> categories;

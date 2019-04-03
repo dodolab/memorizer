@@ -1,6 +1,6 @@
 
-import 'package:memorizer/models/LocString.dart';
-import 'package:memorizer/models/species_item.dart';
+import 'package:memorizer/entities/loc_string.dart';
+import 'package:memorizer/entities/species_item.dart';
 
 class CategoryContent extends Object {
   final LocString name;
