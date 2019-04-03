@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:memorizer/lang/sit_localizations.dart';
 import 'package:memorizer/models/species_item.dart';
 import 'dart:math';
 
@@ -311,16 +312,16 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
       context: context,
       builder: (context) =>
       new AlertDialog(
-        title: new Text('Are you sure?'),
-        content: new Text('Do you want to exit the test'),
+        title: new Text(SitLocalizations.of(context).exitdialog_title),
+        content: new Text(SitLocalizations.of(context).exitdialog_message),
         actions: <Widget>[
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: new Text('No'),
+            child: new Text(SitLocalizations.of(context).answer_no),
           ),
           new FlatButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: new Text('Yes'),
+            child: new Text(SitLocalizations.of(context).answer_yes),
           ),
         ],
       ),

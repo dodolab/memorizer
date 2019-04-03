@@ -20,11 +20,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "app_name" : MessageLookupByLibrary.simpleMessage("Memorizer"),
     "categories" : MessageLookupByLibrary.simpleMessage("Categories"),
     "gallery" : MessageLookupByLibrary.simpleMessage("Gallery"),
     "memorizer" : MessageLookupByLibrary.simpleMessage("Memorizer"),
     "practice" : MessageLookupByLibrary.simpleMessage("Practice"),
     "select" : MessageLookupByLibrary.simpleMessage("Select number of entities"),
-    "start" : MessageLookupByLibrary.simpleMessage("START")
+    "start" : MessageLookupByLibrary.simpleMessage("START"),
+    "lang_cs" : MessageLookupByLibrary.simpleMessage("Czech"),
+    "lang_en" : MessageLookupByLibrary.simpleMessage("English"),
+    "lang_la" : MessageLookupByLibrary.simpleMessage("Latin"),
+    "select_language" : MessageLookupByLibrary.simpleMessage("Select Language"),
+    "summary" : MessageLookupByLibrary.simpleMessage("Summary"),
+    "error_entities" : MessageLookupByLibrary.simpleMessage("Species that were wrong:"),
+    "answer_yes" : MessageLookupByLibrary.simpleMessage("Yes"),
+    "answer_no" : MessageLookupByLibrary.simpleMessage("No"),
+    "exitdialog_title" : MessageLookupByLibrary.simpleMessage("Abort test"),
+    "exitdialog_message" : MessageLookupByLibrary.simpleMessage("Do you want to abort test?")
   };
 }

@@ -143,18 +143,18 @@ class _CategoriesPageState extends State<CategoriesPage> {
 
   _showLangChangeDialog() {
     SimpleDialog dialog = SimpleDialog(
-      title: const Text('Choose a language'),
+      title: Text(SitLocalizations.of(context).select_language),
       children: <Widget>[
         SimpleDialogOption(
-          child: const Text('English'),
+          child: Text(SitLocalizations.of(context).lang_en),
           onPressed: () { _changeLanguage("en"); Navigator.pop(context);},
         ),
         SimpleDialogOption(
-          child: const Text('Latin'),
+          child: Text(SitLocalizations.of(context).lang_la),
           onPressed: () {_changeLanguage("la"); Navigator.pop(context);},
         ),
         SimpleDialogOption(
-          child: const Text('Česky'),
+          child: Text(SitLocalizations.of(context).lang_cs),
           onPressed: () {_changeLanguage("cs"); Navigator.pop(context);},
         )
       ],

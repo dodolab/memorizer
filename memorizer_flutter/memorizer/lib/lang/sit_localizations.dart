@@ -37,10 +37,21 @@ class SitLocalizations {
       Localizations.of<SitLocalizations>(context, SitLocalizations);
 
   // Localized Messages
-  String get title => Intl.message('memorizer');
+  String get app_name => Intl.message('app_name');
   String get categories => Intl.message('categories');
-  String get practice => Intl.message('practice');
   String get gallery => Intl.message('gallery');
-  String get start => Intl.message('start');
+  String get memorizer => Intl.message('memorizer');
+  String get practice => Intl.message('practice');
   String get select => Intl.message('select');
+  String get start => Intl.message('start');
+  String get lang_cs => Intl.message('lang_cs');
+  String get lang_en => Intl.message('lang_en');
+  String get lang_la => Intl.message('lang_la');
+  String get select_language => Intl.message('select_language');
+  String get summary => Intl.message('summary');
+  String get error_entities => Intl.message('error_entities');
+  String get answer_yes => Intl.message('answer_yes');
+  String get answer_no => Intl.message('answer_no');
+  String get exitdialog_title => Intl.message('exitdialog_title');
+  String get exitdialog_message => Intl.message('exitdialog_message');
 }

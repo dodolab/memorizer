@@ -47,10 +47,9 @@ class MainApp extends StatelessWidget {
           ],
           supportedLocales: [
             const Locale('en'),
-            const Locale('cs'),
           ],
           theme: new ThemeData(brightness: Brightness.dark),
-          onGenerateTitle: (context) => SitLocalizations.of(context).title,
+          onGenerateTitle: (context) => SitLocalizations.of(context).app_name,
           home: new CategoriesPage()),
     );
   }

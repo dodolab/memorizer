@@ -94,7 +94,7 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage>
           shape: BoxShape.rectangle,
           image: new DecorationImage(
             fit: BoxFit.contain,
-            image: new AssetImage("assets/ic_practice.png"),
+            image: new AssetImage("assets/img_practice.png"),
           ),
         ),
       ),

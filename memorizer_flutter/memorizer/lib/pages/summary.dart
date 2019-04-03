@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:memorizer/lang/sit_localizations.dart';
 import 'package:memorizer/models/species_item.dart';
 import 'package:memorizer/pages/gallery.dart';
 import 'package:memorizer/pages/practice_confirm.dart';
@@ -75,7 +76,7 @@ class _SummaryPageState extends State<SummaryPage> {
         Container(
             margin: new EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0),
             child:
-                Text("Items that were wrong:", style: TextStyle(fontSize: 16))),
+                Text(SitLocalizations.of(context).error_entities, style: TextStyle(fontSize: 16))),
         ListView.builder(
           physics: ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,

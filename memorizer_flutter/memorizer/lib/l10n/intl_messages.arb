@@ -1,7 +1,7 @@
 {
   "@@last_modified": "2019-03-23T22:00:58.774450",
-  "memorizer": "memorizer",
-  "@memorizer": {
+  "app_name": "app_name",
+  "@app_name": {
     "type": "text",
     "placeholders": {}
   },
@@ -10,13 +10,23 @@
     "type": "text",
     "placeholders": {}
   },
+  "gallery": "gallery",
+  "@gallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "memorizer": "memorizer",
+  "@memorizer": {
+    "type": "text",
+    "placeholders": {}
+  },
   "practice": "practice",
   "@practice": {
     "type": "text",
     "placeholders": {}
   },
-  "gallery": "gallery",
-  "@gallery": {
+  "select": "select",
+  "@select": {
     "type": "text",
     "placeholders": {}
   },
@@ -25,8 +35,53 @@
     "type": "text",
     "placeholders": {}
   },
-  "select": "select",
-  "@select": {
+  "lang_cs": "lang_cs",
+  "@lang_cs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang_en": "lang_en",
+  "@lang_en": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang_la": "lang_la",
+  "@lang_la": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select_language": "select_language",
+  "@select_language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "summary": "summary",
+  "@summary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "error_entities": "error_entities",
+  "@error_entities": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "answer_yes": "answer_yes",
+  "@answer_yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "answer_no": "answer_no",
+  "@answer_no": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exitdialog_title": "exitdialog_title",
+  "@exitdialog_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exitdialog_message": "exitdialog_message",
+  "@exitdialog_message": {
     "type": "text",
     "placeholders": {}
   }

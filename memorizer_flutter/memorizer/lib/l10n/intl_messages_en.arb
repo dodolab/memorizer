@@ -1,8 +1,8 @@
 {
   "@@locale": "en",
   "@@last_modified": "2019-03-22T21:46:06.388947",
-  "memorizer": "Memorizer",
-  "@memorizer": {
+  "app_name": "Memorizer",
+  "@app_name": {
     "type": "text",
     "placeholders": {}
   },
@@ -11,23 +11,78 @@
     "type": "text",
     "placeholders": {}
   },
-   "practice": "Practice",
-   "@practice": {
-     "type": "text",
-     "placeholders": {}
-   },
-   "gallery": "Gallery",
-   "@gallery": {
-     "type": "text",
-     "placeholders": {}
-   },
-   "start": "START",
-   "@start": {
-     "type": "text",
-     "placeholders": {}
+  "gallery": "Gallery",
+  "@gallery": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "memorizer": "Memorizer",
+  "@memorizer": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "practice": "Practice",
+  "@practice": {
+    "type": "text",
+    "placeholders": {}
   },
   "select": "Select number of entities",
   "@select": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "start": "START",
+  "@start": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang_cs": "Czech",
+  "@lang_cs": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang_en": "English",
+  "@lang_en": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lang_la": "Latin",
+  "@lang_la": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "select_language": "Select Language",
+  "@select_language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "summary": "Summary",
+  "@summary": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "error_entities": "Species that were wrong:",
+  "@error_entities": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "answer_yes": "Yes",
+  "@answer_yes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "answer_no": "No",
+  "@answer_no": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exitdialog_title": "Abort test",
+  "@exitdialog_title": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "exitdialog_message": "Do you want to abort test?",
+  "@exitdialog_message": {
     "type": "text",
     "placeholders": {}
   }

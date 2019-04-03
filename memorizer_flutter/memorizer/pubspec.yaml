@@ -1,6 +1,6 @@
 name: memorizer
-description: A new Flutter application.
-
+description: Flutter playground application
+package: memorizer
 version: 1.0.0+1
 
 environment:
@@ -28,21 +28,19 @@ dev_dependencies:
     sdk: flutter
   intl: ^0.15.7
   intl_translation: ^0.17.0
+  flutter_launcher_icons: "^0.7.0"
 
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/launcher/icon.png"
+  image_path_android: "assets/launcher/icon.png"
+  adaptive_icon_background: "assets/launcher/background.png"
+  adaptive_icon_foreground: "assets/launcher/foreground.png"
 
-
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
 flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
   - assets/data.json
   - assets/flag_cs.png
@@ -50,29 +48,4 @@ flutter:
   - assets/flag_la.png
   - assets/ic_gallery.png
   - assets/ic_practice.png
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.io/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.io/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.io/custom-fonts/#from-packages
+  - assets/img_practice.png
