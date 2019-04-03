@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:memorizer/lang/sit_localizations.dart';
 import 'package:memorizer/entities/species_item.dart';
@@ -126,7 +127,7 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
                                       color: Color.fromRGBO(64, 75, 96, .9)),
                                   child: Opacity(
                                       opacity: opacity,
-                                      child: Image.network(imageToShow,
+                                      child: CachedNetworkImage(imageUrl: imageToShow,
                                           fit: BoxFit.cover)),
                                 )));
                       },

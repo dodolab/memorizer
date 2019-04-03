@@ -185,6 +185,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
         return "flag_la.png";
     }
 
-    return "flag_en.png";
+    return "flag_la.png";
   }
 }

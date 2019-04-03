@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:memorizer/entities/species_item.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class SpeciesDetail extends StatelessWidget {
   SpeciesDetail({Key key, this.item}) : super(key: key);
@@ -18,7 +19,7 @@ class SpeciesDetail extends StatelessWidget {
               Stack(
                 children: <Widget>[
                   Swiper(itemBuilder: (BuildContext context, int index){
-                    return new Image.network(item.imageUrls[index], fit: BoxFit.cover,);
+                    return new CachedNetworkImage(imageUrl: item.imageUrls[index], fit: BoxFit.cover);
                   },
                       itemCount: item.imageUrls.length,
                       pagination: new SwiperPagination(),

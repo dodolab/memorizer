@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
@@ -39,8 +40,9 @@ class CategoryCardWidgetState extends State<CategoryCardWidget> {
     List<Widget> children = <Widget>[
       ClipRect(
         clipper: SquareClipper(),
-        child: Image.network(widget.categoryContent.items.first.imageUrls.first,
-            fit: BoxFit.cover),
+        child: CachedNetworkImage(imageUrl: widget.categoryContent.items.first.imageUrls.first,
+            fit: BoxFit.cover
+        ),
       ),
       Container(
         decoration: _buildGradientBackground(),

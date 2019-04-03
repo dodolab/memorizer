@@ -35,6 +35,7 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
       langCode = snapshot.data;
 
       return new Card(
+        clipBehavior: Clip.antiAlias,
         elevation: 8.0,
         margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
         child: Container(
@@ -54,7 +55,6 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
         widget.categoryContent.name.getString(langCode),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-
       subtitle: Row(
         children: <Widget>[
           Expanded(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:memorizer/entities/species_item.dart';
@@ -37,9 +38,9 @@ class _GalleryState extends State<GalleryPage> {
     return Stack(children: <Widget>[
       Swiper(
           itemBuilder: (BuildContext context, int index) {
-            return new Image.network(
-              widget.items[index].imageUrls.first,
-              fit: BoxFit.cover,
+            return CachedNetworkImage(
+              imageUrl: widget.items[index].imageUrls.first,
+              fit: BoxFit.cover
             );
           },
           itemCount: widget.items.length,

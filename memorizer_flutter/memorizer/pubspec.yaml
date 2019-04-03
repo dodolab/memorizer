@@ -16,7 +16,8 @@ dependencies:
   bloc: "^0.10.0"
   shared_preferences: "^0.4.1"
   flutter_swiper: ^1.1.5
-
+  cached_network_image: 0.7.0
+  flutter_cache_manager: 0.3.2
   sliver_fab: "^1.0.0"
 
 
