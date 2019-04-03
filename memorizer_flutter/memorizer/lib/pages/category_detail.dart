@@ -79,14 +79,12 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
               builder: (context) =>
               new SliverFab(
                 floatingWidget: FloatingActionButton(
-                  backgroundColor: colorDecor,
-                  onPressed: () =>
-                      Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text("You clicked FAB!"))),
-                  child: Icon(Icons.add),
+                  backgroundColor: Color.fromRGBO(247, 64, 106, 1.0),
+                  onPressed: () { _navigateToPractice(); },
+                  child: Image.asset("assets/ic_practice.png"),
                 ),
                 floatingPosition: FloatingPosition(right: 16),
-                expandedHeight: 400.0,
+                expandedHeight: 360.0,
                 slivers: <Widget>[
                   _buildAppBar(),
                   _buildContentSection()
@@ -106,10 +104,7 @@ class _CategoryDetailPageState extends State<CategoryDetailPage> {
         child: new Row(
           children: <Widget>[
             IconButton(
-                icon: Image.asset("assets/ic_practice.png"),
-                onPressed: () { _navigateToPractice(); }),
-            IconButton(
-                icon: Image.asset("assets/ic_gallery.png"),
+                icon: Icon(Icons.list),
                 onPressed: () { _navigateToGallery(); })
           ],
         ))

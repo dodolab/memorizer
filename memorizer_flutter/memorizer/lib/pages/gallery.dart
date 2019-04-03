@@ -43,7 +43,7 @@ class _GalleryState extends State<GalleryPage> {
             );
           },
           itemCount: widget.items.length,
-          control: new SwiperControl(),
+          control: new SwiperControl(color: Colors.redAccent),
           itemWidth: orientation == Orientation.landscape
               ? MediaQuery.of(context).size.width
               : MediaQuery.of(context).size.height,

@@ -50,29 +50,7 @@ class SpeciesItemWidgetState extends State<SpeciesItemWidget> {
       leading: _buildImage(),
       title: Text(
         item.name.getString(langCode),
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-      ),
-      // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
-
-      subtitle: Row(
-        children: <Widget>[
-          Expanded(
-              flex: 1,
-              child: Container(
-                // tag: 'hero',
-                child: LinearProgressIndicator(
-                    backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-                    value: 10,
-                    valueColor: AlwaysStoppedAnimation(Colors.green)),
-              )),
-          Expanded(
-            flex: 4,
-            child: Padding(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Text("Dojo",
-                    style: TextStyle(color: Colors.white))),
-          )
-        ],
+        style: TextStyle(color: Colors.white),
       ),
       trailing:
       Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0),

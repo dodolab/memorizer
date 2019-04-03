@@ -85,8 +85,6 @@ class _PracticeState extends State<Practice> with TickerProviderStateMixin {
                   } else {
                     opacity = 0;
                   }
-                } else if(!model.canGoNext() && _switchAnimation.previousImageOpacity.value == 0){
-                  opacity = 0;
                 }
 
                 var imageToShow = (_switchController.isAnimating &&
