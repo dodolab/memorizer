@@ -2,7 +2,7 @@
 
 This application was made mainly to demonstrate abilities of Flutter framework and its comparison to the native Android.
 
-**Budget: ~20 hours of work.**
+🔥 This branch contains only Android version and is hereby deprecated. There will likely be no updates for Android app (since Android sucks 🔥).
 
 ## Application UI
 
@@ -20,19 +20,9 @@ This application was made mainly to demonstrate abilities of Flutter framework a
 
 ## Architecture
 
-* tried to use Bloc pattern; only for fetching categories, though
-* used `SharedPreferences` to store language settings
-* all data is static (for now), stored in JSON file in the assets
-* images are taken from `Flickr api`
+* used MVVM pattern and service-based architecture
 
-![Memorizer app](docs/arch_flutter.png)
-
-## TODO
-
-* more animals
-* more features :-) 
-* configure AWS database that will store metadata
-* add/edit new images and translations using AWS and flickr API
+![Memorizer app](docs/arch_android.png)
 
 ## License
 
