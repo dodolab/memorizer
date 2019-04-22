@@ -3,6 +3,7 @@ import 'package:memorizer/entities/category_content.dart';
 import 'package:memorizer/entities/species_item.dart';
 import 'package:memorizer/pages/category_detail.dart';
 import 'package:memorizer/utils/shared_preferences.dart';
+import 'package:memorizer/widgets/round_icon.dart';
 
 class SpeciesItemWidget extends StatefulWidget {
   final SpeciesItem item;
@@ -58,20 +59,7 @@ class SpeciesItemWidgetState extends State<SpeciesItemWidget> {
   }
 
   Widget _buildImage() {
-    var avatar = new Hero(
-      tag: item.name.getString(langCode),
-      child: new Container(
-        width: 70.0,
-        height: 70.0,
-        decoration: new BoxDecoration(
-          shape: BoxShape.circle,
-          image: new DecorationImage(
-            fit: BoxFit.cover,
-            image: new NetworkImage(item.imageUrl ?? ''),
-          ),
-        ),
-      ),
-    );
+    var avatar = new RoundIconWidget(item.imageUrl ?? '', false);
 
     var placeholder = new Container(
         width: 70.0,

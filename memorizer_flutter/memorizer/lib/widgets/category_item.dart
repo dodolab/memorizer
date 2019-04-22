@@ -50,7 +50,7 @@ class CategoryItemWidgetState extends State<CategoryItemWidget> {
     return ListTile(
       contentPadding:
       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      leading: RoundIconWidget(widget.categoryContent.items.first.imageUrl),
+      leading: RoundIconWidget(widget.categoryContent.items.first.imageUrl, true),
       title: Text(
         widget.categoryContent.name.getString(langCode),
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),

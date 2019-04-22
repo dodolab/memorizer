@@ -121,7 +121,7 @@ class _PracticeConfirmPageState extends State<PracticeConfirmPage>
               ),
             ),
             new Container(
-              width: 50.0,
+              width: 80.0,
               alignment: Alignment.center,
               child: new Text('${_sliderValue.toInt()}',
                   style: Theme.of(context).textTheme.display1),
