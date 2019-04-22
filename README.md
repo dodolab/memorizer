@@ -2,6 +2,8 @@
 
 This application was made mainly to demonstrate abilities of Flutter framework and its comparison to the native Android.
 
+**Native Android version of this application can be found in [this](https://github.com/dodocloud/memorizer/tree/memorizer_android) branch.**
+
 **Budget: ~20 hours of work.**
 
 ## Application UI
